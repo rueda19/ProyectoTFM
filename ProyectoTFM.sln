@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProyectoTFM", "ProyectoTFM\ProyectoTFM.csproj", "{EEF409BC-ADF4-4B40-B57B-FD6A0DA2FCF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistencia", "Persistencia", "{4A4E7C09-A7E3-4076-98A2-77FA533C97DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LogicaNegocio", "LogicaNegocio", "{D96A0224-9080-472C-9495-A69DED6CD800}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentacion", "Presentacion", "{EF241940-3912-49CC-B2C0-FA4AF5149E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistencia", "Persistencia\Persistencia.csproj", "{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEF409BC-ADF4-4B40-B57B-FD6A0DA2FCF1}.Debug|x86.ActiveCfg = Debug|x86
+		{EEF409BC-ADF4-4B40-B57B-FD6A0DA2FCF1}.Debug|x86.Build.0 = Debug|x86
+		{EEF409BC-ADF4-4B40-B57B-FD6A0DA2FCF1}.Release|x86.ActiveCfg = Release|x86
+		{EEF409BC-ADF4-4B40-B57B-FD6A0DA2FCF1}.Release|x86.Build.0 = Release|x86
+		{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B}.Debug|x86.ActiveCfg = Debug|x86
+		{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B}.Debug|x86.Build.0 = Debug|x86
+		{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B}.Release|x86.ActiveCfg = Release|x86
+		{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B590D665-CFBE-4FCA-B2F1-2A96B92FCF2B} = {4A4E7C09-A7E3-4076-98A2-77FA533C97DA}
+	EndGlobalSection
+EndGlobal
