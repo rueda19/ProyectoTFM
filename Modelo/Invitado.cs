@@ -8,9 +8,9 @@ namespace Modelo
     public class Invitado
     {
         public int IDReunion { get; set; }
-        public int IDEmpleado { get; set; }
+        public string IDEmpleado { get; set; }
 
-        public Invitado(int idReunion, int idEmpleado)
+        public Invitado(int idReunion, string idEmpleado)
         {
             IDReunion = idReunion;
             IDEmpleado = idEmpleado;

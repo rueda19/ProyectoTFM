@@ -8,9 +8,9 @@ namespace Modelo
     public class Asistente
     {
         public int IDActa { get; set; }
-        public int IDEmpleado { get; set; }
+        public string IDEmpleado { get; set; }
 
-        public Asistente(int idActa, int idEmpleado)
+        public Asistente(int idActa, string idEmpleado)
         {
             IDActa = idActa;
             IDEmpleado = idEmpleado;

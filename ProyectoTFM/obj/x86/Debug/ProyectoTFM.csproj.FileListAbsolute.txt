@@ -1,9 +1,9 @@
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\ProyectoTFM.exe
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\ProyectoTFM.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.csprojResolveAssemblyReference.cache
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.dll
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.dll
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.pdb
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.pdb
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.exe
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.dll
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.dll
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.pdb
