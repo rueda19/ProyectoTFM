@@ -1,7 +1,4 @@
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.Properties.Resources.resources
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\GenerateResource.read.1.tlog
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\bin\Debug\PresentacionEscritorio.exe.config
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\bin\Debug\PresentacionEscritorio.exe
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\bin\Debug\PresentacionEscritorio.pdb
@@ -16,3 +13,5 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\bin\Deb
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.Form1.resources
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.MisTareas.resources
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.MisReuniones.resources
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.csprojResolveAssemblyReference.cache
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.csproj.GenerateResource.Cache

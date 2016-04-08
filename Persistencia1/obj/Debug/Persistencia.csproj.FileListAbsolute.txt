@@ -3,6 +3,5 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\bin\Debug\Persis
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\bin\Debug\Persistencia.pdb
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\bin\Debug\Modelo.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\bin\Debug\Modelo.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\obj\Debug\Persistencia.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Persistencia1\obj\Debug\Persistencia.pdb

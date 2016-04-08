@@ -25,6 +25,11 @@ namespace Negocio
         {
             return gbd.getReunionUsuarioPasadas(user);
         }
+        
+        public List<Tarea> getTareasReunion(int idReunion)
+        {
+            return gbd.getTareasReunion(idReunion);
+        }
 
         public List<Tarea> getTareasUsuarioTerminadas(string Usuario)
         {
@@ -111,12 +116,12 @@ namespace Negocio
             return gbd.removeEmpleado(user);
         }
 
-        public Invitado getInvitadoReunion(int IDReunion)
+        public List<Invitado> getInvitadoReunion(int IDReunion)
         {
             return gbd.getInvitadoReunion(IDReunion);
         }
 
-        public Invitado getInvitadoEmpleado(string IDEmpleado)
+        public List<Invitado> getInvitadoEmpleado(string IDEmpleado)
         {
             return gbd.getInvitadoEmpleado(IDEmpleado);
         }
@@ -136,12 +141,12 @@ namespace Negocio
             return gbd.removeInvitadoReunion(IDReunion);
         }
 
-        public Asistente getAsistenteActa(int IDActa)
+        public List<Asistente> getAsistenteActa(int IDActa)
         {
             return gbd.getAsistenteActa(IDActa);
         }
 
-        public Asistente getAsistenteEmpleado(string IDEmpleado)
+        public List<Asistente> getAsistenteEmpleado(string IDEmpleado)
         {
             return gbd.getAsistenteEmpleado(IDEmpleado);
         }

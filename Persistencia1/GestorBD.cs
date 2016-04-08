@@ -72,6 +72,36 @@ namespace Persistencia
             return reuniones;
         }
 
+        public List<Tarea> getTareasReunion(int idReunion)
+        {
+            List<Tarea> tareas = new List<Tarea>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDReunion=@idReunion", conn);
+                cmd.Parameters.AddWithValue("@idReunion", idReunion);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetDateTime(1), (dr.GetValue(2) is DBNull) ? new DateTime(0) : dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? 0 : Double.Parse(dr.GetValue(4).ToString()), dr.GetString(5), dr.GetString(6), dr.GetString(7), dr.GetInt32(8)));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return tareas;
+        }
+
         public List<Tarea> getTareasUsuarioTerminadas(string Usuario)
         {
             List<Tarea> tareas = new List<Tarea>();
@@ -566,9 +596,9 @@ namespace Persistencia
             return i;
         }
 
-        public Invitado getInvitadoReunion(int IDReunion)
+        public List<Invitado> getInvitadoReunion(int IDReunion)
         {
-            Invitado invitado = null;
+            List<Invitado> invitados = new List<Invitado>();
             SqlConnection conn = null;
             try
             {
@@ -581,7 +611,7 @@ namespace Persistencia
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    invitado = new Invitado(dr.GetInt32(0), dr.GetString(1));
+                    invitados.Add(new Invitado(dr.GetInt32(0), dr.GetString(1)));
                 }
             }
             catch (Exception e)
@@ -594,12 +624,12 @@ namespace Persistencia
                     conn.Close();
             }
 
-            return invitado;
+            return invitados;
         }
 
-        public Invitado getInvitadoEmpleado(string user)
+        public List<Invitado> getInvitadoEmpleado(string user)
         {
-            Invitado invitado = null;
+            List<Invitado> invitados = new List<Invitado>();
             SqlConnection conn = null;
             try
             {
@@ -612,7 +642,7 @@ namespace Persistencia
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    invitado = new Invitado(dr.GetInt32(0), dr.GetString(1));
+                    invitados.Add(new Invitado(dr.GetInt32(0), dr.GetString(1)));
                 }
             }
             catch (Exception e)
@@ -625,7 +655,7 @@ namespace Persistencia
                     conn.Close();
             }
 
-            return invitado;
+            return invitados;
         }
 
         public int setInvitado(Invitado invitado)
@@ -708,9 +738,9 @@ namespace Persistencia
             return i;
         }
 
-        public Asistente getAsistenteActa(int IDActa)
+        public List<Asistente> getAsistenteActa(int IDActa)
         {
-            Asistente asistente = null;
+            List<Asistente> asistentes = new List<Asistente>();
             SqlConnection conn = null;
             try
             {
@@ -723,7 +753,7 @@ namespace Persistencia
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    asistente = new Asistente(dr.GetInt32(0), dr.GetString(1));
+                    asistentes.Add(new Asistente(dr.GetInt32(0), dr.GetString(1)));
                 }
             }
             catch (Exception e)
@@ -736,12 +766,12 @@ namespace Persistencia
                     conn.Close();
             }
 
-            return asistente;
+            return asistentes;
         }
 
-        public Asistente getAsistenteEmpleado(string IDEmpleado)
+        public List<Asistente> getAsistenteEmpleado(string IDEmpleado)
         {
-            Asistente asistente = null;
+            List<Asistente> asistentes = new List<Asistente>(); ;
             SqlConnection conn = null;
             try
             {
@@ -753,7 +783,7 @@ namespace Persistencia
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    asistente = new Asistente(dr.GetInt32(0), dr.GetString(1));
+                    asistentes.Add(new Asistente(dr.GetInt32(0), dr.GetString(1)));
                 }
             }
             catch (Exception e)
@@ -766,7 +796,7 @@ namespace Persistencia
                     conn.Close();
             }
 
-            return asistente;
+            return asistentes;
         }
 
         public int setAsistente(Asistente asistente)

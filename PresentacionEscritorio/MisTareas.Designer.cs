@@ -79,7 +79,6 @@
             // 
             this.gridGroupingControl1.BackColor = System.Drawing.SystemColors.Window;
             this.gridGroupingControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridGroupingControl1.EnableAutoSize = true;
             this.gridGroupingControl1.FreezeCaption = false;
             this.gridGroupingControl1.Location = new System.Drawing.Point(3, 85);
             this.gridGroupingControl1.Name = "gridGroupingControl1";

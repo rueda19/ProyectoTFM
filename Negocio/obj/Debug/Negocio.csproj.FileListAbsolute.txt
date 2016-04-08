@@ -4,6 +4,6 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\bin\Debug\Modelo.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\bin\Debug\Persistencia.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\bin\Debug\Modelo.pdb
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\bin\Debug\Persistencia.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\obj\Debug\Negocio.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\obj\Debug\Negocio.pdb
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
