@@ -69,15 +69,24 @@ namespace PresentacionEscritorio
         {
             if ((sender as CaptionImage).Name == "CaptionImage1")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new Form1();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage2")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new MisReuniones();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage3")
             {
-                this.WindowState = FormWindowState.Minimized;
+                //this.Hide();
+                //var form2 = new MisTareas();
+                //form2.Closed += (s, args) => this.Close();
+                //form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage4")
             {

@@ -16,6 +16,7 @@ using Syncfusion.Windows.Forms.Grid.Grouping;
 using Syncfusion.Grouping;
 using Syncfusion.Windows.Forms.Grid;
 using System.Drawing.Text;
+using System.Diagnostics;
 
 namespace PresentacionEscritorio
 {
@@ -25,9 +26,13 @@ namespace PresentacionEscritorio
         private Negocio.Negocio negocio = new Negocio.Negocio();
         private GridDynamicFilter filter = new GridDynamicFilter();
         private List<Reunion> reuniones;
+        Reunion reunion;
         List<Tarea> tareas;
         List<Asistente> asistentes;
         List<Invitado> invitados;
+        List<InvitadoAsitente> ia;
+        Agenda agenda;
+        Acta acta;
         private int idReu=0;
         private InstalledFontCollection installedFonts = new InstalledFontCollection();
         private int tamano1 = 8;
@@ -87,8 +92,11 @@ namespace PresentacionEscritorio
             comboBox4.DisplayMember = "Name";
             comboBox4.DrawMode = DrawMode.OwnerDrawFixed;
 
-            invitados = negocio.getInvitadoReunion(1);
-            gridGroupingControl3.DataSource = invitados;
+            invitados = negocio.getInvitadoReunion(0);
+            asistentes = negocio.getAsistenteActa(0);
+            ia = new List<InvitadoAsitente>();
+            ia.Add(new InvitadoAsitente("",false));
+            gridGroupingControl3.DataSource = ia;
             SampleCustomization(gridGroupingControl3);
             this.gridGroupingControl3.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl3.TopLevelGroupOptions.ShowCaption = false;
@@ -101,21 +109,20 @@ namespace PresentacionEscritorio
             il.Images.Add(Properties.Resources.ELIMINAR);
             this.gridGroupingControl3.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageList = il;
             this.gridGroupingControl3.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageIndex = 0;
-            //this.gridGroupingControl3.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.PushButton;
-            //this.gridGroupingControl3.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.Description = "Quitar";
-            
-            asistentes = negocio.getAsistenteActa(1);
-            gridGroupingControl4.DataSource = asistentes;
-            SampleCustomization(gridGroupingControl4);
-            this.gridGroupingControl4.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
-            this.gridGroupingControl4.TopLevelGroupOptions.ShowCaption = false;
-            this.gridGroupingControl4.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
-            this.gridGroupingControl4.GridVisualStyles = GridVisualStyles.Metro;
-            this.gridGroupingControl4.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
-            this.gridGroupingControl4.TableDescriptor.Columns.Add(" ");
-            this.gridGroupingControl4.TableDescriptor.Columns[2].Width = 20;
-            this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageList = il;
-            this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageIndex = 0;          
+
+            richTextBox1.Text = "";
+            //asistentes = negocio.getAsistenteActa(0);
+            //gridGroupingControl4.DataSource = asistentes;
+            //SampleCustomization(gridGroupingControl4);
+            //this.gridGroupingControl4.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            //this.gridGroupingControl4.TopLevelGroupOptions.ShowCaption = false;
+            //this.gridGroupingControl4.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            //this.gridGroupingControl4.GridVisualStyles = GridVisualStyles.Metro;
+            //this.gridGroupingControl4.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            //this.gridGroupingControl4.TableDescriptor.Columns.Add(" ");
+            //this.gridGroupingControl4.TableDescriptor.Columns[2].Width = 20;
+            //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageList = il;
+            //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageIndex = 0;          
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
@@ -150,15 +157,24 @@ namespace PresentacionEscritorio
         {
             if ((sender as CaptionImage).Name == "CaptionImage1")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new Form1();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage2")
             {
-                this.WindowState = FormWindowState.Minimized;
+                //this.Hide();
+                //var form2 = new MisReuniones();
+                //form2.Closed += (s, args) => this.Close();
+                //form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage3")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new MisTareas();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage4")
             {
@@ -260,10 +276,43 @@ namespace PresentacionEscritorio
                     if (idReu != (int)rec.GetValue(style.TableCellIdentity.Column.Name))
                     {
                         idReu = (int)rec.GetValue(style.TableCellIdentity.Column.Name);
-                        MessageBox.Show(idReu.ToString());
+                        //MessageBox.Show(idReu.ToString());
+                        reunion = negocio.getReunion(idReu);
+                        agenda = negocio.getAgendaReunion(idReu);
+                        richTextBox1.Rtf = agenda.Contenido;
+                        acta = negocio.getActaReunion(idReu);
+                        richTextBox2.Rtf = acta.Contenido;
+                        tareas = negocio.getTareasReunion(idReu);
+                        gridGroupingControl2.DataSource = tareas;
+
+                        invitados = negocio.getInvitadoReunion(idReu);
+                        asistentes = negocio.getAsistenteActa(acta.ID);
+                        ia = new List<InvitadoAsitente>();
+                        foreach (Invitado inv in invitados)
+                        {
+                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                        }
+                        gridGroupingControl3.DataSource = ia;
+
+                        ActualizarIndicadores(true);
                     }
                 }
             }
+        }
+
+        private bool asistioEmpleado(string p)
+        {
+            bool b=false;
+            int i = 0;
+            while (asistentes.Count > i && !b)
+            {
+                if (asistentes[i].IDEmpleado.Equals(p))
+                {
+                    b = true;
+                }
+                i++;
+            }
+            return b;
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -297,6 +346,13 @@ namespace PresentacionEscritorio
             richTextBox1.SelectionFont = new Font("Verdana", 10);
             richTextBox1.SelectedText = "The bulleted text is indented 30 pixels from the bullet symbol using the BulletIndent property.\n";
             MessageBox.Show(richTextBox1.Text);
+            richTextBox1.LinkClicked +=new LinkClickedEventHandler(richTextBox1_LinkClicked);
+        }
+
+        private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            Process p = new Process();
+            p = Process.Start(e.LinkText.Replace("!"," "));
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -398,12 +454,14 @@ namespace PresentacionEscritorio
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox2.Rtf = richTextBox1.Rtf;
+            agenda.Contenido = richTextBox1.Rtf;
+            negocio.updateAgenda(agenda);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            richTextBox1.Rtf = richTextBox2.Rtf;
+            acta.Contenido = richTextBox2.Rtf;
+            negocio.updateActa(acta);
         }
 
         private void gridGroupingControl3_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
@@ -417,7 +475,7 @@ namespace PresentacionEscritorio
                 GridCurrentCell cc = tableControl.CurrentCell;
                 if (cc.ColIndex.Equals(3) && cc.RowIndex>2)
                 {
-                    GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                    GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 1);
                     GridRecord rec = el as GridRecord;
                     if (rec == null && el is GridRecordRow)
                     {
@@ -425,14 +483,116 @@ namespace PresentacionEscritorio
                     }
                     if (rec != null)
                     {
-                        if(ggc.Text.Equals("Invitado"))
-                            MessageBox.Show(style.TableCellIdentity.Column.Name+"I");
-                        else
-                            MessageBox.Show(style.TableCellIdentity.Column.Name + "A");
+                        negocio.removeInvitado(new Invitado(reunion.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
+                        negocio.removeAsistente(new Asistente(acta.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
+                        invitados = negocio.getInvitadoReunion(idReu);
+                        asistentes = negocio.getAsistenteActa(acta.ID);
+                        ia = new List<InvitadoAsitente>();
+                        foreach (Invitado inv in invitados)
+                        {
+                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                        }
+                        gridGroupingControl3.DataSource = ia;
+                        //MessageBox.Show(style.TableCellIdentity.Column.Name);
                         //MessageBox.Show(rec.GetValue(style.TableCellIdentity.Column.Name).ToString());
+                        ActualizarIndicadores(true);
                     }
                 }
             }
+        }
+
+        private void gridGroupingControl3_TableControlCheckBoxClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            GridGroupingControl ggc = (GridGroupingControl)sender;
+            Element el = ggc.Table.GetInnerMostCurrentElement();
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = ggc.GetTableControl(table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleUser = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    Boolean b = (bool)style.CellValue;
+                    if (!b)
+                    {
+                        if (negocio.setAsistente(new Asistente(acta.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        {
+                            invitados = negocio.getInvitadoReunion(idReu);
+                            asistentes = negocio.getAsistenteActa(acta.ID);
+                            ia = new List<InvitadoAsitente>();
+                            foreach (Invitado inv in invitados)
+                            {
+                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (negocio.removeAsistente(new Asistente(acta.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        {
+                            asistentes = negocio.getAsistenteActa(acta.ID);
+                            ia = new List<InvitadoAsitente>();
+                            foreach (Invitado inv in invitados)
+                            {
+                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            }
+                        }
+                    }
+                    ActualizarIndicadores(true);
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Añadir Invitados");
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Añadir Tarea");
+        }
+
+        private void ActualizarIndicadores(bool terminada)
+        {
+            if (terminada)
+            {
+                lblAsistencia.Text = (asistentes.Count*100) / invitados.Count + "%";
+                lblNTCreadas.Text = tareas.Count + " Tareas";
+                var qTerminadas = tareas.Where(t => t.Estado == "Terminada");
+                lblTTerminadas.Text = qTerminadas.Count() * 100 / tareas.Count + "%";
+                var qAbandonas = tareas.Where(t => t.Estado == "Abandonada");
+                lblTAbandonadas.Text = qAbandonas.Count() * 100 / tareas.Count + "%";
+                var qProceso = tareas.Where(t => t.Estado != "Terminada" && t.Estado != "Abandonada");
+                lblTProceso.Text = qProceso.Count() * 100 / tareas.Count + "%";
+            }
+            else
+            {
+                lblAsistencia.Text = "";
+                lblNTCreadas.Text = "";
+                lblTTerminadas.Text = "";
+                lblTAbandonadas.Text = "";
+                lblTProceso.Text = "";
+            }
+        }
+    }
+
+    public class InvitadoAsitente
+    {
+        public string Usuario;
+        public bool Asistio;
+
+        public InvitadoAsitente(string usuario, bool asistio)
+        {
+            Usuario = usuario;
+            Asistio = asistio;
         }
     }
 }

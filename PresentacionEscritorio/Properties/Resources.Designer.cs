@@ -63,6 +63,16 @@ namespace PresentacionEscritorio.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ANADIR {
+            get {
+                object obj = ResourceManager.GetObject("ANADIR", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
@@ -116,6 +126,16 @@ namespace PresentacionEscritorio.Properties {
         internal static System.Drawing.Bitmap EMPLEADO3 {
             get {
                 object obj = ResourceManager.GetObject("EMPLEADO3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HIPERVINCULO {
+            get {
+                object obj = ResourceManager.GetObject("HIPERVINCULO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

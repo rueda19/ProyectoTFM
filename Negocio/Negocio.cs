@@ -71,9 +71,19 @@ namespace Negocio
             return gbd.removeTarea(ID);
         }
 
+        public Agenda getAgendaReunion(int IDReunion)
+        {
+            return gbd.getAgendaReunion(IDReunion);
+        }
+
         public Agenda getAgenda(int ID)
         {
             return gbd.getAgenda(ID);
+        }
+
+        public int updateAgenda(Agenda agenda)
+        {
+            return gbd.updateAgenda(agenda);
         }
 
         public int setAgenda(Agenda agenda)
@@ -86,9 +96,19 @@ namespace Negocio
             return gbd.removeAgenda(ID);
         }
 
+        public Acta getActaReunion(int IDReunion)
+        {
+            return gbd.getActaReunion(IDReunion);
+        }
+
         public Acta getActa(int ID)
         {
             return gbd.getActa(ID);
+        }
+
+        public int updateActa(Acta acta)
+        {
+            return gbd.updateActa(acta);
         }
 
         public int setActa(Acta acta)
@@ -131,6 +151,11 @@ namespace Negocio
             return gbd.setInvitado(invitado);
         }
 
+        public int removeInvitado(Invitado invitado)
+        {
+            return gbd.removeInvitado(invitado);
+        }
+
         public int removeInvitadoEmpleado(string IDEmpleado)
         {
             return gbd.removeInvitadoEmpleado(IDEmpleado);
@@ -159,6 +184,11 @@ namespace Negocio
         public int removeAsistenteActa(int IDActa)
         {
             return gbd.removeAsistenteActa(IDActa);
+        }
+
+        public int removeAsistente(Asistente asistente)
+        {
+            return gbd.removeAsistente(asistente);
         }
 
         public int removeAsistenteEmpleado(string IDEmpleado)
