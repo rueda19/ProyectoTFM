@@ -121,6 +121,11 @@ namespace Negocio
             return gbd.removeActa(ID);
         }
 
+        public List<Empleado> getEmpleados()
+        {
+            return gbd.getEmpleados();
+        }
+
         public Empleado getEmpleado(string user)
         {
             return gbd.getEmpleado(user);

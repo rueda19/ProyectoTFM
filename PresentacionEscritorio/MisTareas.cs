@@ -15,6 +15,7 @@ using Syncfusion.Grouping;
 using Syncfusion.Windows.Forms.Grid;
 using Syncfusion.GridHelperClasses;
 using System.Text.RegularExpressions;
+using Syncfusion.Drawing;
 
 namespace PresentacionEscritorio
 {
@@ -50,19 +51,37 @@ namespace PresentacionEscritorio
             list1.Add("Terminada");
             list1.Add("Abandonada");
             list1.Add("Planificada");
-            this.gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.ComboBox;
-            this.gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyRecordFieldCell.ChoiceList = list1;
-            this.gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyRecordFieldCell.CellValue = "Trial1";
-            gridGroupingControl1.TableDescriptor.Columns[0].ReadOnly=true;
-            gridGroupingControl1.TableDescriptor.Columns[1].ReadOnly = true;
-            gridGroupingControl1.TableDescriptor.Columns[6].ReadOnly = true;
+            this.gridGroupingControl1.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.ComboBox;
+            this.gridGroupingControl1.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.ChoiceList = list1;
+            this.gridGroupingControl1.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellValue = "Trial1";
+            gridGroupingControl1.TableDescriptor.Columns[0].ReadOnly = true;
+            this.gridGroupingControl1.TableDescriptor.Columns[4].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.MonthCalendar;
+            gridGroupingControl1.TableDescriptor.Columns[2].ReadOnly = true;
             gridGroupingControl1.TableDescriptor.Columns[7].ReadOnly = true;
             gridGroupingControl1.TableDescriptor.Columns[8].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[9].ReadOnly = true;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl1.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+
+            //Event hooking in constructor.
+            this.gridGroupingControl1.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
+        }
+
+        //This event is triggered when the row height is changed.
+        void TableModel_QueryRowHeight(object sender, GridRowColSizeEventArgs e)
+        {
+            if (e.Index > 0)
+            {
+                IGraphicsProvider graphicsProvider = this.gridGroupingControl1.TableModel.GetGraphicsProvider();
+                Graphics g = graphicsProvider.Graphics;
+                GridStyleInfo style = this.gridGroupingControl1.TableModel[e.Index, 2];
+                GridCellModelBase model = style.CellModel;
+                e.Size = model.CalculatePreferredCellSize(g, e.Index, 2, style, GridQueryBounds.Height).Height;
+                e.Handled = true;
+            }
         }
 
         void image_ImageMouseUp(object sender, ImageMouseUpEventArgs e)

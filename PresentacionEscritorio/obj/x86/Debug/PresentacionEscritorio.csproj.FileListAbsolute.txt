@@ -15,3 +15,5 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.csprojResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.csproj.GenerateResource.Cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.MisReuniones.resources
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.AnadirInvitados.resources
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.AnadirTarea.resources

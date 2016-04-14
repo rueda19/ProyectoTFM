@@ -19,13 +19,13 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE IDResponsable=@user And Fecha>@fecha", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Titulo, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE IDResponsable=@user And Fecha>@fecha", conn);
                 cmd.Parameters.AddWithValue("@user", user);
                 cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    reuniones.Add(new Reunion(dr.GetInt32(0), dr.GetString(1), (Double)dr.GetDecimal(2), dr.GetDateTime(3), dr.GetString(4)));
+                    reuniones.Add(new Reunion(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), (Double)dr.GetDecimal(3), dr.GetDateTime(4), dr.GetString(5)));
                 }
             }
             catch (Exception e)
@@ -50,13 +50,13 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE IDResponsable=@user", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Titulo, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE IDResponsable=@user", conn);
                 cmd.Parameters.AddWithValue("@user", user);
                 cmd.Parameters.AddWithValue("@fecha", DateTime.Now);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    reuniones.Add(new Reunion(dr.GetInt32(0), dr.GetString(1), (Double)dr.GetDecimal(2), dr.GetDateTime(3), dr.GetString(4)));
+                    reuniones.Add(new Reunion(dr.GetInt32(0), dr.GetString(1),  dr.GetString(2), (Double)dr.GetDecimal(3), dr.GetDateTime(4), dr.GetString(5)));
                 }
             }
             catch (Exception e)
@@ -81,12 +81,12 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDReunion=@idReunion", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDReunion=@idReunion", conn);
                 cmd.Parameters.AddWithValue("@idReunion", idReunion);
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetDateTime(1), (dr.GetValue(2) is DBNull) ? new DateTime(0) : dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? 0 : Double.Parse(dr.GetValue(4).ToString()), dr.GetString(5), dr.GetString(6), dr.GetString(7), dr.GetInt32(8)));
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9))));
                 }
             }
             catch (Exception e)
@@ -111,13 +111,13 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDResponsable=@resp", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDResponsable=@resp", conn);
                 cmd.Parameters.AddWithValue("@resp", Usuario);
                 //cmd.Prepare();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetDateTime(1), (dr.GetValue(2) is DBNull) ? new DateTime(0) : dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? 0 : Double.Parse(dr.GetValue(4).ToString()), dr.GetString(5), dr.GetString(6), dr.GetString(7), dr.GetInt32(8)));
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9))));
                 }
             }
             catch (Exception e)
@@ -142,13 +142,13 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDResponsable=@resp And (Estado<>'Terminada' And Estado<>'Abandonada')", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDResponsable=@resp And (Estado<>'Terminada' And Estado<>'Abandonada')", conn);
                 cmd.Parameters.AddWithValue("@resp", Usuario);
                 //cmd.Prepare();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetDateTime(1), (dr.GetValue(2) is DBNull) ? new DateTime(0) : dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? 0 : Double.Parse(dr.GetValue(4).ToString()), dr.GetString(5), dr.GetString(6), dr.GetString(7), dr.GetInt32(8)));
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9))));
                 }
             }
             catch (Exception e)
@@ -173,13 +173,14 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE ID=@id", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE ID=@id", conn);
                 cmd.Parameters.AddWithValue("@id", ID);
                 //cmd.Prepare();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    tarea = new Tarea(dr.GetInt32(0), dr.GetDateTime(1), (dr.GetValue(2) is DBNull) ? new DateTime(0) : dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? 0 : (Double)dr.GetValue(4), dr.GetString(5), dr.GetString(6), dr.GetString(7), dr.GetInt32(8));
+                    //tarea = new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), (dr.GetValue(3) is DBNull) ? new DateTime(0) : dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? new DateTime(0) : dr.GetDateTime(4), (dr.GetValue(5) is DBNull) ? 0 : Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), dr.GetInt32(9));
+                    tarea = new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9)));
                 }
             }
             catch (Exception e)
@@ -204,15 +205,16 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO GP_Tarea(FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion) VALUES (@fini,@ffin,@feje,@tiemdedi,@origen,@estado,@idres,@idreunion)", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO GP_Tarea(Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion) VALUES (@fdes,@fini,@ffin,@feje,@tiemdedi,@origen,@estado,@idres,@idreunion)", conn);
+                cmd.Parameters.AddWithValue("@fdes", tarea.Descripcion);
                 cmd.Parameters.AddWithValue("@fini", tarea.FechaInicio);
                 cmd.Parameters.AddWithValue("@ffin", tarea.FechaFin);
-                cmd.Parameters.AddWithValue("@feje", tarea.FechaEjecutado);
+                cmd.Parameters.AddWithValue("@feje", (object)tarea.FechaEjecutado ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@tiemdedi", tarea.TiempoDedicado);
                 cmd.Parameters.AddWithValue("@origen", tarea.Origen);
                 cmd.Parameters.AddWithValue("@estado", tarea.Estado);
                 cmd.Parameters.AddWithValue("@idres", tarea.IDResponsable);
-                cmd.Parameters.AddWithValue("@idreunion", tarea.IDReunion);
+                cmd.Parameters.AddWithValue("@idreunion", (object)tarea.IDReunion ?? DBNull.Value);
                 i = cmd.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -263,13 +265,13 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT ID, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE ID=@id", conn);
+                SqlCommand cmd = new SqlCommand("SELECT ID, Titulo, Ubicacion, Duracion, Fecha, IDResponsable FROM [Fw_GrupoGarnica].[dbo].[GP_Reunion] WHERE ID=@id", conn);
                 cmd.Parameters.AddWithValue("@id", ID);
                 //cmd.Prepare();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    reunion = new Reunion(dr.GetInt32(0), dr.GetString(1), (Double)dr.GetDecimal(2), dr.GetDateTime(3), dr.GetString(4));
+                    reunion = new Reunion(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), (Double)dr.GetDecimal(3), dr.GetDateTime(4), dr.GetString(5));
                 }
             }
             catch (Exception e)
@@ -294,7 +296,8 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Reunion](Ubicacion, Duracion, Fecha, IDResponsable) VALUES (@ubi,@dur,@fecha,@res)", conn);
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Reunion](Titulo, Ubicacion, Duracion, Fecha, IDResponsable) VALUES (@tit,@ubi,@dur,@fecha,@res)", conn);
+                cmd.Parameters.AddWithValue("@tit", reunion.Titulo);
                 cmd.Parameters.AddWithValue("@ubi", reunion.Ubicacion);
                 cmd.Parameters.AddWithValue("@dur", reunion.Duracion);
                 cmd.Parameters.AddWithValue("@fecha", reunion.Fecha);
@@ -635,6 +638,36 @@ namespace Persistencia
             return i;
         }
 
+        public List<Empleado> getEmpleados()
+        {
+            List<Empleado> empleados = new List<Empleado>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Usuario, NombreCompleto, Departamento FROM [Fw_GrupoGarnica].[dbo].[GP_Empleado]", conn);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    empleados.Add(new Empleado(dr.GetString(0), dr.GetString(1), dr.GetString(2)));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return empleados;
+        }
+
         public Empleado getEmpleado(string user)
         {
             Empleado empleado = null;
@@ -792,8 +825,8 @@ namespace Persistencia
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Invitado](IDReunion, IDEmpl) VALUES(@idreu,@idemp)", conn);
-                cmd.Parameters.AddWithValue("@idreu", invitado.IDEmpleado);
-                cmd.Parameters.AddWithValue("@idemp", invitado.IDReunion);
+                cmd.Parameters.AddWithValue("@idemp", invitado.IDEmpleado);
+                cmd.Parameters.AddWithValue("@idreu", invitado.IDReunion);
                 //cmd.Parameters.AddWithValue("@id", IDReunion); WHERE IDReunion=@id
                 i = cmd.ExecuteNonQuery();
             }

@@ -15,7 +15,7 @@ namespace PresentacionEscritorio
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MisReuniones());
+            Application.Run(new MisTareas());
         }
     }
 }

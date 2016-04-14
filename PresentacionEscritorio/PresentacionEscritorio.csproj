@@ -82,6 +82,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnadirInvitados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnadirInvitados.Designer.cs">
+      <DependentUpon>AnadirInvitados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnadirTarea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnadirTarea.Designer.cs">
+      <DependentUpon>AnadirTarea.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +114,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AnadirInvitados.resx">
+      <DependentUpon>AnadirInvitados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnadirTarea.resx">
+      <DependentUpon>AnadirTarea.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

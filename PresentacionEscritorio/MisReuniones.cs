@@ -17,6 +17,7 @@ using Syncfusion.Grouping;
 using Syncfusion.Windows.Forms.Grid;
 using System.Drawing.Text;
 using System.Diagnostics;
+using Syncfusion.Drawing;
 
 namespace PresentacionEscritorio
 {
@@ -123,6 +124,76 @@ namespace PresentacionEscritorio
             //this.gridGroupingControl4.TableDescriptor.Columns[2].Width = 20;
             //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageList = il;
             //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageIndex = 0;          
+
+            System.Collections.Specialized.StringCollection list1 = new System.Collections.Specialized.StringCollection();
+            list1.Add("Retrasada");
+            list1.Add("En curso");
+            list1.Add("Terminada");
+            list1.Add("Abandonada");
+            list1.Add("Planificada");
+            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.ComboBox;
+            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.ChoiceList = list1;
+            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellValue = "Trial1";
+            gridGroupingControl2.TableDescriptor.Columns[0].ReadOnly = true;
+            this.gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.MonthCalendar;
+            gridGroupingControl2.TableDescriptor.Columns[2].ReadOnly = true;
+            gridGroupingControl2.TableDescriptor.Columns[7].ReadOnly = true;
+            gridGroupingControl2.TableDescriptor.Columns[8].ReadOnly = true;
+            gridGroupingControl2.TableDescriptor.Columns[9].ReadOnly = true;
+            this.gridGroupingControl2.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            this.gridGroupingControl2.TopLevelGroupOptions.ShowCaption = false;
+            this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            this.gridGroupingControl2.GridVisualStyles = GridVisualStyles.Metro;
+            this.gridGroupingControl2.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            this.gridGroupingControl2.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
+        }
+
+        //This event is triggered when the row height is changed.
+        void TableModel_QueryRowHeight(object sender, GridRowColSizeEventArgs e)
+        {
+            if (e.Index > 0)
+            {
+                IGraphicsProvider graphicsProvider = this.gridGroupingControl2.TableModel.GetGraphicsProvider();
+                Graphics g = graphicsProvider.Graphics;
+                GridStyleInfo style = this.gridGroupingControl2.TableModel[e.Index, 2];
+                GridCellModelBase model = style.CellModel;
+                e.Size = model.CalculatePreferredCellSize(g, e.Index, 2, style, GridQueryBounds.Height).Height;
+                e.Handled = true;
+            }
+        }
+
+        private void gridGroupingControl2_RecordValueChanged(object sender, RecordValueChangedEventArgs e)
+        {
+            Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    //MessageBox.Show(style.TableCellIdentity.Column.Name);
+                    //MessageBox.Show(rec.GetValue(style.TableCellIdentity.Column.Name).ToString());
+                    //MessageBox.Show(rec.GetValue(styleID.TableCellIdentity.Column.Name).ToString());
+                    int j = (int)rec.GetValue(styleID.TableCellIdentity.Column.Name);
+                    string fila = style.TableCellIdentity.Column.Name, valor = rec.GetValue(style.TableCellIdentity.Column.Name).ToString();
+                    if (fila.Equals("TiempoDedicado") && valor.Contains("."))
+                    {
+                        rec.SetValue(style.TableCellIdentity.Column.Name, valor);
+                    }
+                    if (negocio.setTareaFila(j, fila, valor) == 0)
+                        MessageBox.Show("Error al actualizar la Tarea");
+                }
+            }
         }
 
         private void comboBox2_DrawItem(object sender, DrawItemEventArgs e)
@@ -553,11 +624,31 @@ namespace PresentacionEscritorio
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Añadir Invitados");
+            AnadirInvitados formIA = new AnadirInvitados(invitados, reunion);
+            formIA.ShowDialog();
+
+            invitados = negocio.getInvitadoReunion(idReu);
+            asistentes = negocio.getAsistenteActa(acta.ID);
+            ia = new List<InvitadoAsitente>();
+            foreach (Invitado inv in invitados)
+            {
+                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+            }
+            gridGroupingControl3.DataSource = ia;
+
+            ActualizarIndicadores(true);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Añadir Tarea");
+            AnadirTarea formIT = new AnadirTarea(reunion);
+            formIT.ShowDialog();
+
+            tareas = negocio.getTareasReunion(idReu);
+            gridGroupingControl2.DataSource = tareas;
+
+            ActualizarIndicadores(true);
         }
 
         private void ActualizarIndicadores(bool terminada)
@@ -580,6 +671,25 @@ namespace PresentacionEscritorio
                 lblTTerminadas.Text = "";
                 lblTAbandonadas.Text = "";
                 lblTProceso.Text = "";
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.SelectedText = ofd.FileName.Replace(" ","!");
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox2.SelectedText = ofd.FileName.Replace(" ", "!");
             }
         }
     }

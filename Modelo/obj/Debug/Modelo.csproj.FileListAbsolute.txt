@@ -1,5 +1,4 @@
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Modelo\bin\Debug\Modelo.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Modelo\bin\Debug\Modelo.pdb
-C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Modelo\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Modelo\obj\Debug\Modelo.dll
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\Modelo\obj\Debug\Modelo.pdb
