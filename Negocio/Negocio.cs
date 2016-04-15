@@ -205,5 +205,10 @@ namespace Negocio
         {
             return gbd.setTareaFila(ID, fila, valor);
         }
+
+        public Indicadores getIndicadores(int IDReunion)
+        {
+            return gbd.getIndicadores(IDReunion);
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace PresentacionEscritorio
         List<InvitadoAsitente> ia;
         Agenda agenda;
         Acta acta;
+        Indicadores indicador;
         private int idReu=0;
         private InstalledFontCollection installedFonts = new InstalledFontCollection();
         private int tamano1 = 8;
@@ -192,6 +193,8 @@ namespace PresentacionEscritorio
                     }
                     if (negocio.setTareaFila(j, fila, valor) == 0)
                         MessageBox.Show("Error al actualizar la Tarea");
+                    else
+                        ActualizarIndicadores(true);
                 }
             }
         }
@@ -655,17 +658,18 @@ namespace PresentacionEscritorio
         {
             if (terminada)
             {
-                lblAsistencia.Text = (asistentes.Count*100) / invitados.Count + "%";
-                lblNTCreadas.Text = tareas.Count + " Tareas";
-                var qTerminadas = tareas.Where(t => t.Estado == "Terminada");
-                lblTTerminadas.Text = qTerminadas.Count() * 100 / tareas.Count + "%";
-                var qAbandonas = tareas.Where(t => t.Estado == "Abandonada");
-                lblTAbandonadas.Text = qAbandonas.Count() * 100 / tareas.Count + "%";
-                var qProceso = tareas.Where(t => t.Estado != "Terminada" && t.Estado != "Abandonada");
-                lblTProceso.Text = qProceso.Count() * 100 / tareas.Count + "%";
+                indicador = negocio.getIndicadores(idReu);
+                lblAsistencia.Text = indicador.Asistencia + "%";
+                lblNTCreadas.Text = indicador.NumTareas + " Tareas";
+                //var qTerminadas = tareas.Where(t => t.Estado == "Terminada");
+                //lblTTerminadas.Text = qTerminadas.Count() * 100 / tareas.Count + "%";
+                lblTTerminadas.Text = indicador.Terminadas + "%";
+                lblTAbandonadas.Text = indicador.Abandonadas + "%";
+                lblTProceso.Text = indicador.EnProceso + "%";
             }
             else
             {
+                indicador = null;
                 lblAsistencia.Text = "";
                 lblNTCreadas.Text = "";
                 lblTTerminadas.Text = "";

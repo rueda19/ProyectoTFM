@@ -10,7 +10,7 @@ using Syncfusion.Windows.Forms;
 using Syncfusion.Windows.Forms.Tools;
 using Negocio;
 using Modelo;
-
+using Microsoft.Office.Interop;
 namespace PresentacionEscritorio
 {
     public partial class Form1 : MetroForm

@@ -1123,5 +1123,35 @@ namespace Persistencia
 
             return i;
         }
+
+        public Indicadores getIndicadores(int IDReunion)
+        {
+            Indicadores indicadores = null;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Asistencia, NumTareas, Terminadas, Abandonadas, EnProceso, IDReunion FROM [Fw_GrupoGarnica].[dbo].[GP_Indicadores] WHERE IDReunion=@idReunion", conn);
+                cmd.Parameters.AddWithValue("@idReunion", IDReunion);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    indicadores = new Indicadores(dr.GetInt32(0), (Double)dr.GetDecimal(1), dr.GetInt32(2), (Double)dr.GetDecimal(3), (Double)dr.GetDecimal(4), (Double)dr.GetDecimal(5), dr.GetInt32(6));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return indicadores;
+        }
     }
 }
