@@ -51,7 +51,7 @@ namespace PresentacionEscritorio
         public MisReuniones()
         {
             InitializeComponent();
-            user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
+            user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1).ToUpper();
             this.Text = user;
 
             foreach (CaptionImage image in this.CaptionImages)
@@ -535,6 +535,8 @@ namespace PresentacionEscritorio
         private void button7_Click(object sender, EventArgs e)
         {
             acta.Contenido = richTextBox2.Rtf;
+            acta.Fecha = DateTime.Now;
+            acta.Duracion = 1.0;
             negocio.updateActa(acta);
         }
 
@@ -695,6 +697,37 @@ namespace PresentacionEscritorio
             {
                 richTextBox2.SelectedText = ofd.FileName.Replace(" ", "!");
             }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            NuevaReunion nr = new NuevaReunion();
+            nr.ShowDialog();
+            reuniones = negocio.getReunionUsuario(user);
+            gridGroupingControl1.DataSource = reuniones;
+            gridGroupingControl1.Table.Records[0].SetCurrent();
+            gridGroupingControl1.TableControl.CurrentCell.Activate(0, 0);
+
+            //idReu = (int)rec.GetValue(style.TableCellIdentity.Column.Name);
+            idReu = reuniones[0].ID;
+            reunion = negocio.getReunion(idReu);
+            agenda = negocio.getAgendaReunion(idReu);
+            richTextBox1.Rtf = agenda.Contenido;
+            acta = negocio.getActaReunion(idReu);
+            richTextBox2.Rtf = acta.Contenido;
+            tareas = negocio.getTareasReunion(idReu);
+            gridGroupingControl2.DataSource = tareas;
+
+            invitados = negocio.getInvitadoReunion(idReu);
+            asistentes = negocio.getAsistenteActa(acta.ID);
+            ia = new List<InvitadoAsitente>();
+            foreach (Invitado inv in invitados)
+            {
+                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+            }
+            gridGroupingControl3.DataSource = ia;
+
+            ActualizarIndicadores(true);
         }
     }
 

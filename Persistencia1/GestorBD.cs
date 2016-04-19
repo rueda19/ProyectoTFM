@@ -287,6 +287,82 @@ namespace Persistencia
             return reunion;
         }
 
+        public int setNuevaReunion(Reunion reunion, Agenda agenda, List<string> invitados)
+        {
+            int idReunion=0;
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Reunion](Titulo, Ubicacion, Duracion, Fecha, IDResponsable) VALUES (@tit,@ubi,@dur,@fecha,@res)", conn);
+                cmd.Parameters.AddWithValue("@tit", reunion.Titulo);
+                cmd.Parameters.AddWithValue("@ubi", reunion.Ubicacion);
+                cmd.Parameters.AddWithValue("@dur", reunion.Duracion);
+                cmd.Parameters.AddWithValue("@fecha", reunion.Fecha);
+                cmd.Parameters.AddWithValue("@res", reunion.IDResponsable);
+                i = cmd.ExecuteNonQuery();
+                if (i == 0)
+                    throw new System.Exception();
+                cmd.Parameters.Clear();
+
+                cmd.CommandText = "SELECT IDENT_CURRENT('[Fw_GrupoGarnica].[dbo].[GP_Reunion]')";
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    idReunion = Int32.Parse(dr.GetValue(0).ToString());
+                }
+                if (idReunion == 0)
+                    throw new System.Exception();
+                dr.Close();
+
+                cmd.CommandText = "INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Agenda](HoraInicio, Contenido, IDReunion) VALUES(@horaini,@cont,@idreu)";
+                cmd.Parameters.AddWithValue("@horaini", agenda.HoraInicio);
+                cmd.Parameters.AddWithValue("@cont", agenda.Contenido);
+                cmd.Parameters.AddWithValue("@idreu", idReunion);
+                i = cmd.ExecuteNonQuery();
+                if (i == 0)
+                    throw new System.Exception();
+                cmd.Parameters.Clear();
+
+                foreach (string inv in invitados)
+                {
+                    cmd.CommandText = "INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Invitado](IDReunion, IDEmpl) VALUES(@idreu,@idemp)";
+                    cmd.Parameters.AddWithValue("@idemp", inv);
+                    cmd.Parameters.AddWithValue("@idreu", idReunion);
+                    i = cmd.ExecuteNonQuery();
+                    if (i == 0)
+                        throw new System.Exception();
+                    cmd.Parameters.Clear();
+                }
+                cmd.CommandText = "INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Acta](Fecha, Duracion, Contenido, IDReunion) VALUES(@fecha,@dur,@cont,@idReun)";
+                cmd.Parameters.AddWithValue("@fecha", DateTime.Parse("2000-1-1"));
+                cmd.Parameters.AddWithValue("@dur", 0.0);
+                cmd.Parameters.AddWithValue("@cont", "");
+                cmd.Parameters.AddWithValue("@idReun", idReunion);
+                i = cmd.ExecuteNonQuery();
+                if (i == 0)
+                    throw new System.Exception();
+                cmd.Parameters.Clear();
+
+                i = 1;
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
         public int setReunion(Reunion reunion)
         {
             int i = 0;

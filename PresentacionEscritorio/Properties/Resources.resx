@@ -118,14 +118,17 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="HOME" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\HOME.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="REUNION3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\REUNION3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PROCESOS" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\PROCESOS.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ELIMINAR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\ELIMINAR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EMPLEADO2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\EMPLEADO2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="REUNION" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\REUNION.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,14 +136,8 @@
   <data name="TAREA3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\TAREA3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EMPLEADO1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\EMPLEADO1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="REUNION2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\REUNION2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ANADIR" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\ANADIR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PROCESOS1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\PROCESOS1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TAREA2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\TAREA2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,40 +148,46 @@
   <data name="EMPLEADO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\EMPLEADO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="max" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\max.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EMPLEADO2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\EMPLEADO2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\Close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PROCESOS3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\PROCESOS3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EMPLEADO3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\EMPLEADO3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HOME" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\HOME.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="REUNION1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\REUNION1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PROCESOS1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\PROCESOS1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PROCESOS2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\imagenes\PROCESOS2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="max" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\max.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\Minus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ELIMINAR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\ELIMINAR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROCESOS3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\PROCESOS3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TAREA" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\TAREA.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EMPLEADO3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\EMPLEADO3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="REUNION2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\REUNION2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="REUNION1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\REUNION1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANADIR" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\ANADIR.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PROCESOS2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\PROCESOS2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="HIPERVINCULO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\imagenes\HIPERVINCULO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EMPLEADO1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\EMPLEADO1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ANADIRGRANDE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\imagenes\ANADIRGRANDE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

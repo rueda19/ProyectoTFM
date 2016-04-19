@@ -91,6 +91,12 @@
     <Compile Include="AnadirInvitados.Designer.cs">
       <DependentUpon>AnadirInvitados.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnadirNuevaInvitacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnadirNuevaInvitacion.Designer.cs">
+      <DependentUpon>AnadirNuevaInvitacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="AnadirTarea.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,10 +121,19 @@
     <Compile Include="MisTareas.Designer.cs">
       <DependentUpon>MisTareas.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuevaReunion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevaReunion.Designer.cs">
+      <DependentUpon>NuevaReunion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnadirInvitados.resx">
       <DependentUpon>AnadirInvitados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AnadirNuevaInvitacion.resx">
+      <DependentUpon>AnadirNuevaInvitacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AnadirTarea.resx">
       <DependentUpon>AnadirTarea.cs</DependentUpon>
@@ -131,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MisTareas.resx">
       <DependentUpon>MisTareas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevaReunion.resx">
+      <DependentUpon>NuevaReunion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -231,6 +249,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\imagenes\HIPERVINCULO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imagenes\ANADIRGRANDE.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
