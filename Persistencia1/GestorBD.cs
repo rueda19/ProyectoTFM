@@ -363,6 +363,41 @@ namespace Persistencia
             return i;
         }
 
+        public int setReunionFila(int ID, string fila, string valor)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_Reunion] SET " + fila + "=@valor WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@fila", fila);
+                if (fila.Equals("Duracion"))
+                {
+                    cmd.Parameters.AddWithValue("@valor", valor.Replace(",", "."));
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@valor", valor);
+                }
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
         public int setReunion(Reunion reunion)
         {
             int i = 0;

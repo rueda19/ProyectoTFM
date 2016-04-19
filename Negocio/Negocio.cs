@@ -61,10 +61,14 @@ namespace Negocio
             return gbd.getReunion(ID);
         }
 
+        public int setReunionFila(int ID, string fila, string valor)
+        {
+            return gbd.setReunionFila(ID, fila, valor);
+        }
+
         public int setNuevaReunion(Reunion reunion, Agenda agenda, List<string> invitados)
         {
-            int IDReunion=gbd.setNuevaReunion(reunion, agenda, invitados);
-            return 1;
+            return gbd.setNuevaReunion(reunion, agenda, invitados);
         }
 
         public int setReunion(Reunion reunion)

@@ -69,6 +69,9 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl1.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            gridGroupingControl1.TableDescriptor.Columns[0].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[1].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[5].ReadOnly = true;
 
             //Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
             //GridTable table = el.ParentTable as GridTable;
@@ -705,6 +708,80 @@ namespace PresentacionEscritorio
             nr.ShowDialog();
             reuniones = negocio.getReunionUsuario(user);
             gridGroupingControl1.DataSource = reuniones;
+            gridGroupingControl1.Table.Records[0].SetCurrent();
+            gridGroupingControl1.TableControl.CurrentCell.Activate(0, 0);
+
+            //idReu = (int)rec.GetValue(style.TableCellIdentity.Column.Name);
+            idReu = reuniones[0].ID;
+            reunion = negocio.getReunion(idReu);
+            agenda = negocio.getAgendaReunion(idReu);
+            richTextBox1.Rtf = agenda.Contenido;
+            acta = negocio.getActaReunion(idReu);
+            richTextBox2.Rtf = acta.Contenido;
+            tareas = negocio.getTareasReunion(idReu);
+            gridGroupingControl2.DataSource = tareas;
+
+            invitados = negocio.getInvitadoReunion(idReu);
+            asistentes = negocio.getAsistenteActa(acta.ID);
+            ia = new List<InvitadoAsitente>();
+            foreach (Invitado inv in invitados)
+            {
+                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+            }
+            gridGroupingControl3.DataSource = ia;
+
+            ActualizarIndicadores(true);
+        }
+
+        private void gridGroupingControl1_RecordValueChanged(object sender, RecordValueChangedEventArgs e)
+        {
+            Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl1.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    //MessageBox.Show(style.TableCellIdentity.Column.Name);
+                    //MessageBox.Show(rec.GetValue(style.TableCellIdentity.Column.Name).ToString());
+                    //MessageBox.Show(rec.GetValue(styleID.TableCellIdentity.Column.Name).ToString());
+                    int j = (int)rec.GetValue(styleID.TableCellIdentity.Column.Name);
+                    string fila = style.TableCellIdentity.Column.Name, valor = rec.GetValue(style.TableCellIdentity.Column.Name).ToString();
+                    if (fila.Equals("Duracion") && valor.Contains("."))
+                    {
+                        rec.SetValue(style.TableCellIdentity.Column.Name, valor);
+                    }
+                    if (negocio.setReunionFila(j, fila, valor) == 0)
+                        MessageBox.Show("Error al actualizar la Tarea");
+                    else
+                        ActualizarIndicadores(true);
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (((CheckBox)sender).Checked)
+            {
+                reuniones = negocio.getReunionUsuarioPasadas(user);
+                gridGroupingControl1.DataSource = reuniones;
+            }
+            else
+            {
+                reuniones = negocio.getReunionUsuario(user);
+                gridGroupingControl1.DataSource = reuniones;
+            }
+
             gridGroupingControl1.Table.Records[0].SetCurrent();
             gridGroupingControl1.TableControl.CurrentCell.Activate(0, 0);
 

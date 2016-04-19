@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.MetroColorTable metroColorTable1 = new Syncfusion.Windows.Forms.MetroColorTable();
+            Syncfusion.Windows.Forms.MetroColorTable metroColorTable2 = new Syncfusion.Windows.Forms.MetroColorTable();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBase = new System.Windows.Forms.Label();
@@ -205,19 +205,19 @@
             this.multiColumnComboBoxBase.Location = new System.Drawing.Point(3, 23);
             this.multiColumnComboBoxBase.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.multiColumnComboBoxBase.Name = "multiColumnComboBoxBase";
-            metroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable1.ArrowInActive = System.Drawing.Color.White;
-            metroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty;
-            metroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty;
-            metroColorTable1.ScrollerBackground = System.Drawing.Color.White;
-            metroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable1.ThumbInActive = System.Drawing.Color.White;
-            metroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty;
-            this.multiColumnComboBoxBase.ScrollMetroColorTable = metroColorTable1;
+            metroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable2.ArrowInActive = System.Drawing.Color.White;
+            metroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty;
+            metroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty;
+            metroColorTable2.ScrollerBackground = System.Drawing.Color.White;
+            metroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable2.ThumbInActive = System.Drawing.Color.White;
+            metroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty;
+            this.multiColumnComboBoxBase.ScrollMetroColorTable = metroColorTable2;
             this.multiColumnComboBoxBase.Size = new System.Drawing.Size(170, 21);
             this.multiColumnComboBoxBase.TabIndex = 11;
             this.multiColumnComboBoxBase.Text = "multiColumnComboBox1";
