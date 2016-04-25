@@ -65,6 +65,9 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl1.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            gridGroupingControl1.TableDescriptor.Columns[2].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            gridGroupingControl1.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            gridGroupingControl1.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "yyyy-MM-dd";
 
             //Event hooking in constructor.
             this.gridGroupingControl1.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
@@ -227,6 +230,43 @@ namespace PresentacionEscritorio
             else
                 tareas = negocio.getTareasUsuario(user);
             gridGroupingControl1.DataSource = tareas;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            AnadirTarea formIT = new AnadirTarea(null);
+            formIT.ShowDialog();
+
+            tareas = negocio.getTareasUsuario(user);
+            gridGroupingControl1.DataSource = tareas;
+        }
+
+        private void gridGroupingControl1_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl1.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                    formIT.ShowDialog();
+
+                    tareas = negocio.getTareasUsuario(user);
+                    gridGroupingControl1.DataSource = tareas;
+                }
+            }
         }
 
     }

@@ -51,10 +51,6 @@ namespace PresentacionEscritorio
             comboBox2.DisplayMember = "Name";
             comboBox2.DrawMode = DrawMode.OwnerDrawFixed;
 
-            List<InvitadoNuevo1> ini = new List<InvitadoNuevo1>();
-            ini.Add(new InvitadoNuevo1("DRUEDA"));
-            invitados.Add("DRUEDA");
-            invitados.Add("RBOVEDA");
             gridGroupingControl1.DataSource = invitados.Select(x => new { Usuario = x }).ToList();
             SampleCustomization(gridGroupingControl1);
             this.gridGroupingControl1.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
@@ -250,7 +246,7 @@ namespace PresentacionEscritorio
             Double horas;
             if (Double.TryParse(textBoxDuracion.Text.Replace(".", ","), out horas))
             {
-                negocio.setNuevaReunion(new Reunion(0, textBoxTitulo.Text, textBoxUbicacion.Text, Double.Parse(textBoxDuracion.Text.Replace(".", ",")), dateTimePickerFecha.Value, user), new Agenda(0, TimeSpan.Parse("18:00"), richTextBox1.Rtf, 0), invitados);
+                negocio.setNuevaReunion(new Reunion(0, textBoxTitulo.Text, textBoxUbicacion.Text, Double.Parse(textBoxDuracion.Text.Replace(".", ",")),0.0, dateTimePickerFecha.Value, user), new Agenda(richTextBox1.Rtf, 0), invitados);
                 this.Close();
             }
             else
@@ -263,7 +259,7 @@ namespace PresentacionEscritorio
             Agenda agendaBase = negocio.getAgendaReunion(reunionBase.ID);
             List<Invitado> invitadosBase = negocio.getInvitadoReunion(reunionBase.ID);
 
-            textBoxDuracion.Text = reunionBase.Duracion + "";
+            textBoxDuracion.Text = reunionBase.DuracionEstimada + "";
             textBoxTitulo.Text = reunionBase.Titulo;
             textBoxUbicacion.Text = reunionBase.Ubicacion;
             dateTimePickerFecha.Value = reunionBase.Fecha;

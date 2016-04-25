@@ -71,7 +71,8 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
             gridGroupingControl1.TableDescriptor.Columns[0].ReadOnly = true;
             gridGroupingControl1.TableDescriptor.Columns[1].ReadOnly = true;
-            gridGroupingControl1.TableDescriptor.Columns[5].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[6].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyCell.Format = "yyyy-MM-dd HH:mm";
 
             //Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
             //GridTable table = el.ParentTable as GridTable;
@@ -86,6 +87,9 @@ namespace PresentacionEscritorio
             this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl2.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl2.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            gridGroupingControl2.TableDescriptor.Columns[2].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            gridGroupingControl2.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "yyyy-MM-dd";
 
             //this.gridGroupingControl1.TableDescriptor.Columns[2].Appearance.AnyCell.AutoSize=true;
             //this.gridGroupingControl1.TableDescriptor.Columns[5].Width = 25;
@@ -98,7 +102,7 @@ namespace PresentacionEscritorio
             comboBox4.DrawMode = DrawMode.OwnerDrawFixed;
 
             invitados = negocio.getInvitadoReunion(0);
-            asistentes = negocio.getAsistenteActa(0);
+            asistentes = negocio.getAsistenteReunion(0);
             ia = new List<InvitadoAsitente>();
             ia.Add(new InvitadoAsitente("",false));
             gridGroupingControl3.DataSource = ia;
@@ -363,7 +367,7 @@ namespace PresentacionEscritorio
                         gridGroupingControl2.DataSource = tareas;
 
                         invitados = negocio.getInvitadoReunion(idReu);
-                        asistentes = negocio.getAsistenteActa(acta.ID);
+                        asistentes = negocio.getAsistenteReunion(idReu);
                         ia = new List<InvitadoAsitente>();
                         foreach (Invitado inv in invitados)
                         {
@@ -538,8 +542,6 @@ namespace PresentacionEscritorio
         private void button7_Click(object sender, EventArgs e)
         {
             acta.Contenido = richTextBox2.Rtf;
-            acta.Fecha = DateTime.Now;
-            acta.Duracion = 1.0;
             negocio.updateActa(acta);
         }
 
@@ -563,9 +565,9 @@ namespace PresentacionEscritorio
                     if (rec != null)
                     {
                         negocio.removeInvitado(new Invitado(reunion.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
-                        negocio.removeAsistente(new Asistente(acta.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
+                        negocio.removeAsistente(new Asistente(reunion.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
                         invitados = negocio.getInvitadoReunion(idReu);
-                        asistentes = negocio.getAsistenteActa(acta.ID);
+                        asistentes = negocio.getAsistenteReunion(idReu);
                         ia = new List<InvitadoAsitente>();
                         foreach (Invitado inv in invitados)
                         {
@@ -601,10 +603,10 @@ namespace PresentacionEscritorio
                     Boolean b = (bool)style.CellValue;
                     if (!b)
                     {
-                        if (negocio.setAsistente(new Asistente(acta.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.setAsistente(new Asistente(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
                         {
                             invitados = negocio.getInvitadoReunion(idReu);
-                            asistentes = negocio.getAsistenteActa(acta.ID);
+                            asistentes = negocio.getAsistenteReunion(idReu);
                             ia = new List<InvitadoAsitente>();
                             foreach (Invitado inv in invitados)
                             {
@@ -614,9 +616,9 @@ namespace PresentacionEscritorio
                     }
                     else
                     {
-                        if (negocio.removeAsistente(new Asistente(acta.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.removeAsistente(new Asistente(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
                         {
-                            asistentes = negocio.getAsistenteActa(acta.ID);
+                            asistentes = negocio.getAsistenteReunion(idReu);
                             ia = new List<InvitadoAsitente>();
                             foreach (Invitado inv in invitados)
                             {
@@ -636,7 +638,7 @@ namespace PresentacionEscritorio
             formIA.ShowDialog();
 
             invitados = negocio.getInvitadoReunion(idReu);
-            asistentes = negocio.getAsistenteActa(acta.ID);
+            asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
             foreach (Invitado inv in invitados)
             {
@@ -649,7 +651,6 @@ namespace PresentacionEscritorio
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Añadir Tarea");
             AnadirTarea formIT = new AnadirTarea(reunion);
             formIT.ShowDialog();
 
@@ -664,13 +665,13 @@ namespace PresentacionEscritorio
             if (terminada)
             {
                 indicador = negocio.getIndicadores(idReu);
-                lblAsistencia.Text = indicador.Asistencia + "%";
+                lblAsistencia.Text = indicador.Asistencia*100 + "%";
                 lblNTCreadas.Text = indicador.NumTareas + " Tareas";
                 //var qTerminadas = tareas.Where(t => t.Estado == "Terminada");
                 //lblTTerminadas.Text = qTerminadas.Count() * 100 / tareas.Count + "%";
-                lblTTerminadas.Text = indicador.Terminadas + "%";
-                lblTAbandonadas.Text = indicador.Abandonadas + "%";
-                lblTProceso.Text = indicador.EnProceso + "%";
+                lblTTerminadas.Text = indicador.Terminadas * 100 + "%";
+                lblTAbandonadas.Text = indicador.Abandonadas * 100 + "%";
+                lblTProceso.Text = indicador.EnProceso * 100 + "%";
             }
             else
             {
@@ -722,7 +723,7 @@ namespace PresentacionEscritorio
             gridGroupingControl2.DataSource = tareas;
 
             invitados = negocio.getInvitadoReunion(idReu);
-            asistentes = negocio.getAsistenteActa(acta.ID);
+            asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
             foreach (Invitado inv in invitados)
             {
@@ -796,7 +797,7 @@ namespace PresentacionEscritorio
             gridGroupingControl2.DataSource = tareas;
 
             invitados = negocio.getInvitadoReunion(idReu);
-            asistentes = negocio.getAsistenteActa(acta.ID);
+            asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
             foreach (Invitado inv in invitados)
             {
@@ -805,6 +806,34 @@ namespace PresentacionEscritorio
             gridGroupingControl3.DataSource = ia;
 
             ActualizarIndicadores(true);
+        }
+
+        private void gridGroupingControl2_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                    formIT.ShowDialog();
+
+                    tareas = negocio.getTareasReunion(reunion.ID);
+                    gridGroupingControl2.DataSource = tareas;
+                }
+            }
         }
     }
 

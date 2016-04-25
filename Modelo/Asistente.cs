@@ -7,12 +7,12 @@ namespace Modelo
 {
     public class Asistente
     {
-        public int IDActa { get; set; }
+        public int IDReunion { get; set; }
         public string IDEmpleado { get; set; }
 
-        public Asistente(int idActa, string idEmpleado)
+        public Asistente(int idReunion, string idEmpleado)
         {
-            IDActa = idActa;
+            IDReunion = idReunion;
             IDEmpleado = idEmpleado;
         }
     }

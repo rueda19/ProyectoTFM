@@ -38,6 +38,7 @@ namespace PresentacionEscritorio
                 tbOrigen.Text = "Manual";
             }
 
+            
 
         }
 

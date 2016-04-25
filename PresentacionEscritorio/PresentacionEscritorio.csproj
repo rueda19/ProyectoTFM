@@ -103,6 +103,12 @@
     <Compile Include="AnadirTarea.Designer.cs">
       <DependentUpon>AnadirTarea.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditarTarea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditarTarea.Designer.cs">
+      <DependentUpon>EditarTarea.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AnadirTarea.resx">
       <DependentUpon>AnadirTarea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditarTarea.resx">
+      <DependentUpon>EditarTarea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

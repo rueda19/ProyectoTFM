@@ -82,8 +82,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl2)).BeginInit();
@@ -198,6 +198,7 @@
             this.gridGroupingControl2.TabIndex = 6;
             this.gridGroupingControl2.Text = "gridGroupingControl2";
             this.gridGroupingControl2.VersionInfo = "13.4350.0.53";
+            this.gridGroupingControl2.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl2_TableControlCellDoubleClick);
             this.gridGroupingControl2.RecordValueChanged += new Syncfusion.Grouping.RecordValueChangedEventHandler(this.gridGroupingControl2_RecordValueChanged);
             // 
             // tableLayoutPanel2
@@ -779,6 +780,18 @@
             this.tableLayoutPanel9.Size = new System.Drawing.Size(882, 72);
             this.tableLayoutPanel9.TabIndex = 21;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox3.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
+            this.pictureBox3.Location = new System.Drawing.Point(531, 3);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(74, 66);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox3.TabIndex = 20;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -792,18 +805,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Mis Reuniones";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox3.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
-            this.pictureBox3.Location = new System.Drawing.Point(531, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(74, 66);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox3.TabIndex = 20;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // MisReuniones
             // 
