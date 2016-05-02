@@ -60,6 +60,7 @@ namespace PresentacionEscritorio
             gridGroupingControl1.TableDescriptor.Columns[7].ReadOnly = true;
             gridGroupingControl1.TableDescriptor.Columns[8].ReadOnly = true;
             gridGroupingControl1.TableDescriptor.Columns[9].ReadOnly = true;
+            gridGroupingControl1.TableDescriptor.Columns[10].ReadOnly = true;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;

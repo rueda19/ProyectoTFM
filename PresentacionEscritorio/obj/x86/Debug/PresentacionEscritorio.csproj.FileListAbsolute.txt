@@ -20,3 +20,4 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.NuevaReunion.resources
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.AnadirNuevaInvitacion.resources
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.EditarTarea.resources
+C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.ProcesosPrincipalesAvanzado.resources

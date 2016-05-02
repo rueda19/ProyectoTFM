@@ -38,6 +38,7 @@
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Diagram.Base, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.Diagram.Windows, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Grid.Base, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
@@ -68,6 +69,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.XlsIO.ClientProfile, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -127,11 +129,18 @@
     <Compile Include="MisTareas.Designer.cs">
       <DependentUpon>MisTareas.cs</DependentUpon>
     </Compile>
+    <Compile Include="MiProceso.cs" />
     <Compile Include="NuevaReunion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NuevaReunion.Designer.cs">
       <DependentUpon>NuevaReunion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcesosPrincipalesAvanzado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcesosPrincipalesAvanzado.Designer.cs">
+      <DependentUpon>ProcesosPrincipalesAvanzado.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -159,6 +168,9 @@
     <EmbeddedResource Include="NuevaReunion.resx">
       <DependentUpon>NuevaReunion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProcesosPrincipalesAvanzado.resx">
+      <DependentUpon>ProcesosPrincipalesAvanzado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -170,6 +182,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <Content Include="Procesos.edp" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

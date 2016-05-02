@@ -54,7 +54,8 @@ namespace PresentacionEscritorio
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new NuevaReunion());
-            Application.Run(new MisReuniones());
+            Application.Run(new ProcesosPrincipalesAvanzado());
+            //Application.Run(new MisReuniones());
         }
     }
 }

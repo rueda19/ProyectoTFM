@@ -148,6 +148,7 @@ namespace PresentacionEscritorio
             gridGroupingControl2.TableDescriptor.Columns[7].ReadOnly = true;
             gridGroupingControl2.TableDescriptor.Columns[8].ReadOnly = true;
             gridGroupingControl2.TableDescriptor.Columns[9].ReadOnly = true;
+            gridGroupingControl2.TableDescriptor.VisibleColumns.Remove("IDPuntoRojo");
             this.gridGroupingControl2.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl2.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;

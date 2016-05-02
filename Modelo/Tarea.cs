@@ -17,8 +17,9 @@ namespace Modelo
         public string Origen { get; set; }
         public string IDResponsable { get; set; }
         public int? IDReunion { get; set; }
+        public int? IDPuntoRojo { get; set; }
 
-        public Tarea(int id, string descripcion, DateTime fechaInicio, DateTime fechaFin, DateTime? fechaEjecutado, double tiempoDedicado, string origen, string estado, string idResponsable, int? idReunion)
+        public Tarea(int id, string descripcion, DateTime fechaInicio, DateTime fechaFin, DateTime? fechaEjecutado, double tiempoDedicado, string origen, string estado, string idResponsable, int? idReunion, int? idPuntoRojo)
         {
             ID = id;
             Descripcion = descripcion;
@@ -30,6 +31,7 @@ namespace Modelo
             Estado = estado;
             IDResponsable = idResponsable;
             IDReunion = idReunion;
+            IDPuntoRojo = idPuntoRojo;
         }
     }
 }

@@ -11,6 +11,16 @@ namespace Negocio
     {
         private GestorBD gbd;
 
+        public Byte[] GetDiagrama(string idProceso)
+        {
+            return gbd.GetDiagrama(idProceso);
+        }
+
+        public int SetDiagrama(string idProceso, Byte[] dBinary)
+        {
+            return gbd.SetDiagrama(idProceso, dBinary);
+        }
+
         public Negocio()
         {
             gbd = new GestorBD();
