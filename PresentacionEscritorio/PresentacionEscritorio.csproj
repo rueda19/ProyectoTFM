@@ -144,6 +144,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\ProcesoB4.png" />
+    <None Include="Resources\ProcesoB3.png" />
+    <None Include="Resources\ProcesoB2.png" />
+    <None Include="Resources\ProcesoB1.png" />
+    <None Include="Resources\ProcesoA4.png" />
+    <None Include="Resources\ProcesoA3.png" />
+    <None Include="Resources\ProcesoA2.png" />
+    <None Include="Resources\ProcesoA1.png" />
     <EmbeddedResource Include="AnadirInvitados.resx">
       <DependentUpon>AnadirInvitados.cs</DependentUpon>
     </EmbeddedResource>

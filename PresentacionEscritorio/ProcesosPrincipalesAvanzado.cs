@@ -23,20 +23,6 @@ namespace PresentacionEscritorio
         {
             InitializeComponent();
 
-            PointF[] pts =
-                {
-                    new Point(0, 0),
-                    new Point(0, 90),
-                    new Point(50, 100),
-                    new Point(100, 90),
-                    new Point(100, 0),
-                    new Point(50, 10)
-
-                };
-            Proceso p = new Proceso(pts);
-            //p.EditStyle.AllowSelect = false;
-            this.diagram1.Model.AppendChild(p);
-            this.diagram1.Model.AppendChild(new Proceso(pts));
             diagram1.EventSink.NodeClick += new NodeMouseEventHandler(EventSink_NodeClick);
             diagram1.Model.BoundaryConstraintsEnabled = false;
             diagram1.Controller.Guides.Enable = false;
@@ -89,6 +75,66 @@ namespace PresentacionEscritorio
             Byte[] dBinary = dStream.ToArray();
             Negocio.Negocio n = new Negocio.Negocio();
             n.SetDiagrama("P01", dBinary);
+        }
+
+        private void toolStripProcesoA1_Click(object sender, EventArgs e)
+        {
+            PointF[] pts =
+                {
+                    new Point(0, 0),
+                    new Point(0, 90),
+                    new Point(50, 100),
+                    new Point(100, 90),
+                    new Point(100, 0),
+                    new Point(50, 10)
+
+                };
+            this.diagram1.Model.AppendChild(new Proceso(pts));
+        }
+
+        private void toolStripProcesoA2_Click(object sender, EventArgs e)
+        {
+            PointF[] pts =
+                {
+                    new Point(0, 0),
+                    new Point(90, 0),
+                    new Point(100, 50),
+                    new Point(90, 100),
+                    new Point(0, 100),
+                    new Point(10, 50)
+
+                };
+            this.diagram1.Model.AppendChild(new Proceso(pts));
+        }
+
+        private void toolStripProcesoA3_Click(object sender, EventArgs e)
+        {
+            PointF[] pts =
+                {
+                    new Point(0, 10),
+                    new Point(50, 0),
+                    new Point(100, 10),
+                    new Point(100, 100),
+                    new Point(90, 50),
+                    new Point(0, 100)
+
+                };
+            this.diagram1.Model.AppendChild(new Proceso(pts));
+        }
+
+        private void toolStripProcesoA4_Click(object sender, EventArgs e)
+        {
+            PointF[] pts =
+                {
+                    new Point(10, 0),
+                    new Point(100, 100),
+                    new Point(50, 90),
+                    new Point(100, 100),
+                    new Point(10, 100),
+                    new Point(0, 50)
+
+                };
+            this.diagram1.Model.AppendChild(new Proceso(pts));
         }
     }
 }
