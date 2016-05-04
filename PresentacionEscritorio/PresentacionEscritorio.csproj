@@ -87,6 +87,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbrirDiagrama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbrirDiagrama.Designer.cs">
+      <DependentUpon>AbrirDiagrama.cs</DependentUpon>
+    </Compile>
     <Compile Include="AnadirInvitados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,18 @@
     <Compile Include="NuevaReunion.Designer.cs">
       <DependentUpon>NuevaReunion.cs</DependentUpon>
     </Compile>
+    <Compile Include="NuevoDiagrama.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NuevoDiagrama.Designer.cs">
+      <DependentUpon>NuevoDiagrama.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProcesosPrincipales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProcesosPrincipales.Designer.cs">
+      <DependentUpon>ProcesosPrincipales.cs</DependentUpon>
+    </Compile>
     <Compile Include="ProcesosPrincipalesAvanzado.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +162,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\redo.png" />
+    <None Include="Resources\image-export.png" />
+    <None Include="Resources\Texto.png" />
+    <None Include="Resources\Rectangulo.png" />
+    <None Include="Resources\linea.png" />
     <None Include="Resources\ProcesoB4.png" />
     <None Include="Resources\ProcesoB3.png" />
     <None Include="Resources\ProcesoB2.png" />
@@ -152,6 +176,9 @@
     <None Include="Resources\ProcesoA3.png" />
     <None Include="Resources\ProcesoA2.png" />
     <None Include="Resources\ProcesoA1.png" />
+    <EmbeddedResource Include="AbrirDiagrama.resx">
+      <DependentUpon>AbrirDiagrama.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnadirInvitados.resx">
       <DependentUpon>AnadirInvitados.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +202,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NuevaReunion.resx">
       <DependentUpon>NuevaReunion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NuevoDiagrama.resx">
+      <DependentUpon>NuevoDiagrama.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProcesosPrincipales.resx">
+      <DependentUpon>ProcesosPrincipales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProcesosPrincipalesAvanzado.resx">
       <DependentUpon>ProcesosPrincipalesAvanzado.cs</DependentUpon>

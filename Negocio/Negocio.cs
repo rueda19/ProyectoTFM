@@ -11,9 +11,39 @@ namespace Negocio
     {
         private GestorBD gbd;
 
+        public Proceso getProceso(string id)
+        {
+            return gbd.getProceso(id);
+        }
+
+        public int setProceso(Proceso proceso)
+        {
+            return gbd.setProceso(proceso);
+        }
+
+        public int setProcesoFila(string ID, string fila, string valor)
+        {
+            return gbd.setProcesoFila(ID, fila, valor);
+        }
+
+        public int removeProceso(string id)
+        {
+            return gbd.removeProceso(id);
+        }
+
+        public List<string> GetIDDiagramas()
+        {
+            return gbd.GetIDDiagramas();
+        }
+
         public Byte[] GetDiagrama(string idProceso)
         {
             return gbd.GetDiagrama(idProceso);
+        }
+
+        public int UpdateDiagrama(string idProceso, Byte[] dBinary)
+        {
+            return gbd.UpdateDiagrama(idProceso, dBinary);
         }
 
         public int SetDiagrama(string idProceso, Byte[] dBinary)

@@ -7,3 +7,12 @@ C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persiste
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.exe
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.pdb
 C:\Users\DRueda\Documents\ProyectoTFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.csprojResolveAssemblyReference.cache
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\ProyectoTFM.exe
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\ProyectoTFM.pdb
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.dll
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.dll
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\Modelo.pdb
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\bin\Debug\Persistencia.pdb
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.csprojResolveAssemblyReference.cache
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.exe
+C:\Users\drueda\Documents\TFM\ProyectoTFM\ProyectoTFM\obj\x86\Debug\ProyectoTFM.pdb

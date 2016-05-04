@@ -117,7 +117,10 @@ namespace PresentacionEscritorio
             }
             else if ((sender as CaptionImage).Name == "CaptionImage5")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new ProcesosPrincipales("GBL");
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
         }
 

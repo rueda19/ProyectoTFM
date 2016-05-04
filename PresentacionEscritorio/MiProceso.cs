@@ -19,17 +19,16 @@ using System.Windows.Forms;
 
 namespace Syncfusion.Windows.Forms.Diagram.Samples
 {
-
     [Serializable()]
     [TypeConverter(typeof(MySymbolConverter))]
-    public class Proceso : Group
+    public class MiProceso : Group
     {
-        public Proceso()
+        public MiProceso()
         {
             MessageBox.Show("dasdas");
         }
 
-        public Proceso(PointF[] pts)
+        public MiProceso(PointF[] pts)
         {
             Polygon polygon = new Polygon(pts);
             polygon.Name = "Polygon";
@@ -46,11 +45,11 @@ namespace Syncfusion.Windows.Forms.Diagram.Samples
             this.AppendChild(polygon);
         }
         
-        public Proceso(Proceso src)
+        public MiProceso(MiProceso src)
             : base(src)
         { }
 
-        protected Proceso(SerializationInfo info, StreamingContext context)
+        protected MiProceso(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
             // The Serialization constructor is invoked during deserialization or during a drag & drop operation.
@@ -86,7 +85,7 @@ namespace Syncfusion.Windows.Forms.Diagram.Samples
 
         public override object Clone()
         {
-            return new Proceso(this);
+            return new MiProceso(this);
         }
     }
 
@@ -112,11 +111,11 @@ namespace Syncfusion.Windows.Forms.Diagram.Samples
             // This code returns only the specified properties. It can be used to filter out
             // properties that you do not wish to expose to in property grid.
             PropertyDescriptor[] props = new PropertyDescriptor[5];
-            props[0] = TypeDescriptor.CreateProperty(typeof(Proceso), "Color", typeof(Color), attrs);
-            props[1] = TypeDescriptor.CreateProperty(typeof(Proceso), "ForeColor", typeof(Color), attrs);
-            props[2] = TypeDescriptor.CreateProperty(typeof(Proceso), "FillStyleType", typeof(FillStyleType), attrs);
-            props[3] = TypeDescriptor.CreateProperty(typeof(Proceso), "IDProceso", typeof(string), attrs);
-            props[4] = TypeDescriptor.CreateProperty(typeof(Proceso), "Texto", typeof(string), attrs);
+            props[0] = TypeDescriptor.CreateProperty(typeof(MiProceso), "Color", typeof(Color), attrs);
+            props[1] = TypeDescriptor.CreateProperty(typeof(MiProceso), "ForeColor", typeof(Color), attrs);
+            props[2] = TypeDescriptor.CreateProperty(typeof(MiProceso), "FillStyleType", typeof(FillStyleType), attrs);
+            props[3] = TypeDescriptor.CreateProperty(typeof(MiProceso), "IDProceso", typeof(string), attrs);
+            props[4] = TypeDescriptor.CreateProperty(typeof(MiProceso), "Texto", typeof(string), attrs);
             return new PropertyDescriptorCollection(props);
         }
     }

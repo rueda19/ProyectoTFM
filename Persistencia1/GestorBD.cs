@@ -10,6 +10,150 @@ namespace Persistencia
 {
     public class GestorBD
     {
+        public Proceso getProceso(string id)
+        {
+            Proceso proceso = null;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Nombre, Tipo, IDResponsable FROM [GP_Proceso] WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    proceso = new Proceso(dr.GetString(0), dr.GetString(1), dr.GetString(2), dr.GetString(3));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return proceso;
+        }
+
+        public int setProceso(Proceso proceso)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Proceso](ID, Nombre, Tipo, IDResponsable) VALUES(@id,@nom,@tipo,@isRes)", conn);
+                cmd.Parameters.AddWithValue("@user", proceso.ID);
+                cmd.Parameters.AddWithValue("@nom", proceso.Nombre);
+                cmd.Parameters.AddWithValue("@tipo", proceso.Tipo);
+                cmd.Parameters.AddWithValue("@isRes", proceso.IDResponsable);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public int setProcesoFila(string ID, string fila, string valor)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_Proceso] SET " + fila + "=@valor WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@fila", fila);
+                cmd.Parameters.AddWithValue("@valor", valor);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public int removeProceso(string id)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM [Fw_GrupoGarnica].[dbo].[GP_Proceso] WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public List<string> GetIDDiagramas()
+        {
+            List<string> idDiagramas = new List<string>();
+            idDiagramas.Add("Global");
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT IDProceso FROM [Fw_GrupoGarnica].[dbo].[GP_Diagrama]", conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    idDiagramas.Add(dr.GetString(0));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return idDiagramas;
+        }
+
         public Byte[] GetDiagrama(string idProceso)
         {
             Byte[] diagrama = null;
@@ -34,6 +178,36 @@ namespace Persistencia
             }
 
             return diagrama;
+        }
+
+        public int UpdateDiagrama(string idProceso, Byte[] dBinary)
+        {
+            SqlConnection conn = null;
+            int i = 0;
+            try
+            {
+                //Create an instance of the connection and command object.
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE GP_Diagrama SET Diagrama=@Diagrama WHERE IDProceso=@idProceso", conn);
+                //Set parameter values
+                cmd.Parameters.AddWithValue("@idProceso", idProceso);
+                cmd.Parameters.AddWithValue("@Diagrama", dBinary);
+
+                //Execute the command.
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return i;
         }
 
         public int SetDiagrama(string idProceso, Byte[] dBinary)
