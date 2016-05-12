@@ -17,10 +17,15 @@ namespace PresentacionEscritorio
     {
         private Negocio.Negocio negocio = new Negocio.Negocio();
         public string IDDiagrama { get; set; }
+        public string Nombre { get; set; }
+        public string Tipo { get; set; }
+        public string Responsable { get; set; }
 
         public NuevoDiagrama()
         {
             InitializeComponent();
+            multiColumnComboBox1.DataSource = negocio.getEmpleados();
+            multiColumnComboBox1.DisplayMember = "Usuario";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -31,9 +36,12 @@ namespace PresentacionEscritorio
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Length == 3)
+            if (textBox1.Text.Length == 3 && textBox2.Text != "" && textBox3.Text != "" && multiColumnComboBox1.Text != "")
             {
                 IDDiagrama = textBox1.Text;
+                Nombre = textBox2.Text;
+                Tipo = textBox3.Text;
+                Responsable = multiColumnComboBox1.Text;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

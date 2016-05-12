@@ -4,12 +4,63 @@ using System.Linq;
 using System.Text;
 using Modelo;
 using Persistencia;
+using System.Data;
 
 namespace Negocio
 {
     public class Negocio
     {
         private GestorBD gbd;
+
+        public DataTable getEstadisticasTareasResponsable(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return gbd.getEstadisticasTareasResponsable(idProceso, fechaInicio, fechaFin);
+        }
+
+        public DataTable getEstadisticasTareasAcabadas(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return gbd.getEstadisticasTareasAcabadas(idProceso, fechaInicio, fechaFin);
+        }
+
+        public PuntoRojo getPuntoRojo(int id)
+        {
+            return gbd.getPuntoRojo(id);
+        }
+
+        public int updatePuntoRojo(PuntoRojo puntoRojo)
+        {
+            return gbd.updatePuntoRojo(puntoRojo);
+        }
+
+        public int removePuntoRojo(int id)
+        {
+            return gbd.removePuntoRojo(id);
+        }
+
+        public int setPuntoRojoFila(int ID, string fila, string valor)
+        {
+            return gbd.setPuntoRojoFila(ID, fila, valor);
+        }
+
+        public int setPuntoRojo(PuntoRojo puntoRojo)
+        {
+            return gbd.setPuntoRojo(puntoRojo);
+        }
+
+        public List<PuntoRojo> getPuntosRojos()
+        {
+            return gbd.getPuntosRojos();
+        }
+
+        public List<Proceso> getProcesos()
+        {
+            return gbd.getProcesos();
+        }
+
+        public Proceso getProcesoPuntoRojo(int? idPuntoRojo)
+        {
+            return gbd.getProcesoPuntoRojo(idPuntoRojo);
+        }
 
         public Proceso getProceso(string id)
         {
@@ -79,6 +130,16 @@ namespace Negocio
         public List<Tarea> getTareasUsuario(string Usuario)
         {
             return gbd.getTareasUsuario(Usuario);
+        }
+
+        public List<Tarea> getTareas(DateTime desde, DateTime hasta)
+        {
+            return gbd.getTareas(desde, hasta);
+        }
+
+        public List<Tarea> getTareas()
+        {
+            return gbd.getTareas();
         }
 
         public Tarea getTarea(int ID)

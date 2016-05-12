@@ -36,20 +36,33 @@ namespace PresentacionEscritorio
                 image.ImageMouseUp += new CaptionImage.MouseUp(image_ImageMouseUp);
             }
 
+            
             proceso = negocio.getProceso(idProceso);
-            textBoxID.Text = proceso.ID;
-            textBoxNombre.Text = proceso.Nombre;
-            textBoxTipo.Text = proceso.Tipo;
-            textBoxResponsable.Text = proceso.IDResponsable;
+            if (proceso.ID == "GBL")
+            {
+                textBoxNombre.Text = proceso.Nombre;
+                textBoxTipo.Enabled = false;
+                textBoxResponsable.Enabled = false;
+                labelTitulo.Text = proceso.Nombre;
+            }
+            else
+            {
+                textBoxID.Text = proceso.ID;
+                textBoxNombre.Text = proceso.Nombre;
+                textBoxTipo.Text = proceso.Tipo;
+                textBoxResponsable.Text = proceso.IDResponsable;
+                labelTitulo.Text = proceso.ID + " " + proceso.Nombre;
+            }
 
-
-            diagram1.EventSink.NodeClick += new NodeMouseEventHandler(EventSink_NodeClick);
+            if (idProceso=="GBL")
+                diagram1.EventSink.NodeClick += new NodeMouseEventHandler(EventSink_NodeClick);
 
             Byte[] dBinary = negocio.GetDiagrama(idProceso);
             MemoryStream dStream = new MemoryStream(dBinary, 0, dBinary.Length);
             dStream.Position = 0;
             diagram1.LoadBinary(dStream);
             dStream.Close();
+            diagram1.View.Grid.Visible = false;
             foreach (Node p in this.diagram1.Model.Nodes)
             {
                 p.EditStyle.AllowSelect = false;
@@ -58,7 +71,27 @@ namespace PresentacionEscritorio
 
         void EventSink_NodeClick(NodeMouseEventArgs evtArgs)
         {
-            MessageBox.Show(evtArgs.Node.Name);
+            //MessageBox.Show(evtArgs.Node.Name);
+            if (existeProceso(evtArgs.Node.Name))
+            {
+                this.Hide();
+                var form2 = new ProcesosPrincipales(evtArgs.Node.Name);
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
+            }
+        }
+
+        private bool existeProceso(string id)
+        {
+            if (id == null)
+                return false;
+            foreach (Proceso p in negocio.getProcesos())
+            {
+                if (p.ID == id)
+                    return true;
+            }
+            return false;
+
         }
 
         void image_ImageMouseUp(object sender, ImageMouseUpEventArgs e)
@@ -90,10 +123,10 @@ namespace PresentacionEscritorio
             }
             else if ((sender as CaptionImage).Name == "CaptionImage5")
             {
-                //this.Hide();
-                //var form2 = new ProcesosPrincipales("GBL");
-                //form2.Closed += (s, args) => this.Close();
-                //form2.Show();
+                this.Hide();
+                var form2 = new ProcesosPrincipales("GBL");
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
         }
 
@@ -122,7 +155,10 @@ namespace PresentacionEscritorio
 
         private void buttonPr_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            var form2 = new PuntosRojos(proceso.ID);
+            form2.Closed += (s, args) => this.Close();
+            form2.Show();
         }
 
         private void buttonImprimir_Click(object sender, EventArgs e)

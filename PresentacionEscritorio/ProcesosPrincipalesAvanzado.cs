@@ -293,6 +293,7 @@ namespace PresentacionEscritorio
                         }
                         else
                         {
+                            negocio.setProceso(new Proceso(nuevoIdProceso, form.Nombre, form.Tipo, form.Responsable));
                             MemoryStream dStream = new MemoryStream();
                             diagram1.SaveBinary(dStream);
                             Byte[] dBinary = dStream.ToArray();

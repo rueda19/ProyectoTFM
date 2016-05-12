@@ -31,31 +31,33 @@
             this.components = new System.ComponentModel.Container();
             Syncfusion.Windows.Forms.Diagram.Binding binding1 = new Syncfusion.Windows.Forms.Diagram.Binding();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProcesosPrincipales));
-            Syncfusion.Windows.Forms.CaptionImage captionImage1 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage2 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage3 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage4 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage5 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage11 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage12 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage13 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage14 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage15 = new Syncfusion.Windows.Forms.CaptionImage();
             this.diagram1 = new Syncfusion.Windows.Forms.Diagram.Controls.Diagram(this.components);
             this.model1 = new Syncfusion.Windows.Forms.Diagram.Model(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxResponsable = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.labelTitulo = new System.Windows.Forms.Label();
-            this.buttonEditar = new System.Windows.Forms.Button();
-            this.buttonIndicadores = new System.Windows.Forms.Button();
-            this.buttonPr = new System.Windows.Forms.Button();
-            this.buttonImprimir = new System.Windows.Forms.Button();
-            this.buttonExportar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.textBoxTipo = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonEDitar = new System.Windows.Forms.Button();
+            this.buttonIndicadores = new System.Windows.Forms.Button();
+            this.buttonPr = new System.Windows.Forms.Button();
+            this.buttonImprimir = new System.Windows.Forms.Button();
+            this.buttonExportar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.diagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.model1)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // diagram1
@@ -86,6 +88,7 @@
             this.diagram1.View.ClientRectangle = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.diagram1.View.Controller = this.diagram1.Controller;
             this.diagram1.View.Grid.MinPixelSpacing = 4F;
+            this.diagram1.View.Grid.Visible = false;
             this.diagram1.View.ScrollVirtualBounds = ((System.Drawing.RectangleF)(resources.GetObject("resource.ScrollVirtualBounds")));
             this.diagram1.View.ZoomType = Syncfusion.Windows.Forms.Diagram.ZoomType.Center;
             // 
@@ -116,11 +119,6 @@
             this.tableLayoutPanel1.Controls.Add(this.textBoxResponsable, 4, 9);
             this.tableLayoutPanel1.Controls.Add(this.label4, 4, 8);
             this.tableLayoutPanel1.Controls.Add(this.labelTitulo, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonEditar, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonIndicadores, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonPr, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonImprimir, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonExportar, 4, 1);
             this.tableLayoutPanel1.Controls.Add(this.diagram1, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.label2, 4, 4);
@@ -128,6 +126,7 @@
             this.tableLayoutPanel1.Controls.Add(this.textBoxID, 4, 3);
             this.tableLayoutPanel1.Controls.Add(this.textBoxNombre, 4, 5);
             this.tableLayoutPanel1.Controls.Add(this.textBoxTipo, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -183,56 +182,6 @@
             this.labelTitulo.TabIndex = 0;
             this.labelTitulo.Text = "Titulo";
             this.labelTitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonEditar
-            // 
-            this.buttonEditar.Location = new System.Drawing.Point(3, 78);
-            this.buttonEditar.Name = "buttonEditar";
-            this.buttonEditar.Size = new System.Drawing.Size(75, 23);
-            this.buttonEditar.TabIndex = 1;
-            this.buttonEditar.Text = "Editar Diagrama";
-            this.buttonEditar.UseVisualStyleBackColor = true;
-            this.buttonEditar.Click += new System.EventHandler(this.buttonEditar_Click);
-            // 
-            // buttonIndicadores
-            // 
-            this.buttonIndicadores.Location = new System.Drawing.Point(180, 78);
-            this.buttonIndicadores.Name = "buttonIndicadores";
-            this.buttonIndicadores.Size = new System.Drawing.Size(75, 23);
-            this.buttonIndicadores.TabIndex = 2;
-            this.buttonIndicadores.Text = "Indicadores";
-            this.buttonIndicadores.UseVisualStyleBackColor = true;
-            this.buttonIndicadores.Click += new System.EventHandler(this.buttonIndicadores_Click);
-            // 
-            // buttonPr
-            // 
-            this.buttonPr.Location = new System.Drawing.Point(357, 78);
-            this.buttonPr.Name = "buttonPr";
-            this.buttonPr.Size = new System.Drawing.Size(75, 23);
-            this.buttonPr.TabIndex = 3;
-            this.buttonPr.Text = "Puntos Rojos";
-            this.buttonPr.UseVisualStyleBackColor = true;
-            this.buttonPr.Click += new System.EventHandler(this.buttonPr_Click);
-            // 
-            // buttonImprimir
-            // 
-            this.buttonImprimir.Location = new System.Drawing.Point(534, 78);
-            this.buttonImprimir.Name = "buttonImprimir";
-            this.buttonImprimir.Size = new System.Drawing.Size(75, 23);
-            this.buttonImprimir.TabIndex = 4;
-            this.buttonImprimir.Text = "Imprimir";
-            this.buttonImprimir.UseVisualStyleBackColor = true;
-            this.buttonImprimir.Click += new System.EventHandler(this.buttonImprimir_Click);
-            // 
-            // buttonExportar
-            // 
-            this.buttonExportar.Location = new System.Drawing.Point(711, 78);
-            this.buttonExportar.Name = "buttonExportar";
-            this.buttonExportar.Size = new System.Drawing.Size(75, 23);
-            this.buttonExportar.TabIndex = 5;
-            this.buttonExportar.Text = "Exportar";
-            this.buttonExportar.UseVisualStyleBackColor = true;
-            this.buttonExportar.Click += new System.EventHandler(this.buttonExportar_Click);
             // 
             // label1
             // 
@@ -309,6 +258,81 @@
             this.textBoxTipo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxTipo.Leave += new System.EventHandler(this.textBoxTipo_Leave);
             // 
+            // flowLayoutPanel1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 5);
+            this.flowLayoutPanel1.Controls.Add(this.buttonEDitar);
+            this.flowLayoutPanel1.Controls.Add(this.buttonIndicadores);
+            this.flowLayoutPanel1.Controls.Add(this.buttonPr);
+            this.flowLayoutPanel1.Controls.Add(this.buttonImprimir);
+            this.flowLayoutPanel1.Controls.Add(this.buttonExportar);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 75);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(888, 75);
+            this.flowLayoutPanel1.TabIndex = 16;
+            // 
+            // buttonEDitar
+            // 
+            this.buttonEDitar.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonEDitar.Image = global::PresentacionEscritorio.Properties.Resources.Editar1;
+            this.buttonEDitar.Location = new System.Drawing.Point(3, 3);
+            this.buttonEDitar.Name = "buttonEDitar";
+            this.buttonEDitar.Size = new System.Drawing.Size(150, 69);
+            this.buttonEDitar.TabIndex = 6;
+            this.buttonEDitar.Text = "Editar Diagrama";
+            this.buttonEDitar.UseVisualStyleBackColor = true;
+            this.buttonEDitar.Click += new System.EventHandler(this.buttonEditar_Click);
+            // 
+            // buttonIndicadores
+            // 
+            this.buttonIndicadores.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonIndicadores.Image = global::PresentacionEscritorio.Properties.Resources.indicadores1;
+            this.buttonIndicadores.Location = new System.Drawing.Point(159, 3);
+            this.buttonIndicadores.Name = "buttonIndicadores";
+            this.buttonIndicadores.Size = new System.Drawing.Size(150, 69);
+            this.buttonIndicadores.TabIndex = 2;
+            this.buttonIndicadores.Text = "Ver Indicadores del Proceso";
+            this.buttonIndicadores.UseVisualStyleBackColor = true;
+            this.buttonIndicadores.Click += new System.EventHandler(this.buttonIndicadores_Click);
+            // 
+            // buttonPr
+            // 
+            this.buttonPr.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonPr.Image = global::PresentacionEscritorio.Properties.Resources.PuntoRojo;
+            this.buttonPr.Location = new System.Drawing.Point(315, 3);
+            this.buttonPr.Name = "buttonPr";
+            this.buttonPr.Size = new System.Drawing.Size(150, 69);
+            this.buttonPr.TabIndex = 3;
+            this.buttonPr.Text = "Ver Puntos Rojos del Diagrama";
+            this.buttonPr.UseVisualStyleBackColor = true;
+            this.buttonPr.Click += new System.EventHandler(this.buttonPr_Click);
+            // 
+            // buttonImprimir
+            // 
+            this.buttonImprimir.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonImprimir.Image = global::PresentacionEscritorio.Properties.Resources.imprimir;
+            this.buttonImprimir.Location = new System.Drawing.Point(471, 3);
+            this.buttonImprimir.Name = "buttonImprimir";
+            this.buttonImprimir.Size = new System.Drawing.Size(150, 69);
+            this.buttonImprimir.TabIndex = 4;
+            this.buttonImprimir.Text = "Imprimir Diagrama";
+            this.buttonImprimir.UseVisualStyleBackColor = true;
+            this.buttonImprimir.Click += new System.EventHandler(this.buttonImprimir_Click);
+            // 
+            // buttonExportar
+            // 
+            this.buttonExportar.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold);
+            this.buttonExportar.Image = global::PresentacionEscritorio.Properties.Resources.exportar;
+            this.buttonExportar.Location = new System.Drawing.Point(627, 3);
+            this.buttonExportar.Name = "buttonExportar";
+            this.buttonExportar.Size = new System.Drawing.Size(150, 69);
+            this.buttonExportar.TabIndex = 5;
+            this.buttonExportar.Text = "Exportar Diagrama";
+            this.buttonExportar.UseVisualStyleBackColor = true;
+            this.buttonExportar.Click += new System.EventHandler(this.buttonExportar_Click);
+            // 
             // ProcesosPrincipales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -319,36 +343,36 @@
             this.CaptionBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(207)))), ((int)(((byte)(96)))));
             this.CaptionBarHeight = 74;
             this.CaptionFont = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold);
-            captionImage1.BackColor = System.Drawing.Color.Transparent;
-            captionImage1.Image = global::PresentacionEscritorio.Properties.Resources.HOME;
-            captionImage1.Name = "CaptionImage1";
-            captionImage1.Size = new System.Drawing.Size(64, 64);
-            captionImage2.BackColor = System.Drawing.Color.Transparent;
-            captionImage2.Image = global::PresentacionEscritorio.Properties.Resources.REUNION;
-            captionImage2.Location = new System.Drawing.Point(100, 4);
-            captionImage2.Name = "CaptionImage2";
-            captionImage2.Size = new System.Drawing.Size(64, 64);
-            captionImage3.BackColor = System.Drawing.Color.Transparent;
-            captionImage3.Image = global::PresentacionEscritorio.Properties.Resources.TAREA;
-            captionImage3.Location = new System.Drawing.Point(170, 4);
-            captionImage3.Name = "CaptionImage3";
-            captionImage3.Size = new System.Drawing.Size(64, 64);
-            captionImage4.BackColor = System.Drawing.Color.Transparent;
-            captionImage4.Image = global::PresentacionEscritorio.Properties.Resources.EMPLEADO;
-            captionImage4.Location = new System.Drawing.Point(240, 4);
-            captionImage4.Name = "CaptionImage4";
-            captionImage4.Size = new System.Drawing.Size(64, 64);
-            captionImage5.BackColor = System.Drawing.Color.Transparent;
-            captionImage5.ForeColor = System.Drawing.Color.Transparent;
-            captionImage5.Image = global::PresentacionEscritorio.Properties.Resources.PROCESOS;
-            captionImage5.Location = new System.Drawing.Point(310, 4);
-            captionImage5.Name = "CaptionImage5";
-            captionImage5.Size = new System.Drawing.Size(64, 64);
-            this.CaptionImages.Add(captionImage1);
-            this.CaptionImages.Add(captionImage2);
-            this.CaptionImages.Add(captionImage3);
-            this.CaptionImages.Add(captionImage4);
-            this.CaptionImages.Add(captionImage5);
+            captionImage11.BackColor = System.Drawing.Color.Transparent;
+            captionImage11.Image = global::PresentacionEscritorio.Properties.Resources.HOME;
+            captionImage11.Name = "CaptionImage1";
+            captionImage11.Size = new System.Drawing.Size(64, 64);
+            captionImage12.BackColor = System.Drawing.Color.Transparent;
+            captionImage12.Image = global::PresentacionEscritorio.Properties.Resources.REUNION;
+            captionImage12.Location = new System.Drawing.Point(100, 4);
+            captionImage12.Name = "CaptionImage2";
+            captionImage12.Size = new System.Drawing.Size(64, 64);
+            captionImage13.BackColor = System.Drawing.Color.Transparent;
+            captionImage13.Image = global::PresentacionEscritorio.Properties.Resources.TAREA;
+            captionImage13.Location = new System.Drawing.Point(170, 4);
+            captionImage13.Name = "CaptionImage3";
+            captionImage13.Size = new System.Drawing.Size(64, 64);
+            captionImage14.BackColor = System.Drawing.Color.Transparent;
+            captionImage14.Image = global::PresentacionEscritorio.Properties.Resources.EMPLEADO;
+            captionImage14.Location = new System.Drawing.Point(240, 4);
+            captionImage14.Name = "CaptionImage4";
+            captionImage14.Size = new System.Drawing.Size(64, 64);
+            captionImage15.BackColor = System.Drawing.Color.Transparent;
+            captionImage15.ForeColor = System.Drawing.Color.Transparent;
+            captionImage15.Image = global::PresentacionEscritorio.Properties.Resources.PROCESOS;
+            captionImage15.Location = new System.Drawing.Point(310, 4);
+            captionImage15.Name = "CaptionImage5";
+            captionImage15.Size = new System.Drawing.Size(64, 64);
+            this.CaptionImages.Add(captionImage11);
+            this.CaptionImages.Add(captionImage12);
+            this.CaptionImages.Add(captionImage13);
+            this.CaptionImages.Add(captionImage14);
+            this.CaptionImages.Add(captionImage15);
             this.ClientSize = new System.Drawing.Size(888, 820);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(900, 900);
@@ -360,6 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.model1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -368,7 +393,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelTitulo;
-        private System.Windows.Forms.Button buttonEditar;
         private System.Windows.Forms.Button buttonIndicadores;
         private System.Windows.Forms.Button buttonPr;
         private System.Windows.Forms.Button buttonImprimir;
@@ -383,5 +407,7 @@
         private System.Windows.Forms.TextBox textBoxTipo;
         private System.Windows.Forms.TextBox textBoxResponsable;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button buttonEDitar;
     }
 }

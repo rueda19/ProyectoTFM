@@ -10,6 +10,298 @@ namespace Persistencia
 {
     public class GestorBD
     {
+        public DataTable getEstadisticasTareasResponsable(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        {
+            DataTable table = new DataTable();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GP_TareasResponsable", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("@IDProceso", idProceso);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return table;
+        }
+
+        public DataTable getEstadisticasTareasAcabadas(string idProceso,DateTime fechaInicio, DateTime fechaFin)
+        {
+            DataTable table = new DataTable();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GP_TareasAcabadas", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
+                cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("@IDProceso", idProceso);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(table);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return table;
+        }
+
+        public PuntoRojo getPuntoRojo(int id)
+        {
+            PuntoRojo puntoRojo = null;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, Prioridad, Solucionado, IDResponsable, IDProceso FROM [GP_PuntoRojo] Where ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    puntoRojo =new PuntoRojo(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetBoolean(3), dr.GetString(4), dr.GetString(5));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return puntoRojo;
+        }
+
+        public int updatePuntoRojo(PuntoRojo puntoRojo)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_PuntoRojo] SET Descripcion=@des, Prioridad=@prio, Solucionado=@sol, IDResponsable=@idRes, IDProceso=@idPro WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", puntoRojo.ID);
+                cmd.Parameters.AddWithValue("@prio", puntoRojo.Prioridad);
+                cmd.Parameters.AddWithValue("@sol", puntoRojo.Solucionado);
+                cmd.Parameters.AddWithValue("@des", puntoRojo.Descripcion);
+                cmd.Parameters.AddWithValue("@idPro", puntoRojo.IDProceso);
+                cmd.Parameters.AddWithValue("@idRes", puntoRojo.IDResponsable);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public int removePuntoRojo(int id)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM [Fw_GrupoGarnica].[dbo].[GP_PuntoRojo] WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public int setPuntoRojoFila(int ID, string fila, string valor)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_PuntoRojo] SET " + fila + "=@valor WHERE ID=@id", conn);
+                cmd.Parameters.AddWithValue("@id", ID);
+                cmd.Parameters.AddWithValue("@fila", fila);
+                cmd.Parameters.AddWithValue("@valor", valor);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public int setPuntoRojo(PuntoRojo puntoRojo)
+        {
+            int i = 0;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_PuntoRojo](Prioridad, Solucionado, Descripcion, IDProceso, IDResponsable) VALUES(@prio,@sol,@des,@idPro,@idRes)", conn);
+                cmd.Parameters.AddWithValue("@prio", puntoRojo.Prioridad);
+                cmd.Parameters.AddWithValue("@sol", puntoRojo.Solucionado);
+                cmd.Parameters.AddWithValue("@des", puntoRojo.Descripcion);
+                cmd.Parameters.AddWithValue("@idPro", puntoRojo.IDProceso);
+                cmd.Parameters.AddWithValue("@idRes", puntoRojo.IDResponsable);
+                i = cmd.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return i;
+        }
+
+        public List<PuntoRojo> getPuntosRojos()
+        {
+            List<PuntoRojo> puntosRojos = new List<PuntoRojo>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, Prioridad, Solucionado, IDResponsable, IDProceso FROM [GP_PuntoRojo]", conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    puntosRojos.Add(new PuntoRojo(dr.GetInt32(0), dr.GetString(1), dr.GetString(2), dr.GetBoolean(3),dr.GetString(4), dr.GetString(5)));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return puntosRojos;
+        }
+
+        public List<Proceso> getProcesos()
+        {
+            List<Proceso> procesos = new List<Proceso>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Nombre, Tipo, IDResponsable FROM [GP_Proceso] WHERE ID<>'GBL'", conn);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    procesos.Add(new Proceso(dr.GetString(0), dr.GetString(1), dr.GetString(2), dr.GetString(3)));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return procesos;
+        }
+
+        public Proceso getProcesoPuntoRojo(int? idPuntoRojo)
+        {
+            Proceso proceso = null;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT p.ID, p.Nombre, p.Tipo, p.IDResponsable FROM [GP_Proceso] p join [GP_PuntoRojo] pr on p.ID=pr.IDProceso WHERE pr.ID=@idPuntoRojo", conn);
+                cmd.Parameters.AddWithValue("@idPuntoRojo", idPuntoRojo);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    proceso = new Proceso(dr.GetString(0), dr.GetString(1), dr.GetString(2), dr.GetString(3));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return proceso;
+        }
+
         public Proceso getProceso(string id)
         {
             Proceso proceso = null;
@@ -51,7 +343,7 @@ namespace Persistencia
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("INSERT INTO [Fw_GrupoGarnica].[dbo].[GP_Proceso](ID, Nombre, Tipo, IDResponsable) VALUES(@id,@nom,@tipo,@isRes)", conn);
-                cmd.Parameters.AddWithValue("@user", proceso.ID);
+                cmd.Parameters.AddWithValue("@id", proceso.ID);
                 cmd.Parameters.AddWithValue("@nom", proceso.Nombre);
                 cmd.Parameters.AddWithValue("@tipo", proceso.Tipo);
                 cmd.Parameters.AddWithValue("@isRes", proceso.IDResponsable);
@@ -375,6 +667,68 @@ namespace Persistencia
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion, IDPuntoRojo FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE IDResponsable=@resp And (Estado<>'Terminada' And Estado<>'Abandonada')", conn);
                 cmd.Parameters.AddWithValue("@resp", Usuario);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9)), (dr.GetValue(10) is DBNull ? null : (int?)dr.GetInt32(10))));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return tareas;
+        }
+
+        public List<Tarea> getTareas(DateTime desde, DateTime hasta)
+        {
+            List<Tarea> tareas = new List<Tarea>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion, IDPuntoRojo FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea] WHERE FechaInicio>=@desde And FechaInicio<=@hasta", conn);
+                cmd.Parameters.AddWithValue("@desde", desde);
+                cmd.Parameters.AddWithValue("@hasta", hasta);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9)), (dr.GetValue(10) is DBNull ? null : (int?)dr.GetInt32(10))));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return tareas;
+        }
+
+        public List<Tarea> getTareas()
+        {
+            List<Tarea> tareas = new List<Tarea>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID, Descripcion, FechaInicio, FechaFin, FechaEjecutado, TiempoDedicado, Origen, Estado, IDResponsable, IDReunion, IDPuntoRojo FROM [Fw_GrupoGarnica].[dbo].[GP_Tarea]", conn);
                 //cmd.Prepare();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
