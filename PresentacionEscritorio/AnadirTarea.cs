@@ -16,21 +16,28 @@ namespace PresentacionEscritorio
     public partial class AnadirTarea : MetroForm
     {
         private Negocio.Negocio negocio = new Negocio.Negocio();
-        private List<PuntoRojo> puntosRojos = new List<PuntoRojo>();
+        private List<Tarea> tareas = new List<Tarea>();
+        private List<Proceso> procesos = new List<Proceso>();
 
-        public AnadirTarea(Reunion reunion, PuntoRojo puntoRojo)
+        public AnadirTarea(Reunion reunion, Proceso proceso, Tarea tarea)
         {
             InitializeComponent();
             FechaInicio.Value = DateTime.Now;
             FechaFin.Value = DateTime.Now;
             
-            puntosRojos = negocio.getPuntosRojos();
-            ComboBoxPuntoRojoID.DataSource = puntosRojos;
-            ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
+            //puntosRojos = negocio.getPuntosRojos();
+            procesos = negocio.getProcesos();
+            ComboBoxPuntoRojoID.DataSource = procesos;
+            //ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
             ComboBoxPuntoRojoID.DisplayMember = "ID"; 
             ComboBoxPuntoRojoID.Text="";
             //ComboBoxPuntoRojoID.col.HideCols.SetRange(1, 3, true);
 
+            tareas = negocio.getTareas();
+            ComboBoxTareaPadre.DataSource = tareas;
+            //ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
+            ComboBoxTareaPadre.DisplayMember = "ID";
+            ComboBoxTareaPadre.Text = "";
 
             List<Empleado> s = negocio.getEmpleados();
             cbResponsable.DataSource = s;
@@ -40,33 +47,28 @@ namespace PresentacionEscritorio
             {
                 tbReunionID.Text = reunion.ID.ToString();
                 tbReunionNombre.Text = reunion.Titulo;
-                tbOrigen.Text = "Reunion";
+                //tbOrigen.Text = "Reunion";
             }
-            if (puntoRojo != null)
+            if (proceso != null)
             {
-                ComboBoxPuntoRojoID.Text = puntoRojo.ID.ToString();
-                textBoxPuntoRojoProceso.Text = puntoRojo.IDProceso + " " + negocio.getProceso(puntoRojo.IDProceso).Nombre;
-                tbOrigen.Text = "PuntoRojo";
+                ComboBoxPuntoRojoID.Text = proceso.ID;
+                textBoxPuntoRojoProceso.Text = proceso.Nombre;
+                ComboBoxPuntoRojoID.Enabled = false;
+                //tbOrigen.Text = "PuntoRojo";
             }
-            if (reunion == null && puntoRojo == null)
+            if (tarea != null)
             {
-                tbOrigen.Text = "Manual";
+                ComboBoxTareaPadre.Text = tarea.ID.ToString();
+                textBoxTareaPadre.Text = tarea.Tipo + " " + tarea.Descripcion;
+                //tbOrigen.Text = "PuntoRojo";
             }
             this.ComboBoxPuntoRojoID.TextChanged += new System.EventHandler(this.ComboBoxPuntoRojoID_TextChanged);
+            this.ComboBoxTareaPadre.TextChanged += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if(tbReunionID.Text.Equals(""))
-                if (ComboBoxPuntoRojoID.Text.Equals(""))
-                    negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, null, null));
-                else
-                    negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, null, Int32.Parse(ComboBoxPuntoRojoID.Text)));
-            else
-                if (ComboBoxPuntoRojoID.Text.Equals(""))
-                    negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, int.Parse(tbReunionID.Text), null));
-                else
-                    negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, int.Parse(tbReunionID.Text), Int32.Parse(ComboBoxPuntoRojoID.Text)));
+            negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, tbReunionID.Text.Equals("") ? (int?)null : Int32.Parse(tbReunionID.Text), ComboBoxPuntoRojoID.Text.Equals("") ? null : ComboBoxPuntoRojoID.Text, ComboBoxTareaPadre.Text.Equals("") ? (int?)null : Int32.Parse(ComboBoxTareaPadre.Text)));
             this.Close();
         }
 
@@ -77,27 +79,68 @@ namespace PresentacionEscritorio
 
         private void ComboBoxPuntoRojoID_TextChanged(object sender, EventArgs e)
         {
-            int i;
             if (ComboBoxPuntoRojoID.Text == "")
             {
                 textBoxPuntoRojoProceso.Text = "";
-                if (tbReunionID.Text == "")
-                {
-                    tbOrigen.Text = "Manual";
-                }
-                else
-                {
-                    tbOrigen.Text = "Reunion";
-                }
-            }
-            else if (Int32.TryParse(ComboBoxPuntoRojoID.Text, out i))
-            {
-                textBoxPuntoRojoProceso.Text = puntosRojos.Single(p => p.ID == i).IDProceso + " " + negocio.getProceso(puntosRojos.Single(p => p.ID == i).IDProceso).Nombre;
-                tbOrigen.Text = "PuntoRojo";
             }
             else
             {
+                Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
+                textBoxPuntoRojoProceso.Text = pr.Nombre;
+            }
+        }
+
+        private void ComboBoxTareaPadre_TextChanged(object sender, EventArgs e)
+        {
+            int i;
+            if (ComboBoxTareaPadre.Text == "")
+            {
+                textBoxTareaPadre.Text = "";
+                ComboBoxPuntoRojoID.Enabled = true;
                 ComboBoxPuntoRojoID.Text = "";
+                textBoxPuntoRojoProceso.Text = "";
+                tbReunionID.Text = "";
+                tbReunionNombre.Text = "";
+            }
+            else if (Int32.TryParse(ComboBoxTareaPadre.Text, out i))
+            {
+                Tarea t = tareas.Single(p => p.ID == i);
+                textBoxTareaPadre.Text = t.Tipo + " " + t.Descripcion;
+                if (t.IDReunion != null)
+                {
+                    tbReunionID.Text = t.IDReunion.ToString();
+                    tbReunionNombre.Text = negocio.getReunion(t.IDReunion.Value).Titulo;
+                }
+                else
+                {
+                    tbReunionID.Text = "";
+                    tbReunionNombre.Text = "";
+                }
+
+                if (t.IDProceso != null)
+                {
+                    ComboBoxPuntoRojoID.Text = t.IDProceso;
+                    if (ComboBoxPuntoRojoID.Text == "")
+                    {
+                        textBoxPuntoRojoProceso.Text = "";
+                    }
+                    else
+                    {
+                        Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
+                        textBoxPuntoRojoProceso.Text = pr.Nombre;
+                    }
+                }
+                else
+                {
+                    ComboBoxPuntoRojoID.Text = "";
+                    textBoxPuntoRojoProceso.Text = "";
+                }
+                ComboBoxPuntoRojoID.Enabled = false;
+            }
+            else
+            {
+                ComboBoxTareaPadre.Text = "";
+                ComboBoxPuntoRojoID.Enabled = true;
             }
         }
     }

@@ -8,18 +8,19 @@ namespace Modelo
     public class Tarea
     {
         public int ID { get; set; }
+        public string Tipo { get; set; }
         public string Descripcion { get; set; } 
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public DateTime? FechaEjecutado { get; set; }
         public double TiempoDedicado { get; set; }
         public string Estado { get; set; }
-        public string Origen { get; set; }
         public string IDResponsable { get; set; }
         public int? IDReunion { get; set; }
-        public int? IDPuntoRojo { get; set; }
+        public string IDProceso { get; set; }
+        public int? IDTareaPadre { get; set; }
 
-        public Tarea(int id, string descripcion, DateTime fechaInicio, DateTime fechaFin, DateTime? fechaEjecutado, double tiempoDedicado, string origen, string estado, string idResponsable, int? idReunion, int? idPuntoRojo)
+        public Tarea(int id, string descripcion, DateTime fechaInicio, DateTime fechaFin, DateTime? fechaEjecutado, double tiempoDedicado, string tipo, string estado, string idResponsable, int? idReunion, string idProceso, int? idTareaPadre)
         {
             ID = id;
             Descripcion = descripcion;
@@ -27,11 +28,12 @@ namespace Modelo
             FechaFin = fechaFin;
             FechaEjecutado = fechaEjecutado;
             TiempoDedicado = tiempoDedicado;
-            Origen = origen;
+            Tipo = tipo;
             Estado = estado;
             IDResponsable = idResponsable;
             IDReunion = idReunion;
-            IDPuntoRojo = idPuntoRojo;
+            IDProceso = idProceso;
+            IDTareaPadre = idTareaPadre;
         }
     }
 }

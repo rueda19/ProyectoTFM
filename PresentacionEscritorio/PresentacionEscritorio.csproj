@@ -125,6 +125,12 @@
     <Compile Include="AnadirTarea.Designer.cs">
       <DependentUpon>AnadirTarea.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetallesTarea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetallesTarea.Designer.cs">
+      <DependentUpon>DetallesTarea.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditarPuntoRojo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,8 +200,23 @@
     <Compile Include="PuntosRojos.Designer.cs">
       <DependentUpon>PuntosRojos.cs</DependentUpon>
     </Compile>
+    <Compile Include="TareasProceso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TareasProceso.Designer.cs">
+      <DependentUpon>TareasProceso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TodasTareas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TodasTareas.Designer.cs">
+      <DependentUpon>TodasTareas.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AnadirPuntoRojo.resx">
       <DependentUpon>AnadirPuntoRojo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetallesTarea.resx">
+      <DependentUpon>DetallesTarea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditarPuntoRojo.resx">
       <DependentUpon>EditarPuntoRojo.cs</DependentUpon>
@@ -205,6 +226,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PuntosRojos.resx">
       <DependentUpon>PuntosRojos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TareasProceso.resx">
+      <DependentUpon>TareasProceso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TodasTareas.resx">
+      <DependentUpon>TodasTareas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Resources\indicadores.png" />
     <None Include="Resources\PuntoRojo.png" />

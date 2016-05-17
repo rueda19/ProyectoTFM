@@ -238,7 +238,7 @@ namespace PresentacionEscritorio
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            AnadirTarea formIT = new AnadirTarea(null,null);
+            AnadirTarea formIT = new AnadirTarea(null,null,null);
             formIT.ShowDialog();
 
             tareas = negocio.getTareasUsuario(user);

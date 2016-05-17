@@ -51,3 +51,6 @@ C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\P
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.AnadirPuntoRojo.resources
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.EditarPuntoRojo.resources
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.EstadisticasTareas.resources
+C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.TareasProceso.resources
+C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.TodasTareas.resources
+C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.DetallesTarea.resources

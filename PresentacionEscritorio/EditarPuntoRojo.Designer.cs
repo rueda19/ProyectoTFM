@@ -189,7 +189,7 @@
             this.cbPrioridad.Name = "cbPrioridad";
             this.cbPrioridad.Size = new System.Drawing.Size(110, 21);
             this.cbPrioridad.TabIndex = 2;
-            this.cbPrioridad.SelectedIndexChanged += new System.EventHandler(this.cbPrioridad_SelectedIndexChanged);
+            //this.cbPrioridad.SelectedIndexChanged += new System.EventHandler(this.cbPrioridad_SelectedIndexChanged);
             // 
             // checkBoxSolucionado
             // 
@@ -200,7 +200,7 @@
             this.checkBoxSolucionado.Size = new System.Drawing.Size(15, 14);
             this.checkBoxSolucionado.TabIndex = 3;
             this.checkBoxSolucionado.UseVisualStyleBackColor = true;
-            this.checkBoxSolucionado.CheckedChanged += new System.EventHandler(this.checkBoxSolucionado_CheckedChanged);
+            //this.checkBoxSolucionado.CheckedChanged += new System.EventHandler(this.checkBoxSolucionado_CheckedChanged);
             // 
             // cbResponsable
             // 

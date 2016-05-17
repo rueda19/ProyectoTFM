@@ -16,8 +16,9 @@ namespace PresentacionEscritorio
     public partial class EditarTarea : MetroForm
     {
         private Negocio.Negocio negocio = new Negocio.Negocio();
+        private List<Tarea> tareas = new List<Tarea>();
         private Tarea tarea;
-        private List<PuntoRojo> puntosRojos = new List<PuntoRojo>();
+        private List<Proceso> procesos = new List<Proceso>();
 
         public EditarTarea(Tarea tarea)
         {
@@ -28,11 +29,18 @@ namespace PresentacionEscritorio
             if (this.tarea.FechaEjecutado != null)
                 FechaEjecucion.Value = this.tarea.FechaEjecutado.Value;
 
-            puntosRojos = negocio.getPuntosRojos();
-            ComboBoxPuntoRojoID.DataSource = puntosRojos;
-            ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
-            ComboBoxPuntoRojoID.DisplayMember = "ID"; 
-            ComboBoxPuntoRojoID.Text="";
+            procesos = negocio.getProcesos();
+            ComboBoxPuntoRojoID.DataSource = procesos;
+            //ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
+            ComboBoxPuntoRojoID.DisplayMember = "ID";
+            ComboBoxPuntoRojoID.Text = "";
+            //ComboBoxPuntoRojoID.col.HideCols.SetRange(1, 3, true);
+
+            tareas = negocio.getTareas();
+            ComboBoxTareaPadre.DataSource = tareas;
+            //ComboBoxPuntoRojoID.ListBox.Grid.Model.HideCols.SetRange(3, 5, true);
+            ComboBoxTareaPadre.DisplayMember = "ID";
+            ComboBoxTareaPadre.Text = "";
 
             List<Empleado> s = negocio.getEmpleados();
             cbResponsable.DataSource = s;
@@ -45,13 +53,19 @@ namespace PresentacionEscritorio
                 tbReunionID.Text = reunion.ID.ToString();
                 tbReunionNombre.Text = reunion.Titulo;
             }
-            if (tarea.IDPuntoRojo != null)
+            if (tarea.IDProceso != null)
             {
-                ComboBoxPuntoRojoID.Text = tarea.IDPuntoRojo.ToString();
-                Proceso p=negocio.getProcesoPuntoRojo(tarea.IDPuntoRojo);
+                ComboBoxPuntoRojoID.Text = tarea.IDProceso;
+                Proceso p=negocio.getProceso(tarea.IDProceso);
                 textBoxPuntoRojoProceso.Text = p.ID + " " + p.Nombre;
             }
-            tbOrigen.Text = this.tarea.Origen;
+            if (tarea.IDTareaPadre != null)
+            {
+                ComboBoxTareaPadre.Text = tarea.IDTareaPadre.ToString();
+                Tarea tPadre = negocio.getTarea(tarea.IDTareaPadre.Value);
+                textBoxTareaPadre.Text = tPadre.Tipo + " " + tPadre.Descripcion;
+            }
+            tbOrigen.Text = this.tarea.Tipo;
 
             tbTiempoDedicado.Text = this.tarea.TiempoDedicado.ToString();
             tbDescripcion.Text = this.tarea.Descripcion;
@@ -59,6 +73,7 @@ namespace PresentacionEscritorio
             cbEstado.Text = this.tarea.Estado;
 
             this.ComboBoxPuntoRojoID.TextChanged += new System.EventHandler(this.ComboBoxPuntoRojoID_TextChanged);
+            this.ComboBoxTareaPadre.TextChanged += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -119,32 +134,69 @@ namespace PresentacionEscritorio
 
         private void ComboBoxPuntoRojoID_TextChanged(object sender, EventArgs e)
         {
-            int i;
             if (ComboBoxPuntoRojoID.Text == "")
             {
                 textBoxPuntoRojoProceso.Text = "";
-                if (tbReunionID.Text == "")
-                {
-                    tbOrigen.Text = "Manual";
-                }
-                else
-                {
-                    tbOrigen.Text = "Reunion";
-                }
-                tarea.IDPuntoRojo = null;
-            }
-            else if (Int32.TryParse(ComboBoxPuntoRojoID.Text, out i))
-            {
-                textBoxPuntoRojoProceso.Text = puntosRojos.Single(p => p.ID == i).IDProceso + " " + negocio.getProceso(puntosRojos.Single(p => p.ID == i).IDProceso).Nombre;
-                tbOrigen.Text = "PuntoRojo";
-                tarea.IDPuntoRojo = i;
             }
             else
             {
-                ComboBoxPuntoRojoID.Text = "";
+                Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
+                textBoxPuntoRojoProceso.Text = pr.Nombre;
             }
+        }
 
-            tarea.Origen = tbOrigen.Text;
+        private void ComboBoxTareaPadre_TextChanged(object sender, EventArgs e)
+        {
+            int i;
+            if (ComboBoxTareaPadre.Text == "")
+            {
+                textBoxTareaPadre.Text = "";
+                ComboBoxPuntoRojoID.Enabled = true;
+                ComboBoxPuntoRojoID.Text = "";
+                textBoxPuntoRojoProceso.Text = "";
+                tbReunionID.Text = "";
+                tbReunionNombre.Text = "";
+            }
+            else if (Int32.TryParse(ComboBoxTareaPadre.Text, out i))
+            {
+                Tarea t = tareas.Single(p => p.ID == i);
+                textBoxTareaPadre.Text = t.Tipo + " " + t.Descripcion;
+                if (t.IDReunion != null)
+                {
+                    tbReunionID.Text = t.IDReunion.ToString();
+                    tbReunionNombre.Text = negocio.getReunion(t.IDReunion.Value).Titulo;
+                }
+                else
+                {
+                    tbReunionID.Text = "";
+                    tbReunionNombre.Text = "";
+                }
+
+                if (t.IDProceso != null)
+                {
+                    ComboBoxPuntoRojoID.Text = t.IDProceso;
+                    if (ComboBoxPuntoRojoID.Text == "")
+                    {
+                        textBoxPuntoRojoProceso.Text = "";
+                    }
+                    else
+                    {
+                        Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
+                        textBoxPuntoRojoProceso.Text = pr.Nombre;
+                    }
+                }
+                else
+                {
+                    ComboBoxPuntoRojoID.Text = "";
+                    textBoxPuntoRojoProceso.Text = "";
+                }
+                ComboBoxPuntoRojoID.Enabled = false;
+            }
+            else
+            {
+                ComboBoxTareaPadre.Text = "";
+                ComboBoxPuntoRojoID.Enabled = true;
+            }
         }
     }
 }

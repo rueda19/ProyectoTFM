@@ -12,6 +12,41 @@ namespace Negocio
     {
         private GestorBD gbd;
 
+        public DataTable getEmpleadosFoto()
+        {
+            return gbd.getEmpleadosFoto();
+        }
+
+        public int updateEmpleado(string empleado, string fila, string valor, byte[] foto)
+        {
+            return gbd.updateEmpleado(empleado, fila, valor, foto);
+        }
+
+        public List<List<Tarea>> getTareaRama(int idTarea)
+        {
+            return gbd.getTareaRama(idTarea);
+        }
+
+        public List<string> getUsuariosDepartamentos()
+        {
+            return gbd.getUsuariosDepartamentos();
+        }
+
+        public List<string> getTiposTareas()
+        {
+            return gbd.getTiposTareas();
+        }
+
+        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin);
+        }
+
+        public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        {
+            return gbd.getTareasProcesos(idProceso, fechaInicio, fechaFin);
+        }
+
         public DataTable getEstadisticasTareasResponsable(string idProceso, DateTime fechaInicio, DateTime fechaFin)
         {
             return gbd.getEstadisticasTareasResponsable(idProceso, fechaInicio, fechaFin);
@@ -22,7 +57,7 @@ namespace Negocio
             return gbd.getEstadisticasTareasAcabadas(idProceso, fechaInicio, fechaFin);
         }
 
-        public PuntoRojo getPuntoRojo(int id)
+        /*public PuntoRojo getPuntoRojo(int id)
         {
             return gbd.getPuntoRojo(id);
         }
@@ -50,16 +85,16 @@ namespace Negocio
         public List<PuntoRojo> getPuntosRojos()
         {
             return gbd.getPuntosRojos();
-        }
+        }*/
 
         public List<Proceso> getProcesos()
         {
             return gbd.getProcesos();
         }
 
-        public Proceso getProcesoPuntoRojo(int? idPuntoRojo)
+        public Proceso getProcesoTarea(int? idTarea)
         {
-            return gbd.getProcesoPuntoRojo(idPuntoRojo);
+            return gbd.getProcesoTarea(idTarea);
         }
 
         public Proceso getProceso(string id)

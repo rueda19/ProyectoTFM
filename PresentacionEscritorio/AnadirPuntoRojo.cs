@@ -39,10 +39,10 @@ namespace PresentacionEscritorio
 
         private void buttonAceptar_Click(object sender, EventArgs e)
         {
-            if (negocio.setPuntoRojo(new PuntoRojo(0, textBox1.Text, cbPrioridad.Text, checkBoxSolucionado.Checked, cbResponsable.Text, cbProceso.Text)) > 0)
-                this.Close();
-            else
-                MessageBox.Show("Error al crear el Punto Rojo");
+            //if (negocio.setPuntoRojo(new PuntoRojo(0, textBox1.Text, cbPrioridad.Text, checkBoxSolucionado.Checked, cbResponsable.Text, cbProceso.Text)) > 0)
+            //    this.Close();
+            //else
+            //    MessageBox.Show("Error al crear el Punto Rojo");
         }
 
         private void buttonCancelar_Click(object sender, EventArgs e)

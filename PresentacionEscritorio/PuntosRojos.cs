@@ -26,7 +26,7 @@ namespace PresentacionEscritorio
         private string user;
         private Negocio.Negocio negocio = new Negocio.Negocio();
         List<Proceso> procesos = new List<Proceso>();
-        List<PuntoRojo> puntosRojos = new List<PuntoRojo>();
+        //List<PuntoRojo> puntosRojos = new List<PuntoRojo>();
         List<TareaAux> tareas = new List<TareaAux>();
         private string IDProc;
 
@@ -77,8 +77,8 @@ namespace PresentacionEscritorio
                 procesos = new List<Proceso>();
                 procesos.Add(negocio.getProceso(IDProc));
             }
-            puntosRojos = negocio.getPuntosRojos();
-            tareas = ConvertirTareas(negocio.getTareas(dateTimeDesde.Value, dateTimeHasta.Value), puntosRojos);
+            //puntosRojos = negocio.getPuntosRojos();
+            //tareas = ConvertirTareas(negocio.getTareas(dateTimeDesde.Value, dateTimeHasta.Value), puntosRojos);
         }
 
         private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -174,7 +174,7 @@ namespace PresentacionEscritorio
                     this.gridGroupingControl1.DataSource = tareas;
                     break;
                 case "PuntosRojos":
-                    this.gridGroupingControl1.DataSource = puntosRojos;
+                    //this.gridGroupingControl1.DataSource = puntosRojos;
                     break;
                 default:
                     this.gridGroupingControl1.DataSource = procesos;
@@ -268,7 +268,7 @@ namespace PresentacionEscritorio
                     this.gridGroupingControl1.Engine.SourceListSet.Add(listBox1.Items[i].ToString(), tareas);
                     break;
                 case "PuntosRojos":
-                    this.gridGroupingControl1.Engine.SourceListSet.Add(listBox1.Items[i].ToString(), puntosRojos);
+                    //this.gridGroupingControl1.Engine.SourceListSet.Add(listBox1.Items[i].ToString(), puntosRojos);
                     break;
                 default:
                     this.gridGroupingControl1.Engine.SourceListSet.Add(listBox1.Items[i].ToString(), procesos);
@@ -291,19 +291,19 @@ namespace PresentacionEscritorio
             e.Effect = DragDropEffects.All;
         }
 
-        private List<TareaAux> ConvertirTareas(List<Tarea> tareas, List<PuntoRojo> puntosRojos)
-        {
-            List<TareaAux> ta = new List<TareaAux>();
-            foreach (Tarea t in tareas)
-            {
-                if (t.IDPuntoRojo != null)
-                {
-                    string idProceso = puntosRojos.Single(s => s.ID == t.IDPuntoRojo).IDProceso;
-                    ta.Add(new TareaAux(t.ID, t.Descripcion, t.FechaInicio, t.FechaFin, t.FechaEjecutado, t.TiempoDedicado, t.Origen, t.Estado, t.IDResponsable, t.IDReunion, t.IDPuntoRojo, idProceso));
-                }
-            }
-            return ta;
-        }
+        //private List<TareaAux> ConvertirTareas(List<Tarea> tareas, List<PuntoRojo> puntosRojos)
+        //{
+        //    List<TareaAux> ta = new List<TareaAux>();
+        //    foreach (Tarea t in tareas)
+        //    {
+        //        if (t.IDPuntoRojo != null)
+        //        {
+        //            string idProceso = puntosRojos.Single(s => s.ID == t.IDPuntoRojo).IDProceso;
+        //            ta.Add(new TareaAux(t.ID, t.Descripcion, t.FechaInicio, t.FechaFin, t.FechaEjecutado, t.TiempoDedicado, t.Origen, t.Estado, t.IDResponsable, t.IDReunion, t.IDPuntoRojo, idProceso));
+        //        }
+        //    }
+        //    return ta;
+        //}
 
         private void buttonEstadisticas_Click(object sender, EventArgs e)
         {
@@ -421,8 +421,8 @@ namespace PresentacionEscritorio
                                 break;
                             case "PuntosRojos":
                                 //MessageBox.Show("Abrir PuntoRojo con ID= " + rec.GetValue(styleID.TableCellIdentity.Column.Name));
-                                EditarPuntoRojo formITP = new EditarPuntoRojo(negocio.getPuntoRojo((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
-                                formITP.ShowDialog();
+                                //EditarPuntoRojo formITP = new EditarPuntoRojo(negocio.getPuntoRojo((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                                //formITP.ShowDialog();
                                 break;
                             case "Tareas":
                                 //MessageBox.Show("Abrir Tarea con ID= " + rec.GetValue(styleID.TableCellIdentity.Column.Name));
@@ -444,8 +444,8 @@ namespace PresentacionEscritorio
                                         break;
                                     case "PuntosRojos":
                                         //MessageBox.Show("Abrir PuntoRojo con ID= " + rec.GetValue(styleID.TableCellIdentity.Column.Name));
-                                        EditarPuntoRojo formITP1 = new EditarPuntoRojo(negocio.getPuntoRojo((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
-                                        formITP1.ShowDialog();
+                                        //EditarPuntoRojo formITP1 = new EditarPuntoRojo(negocio.getPuntoRojo((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                                        //formITP1.ShowDialog();
                                         break;
                                     case "Tareas":
                                         //MessageBox.Show("Abrir Tarea con ID= " + rec.GetValue(styleID.TableCellIdentity.Column.Name));
@@ -477,7 +477,7 @@ namespace PresentacionEscritorio
 
         private void buttonAnadirTarea_Click(object sender, EventArgs e)
         {
-            AnadirTarea formAT = new AnadirTarea(null,null);
+            AnadirTarea formAT = new AnadirTarea(null,null,null);
             formAT.ShowDialog();
             ObtenerDatos();
             MostrarGridGroupingControl();
