@@ -113,13 +113,17 @@ namespace PresentacionEscritorio
             else if ((sender as CaptionImage).Name == "CaptionImage3")
             {
                 this.Hide();
-                var form2 = new MisTareas();
+                //var form2 = new MisTareas();
+                var form2 = new TodasTareas();
                 form2.Closed += (s, args) => this.Close();
                 form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage4")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new ListaEmpleados();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage5")
             {
@@ -156,7 +160,7 @@ namespace PresentacionEscritorio
         private void buttonPr_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var form2 = new PuntosRojos(proceso.ID);
+            var form2 = new TareasProceso(proceso.ID);
             form2.Closed += (s, args) => this.Close();
             form2.Show();
         }

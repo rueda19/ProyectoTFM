@@ -54,3 +54,5 @@ C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\P
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.TareasProceso.resources
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.TodasTareas.resources
 C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.DetallesTarea.resources
+C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.DetallesEmpleado.resources
+C:\Users\drueda\Documents\TFM\ProyectoTFM\PresentacionEscritorio\obj\x86\Debug\PresentacionEscritorio.ListaEmpleados.resources

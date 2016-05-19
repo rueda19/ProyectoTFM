@@ -12,6 +12,11 @@ namespace Negocio
     {
         private GestorBD gbd;
 
+        public Byte[] getEmpleadoFoto(string user)
+        {
+            return gbd.getEmpleadoFoto(user);
+        }
+
         public DataTable getEmpleadosFoto()
         {
             return gbd.getEmpleadosFoto();
@@ -152,7 +157,7 @@ namespace Negocio
             return gbd.getReunionUsuarioPasadas(user);
         }
         
-        public List<Tarea> getTareasReunion(int idReunion)
+        public List<List<Tarea>> getTareasReunion(int idReunion)
         {
             return gbd.getTareasReunion(idReunion);
         }

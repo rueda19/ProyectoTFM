@@ -113,7 +113,10 @@ namespace PresentacionEscritorio
             }
             else if ((sender as CaptionImage).Name == "CaptionImage4")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new ListaEmpleados();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage5")
             {

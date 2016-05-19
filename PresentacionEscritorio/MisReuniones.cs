@@ -26,9 +26,10 @@ namespace PresentacionEscritorio
         private string user;
         private Negocio.Negocio negocio = new Negocio.Negocio();
         private GridDynamicFilter filter = new GridDynamicFilter();
+        GridExcelFilter filter2 = new GridExcelFilter();
         private List<Reunion> reuniones;
         Reunion reunion;
-        List<Tarea> tareas;
+        List<List<Tarea>> tareas;
         List<Asistente> asistentes;
         List<Invitado> invitados;
         List<InvitadoAsitente> ia;
@@ -79,17 +80,21 @@ namespace PresentacionEscritorio
             //GridTableCellStyleInfo style = table.GetTableCellStyle(1, 2);
             //GridRecord rec = el as GridRecord;
             //MessageBox.Show(rec.GetValue(style.TableCellIdentity.Column.Name).ToString());
+            
             tareas = negocio.getTareasReunion(0);
-            gridGroupingControl2.DataSource = tareas;
-            SampleCustomization(gridGroupingControl2);
+            
+            //gridGroupingControl2.DataSource = tareas;
+            MostrarGridGroupingControl();
+
+            //SampleCustomization(gridGroupingControl2);
             this.gridGroupingControl2.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl2.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl2.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl2.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
-            gridGroupingControl2.TableDescriptor.Columns[2].Appearance.AnyCell.Format = "yyyy-MM-dd";
-            gridGroupingControl2.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "yyyy-MM-dd";
-            gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            //gridGroupingControl2.TableDescriptor.Columns[2].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            //gridGroupingControl2.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "yyyy-MM-dd";
+            //gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "yyyy-MM-dd";
 
             //this.gridGroupingControl1.TableDescriptor.Columns[2].Appearance.AnyCell.AutoSize=true;
             //this.gridGroupingControl1.TableDescriptor.Columns[5].Width = 25;
@@ -133,28 +138,133 @@ namespace PresentacionEscritorio
             //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageList = il;
             //this.gridGroupingControl4.TableDescriptor.Columns[2].Appearance.AnyRecordFieldCell.ImageIndex = 0;          
 
-            System.Collections.Specialized.StringCollection list1 = new System.Collections.Specialized.StringCollection();
-            list1.Add("Retrasada");
-            list1.Add("En curso");
-            list1.Add("Terminada");
-            list1.Add("Abandonada");
-            list1.Add("Planificada");
-            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.ComboBox;
-            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.ChoiceList = list1;
-            this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellValue = "Trial1";
-            gridGroupingControl2.TableDescriptor.Columns[0].ReadOnly = true;
-            this.gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.MonthCalendar;
-            gridGroupingControl2.TableDescriptor.Columns[2].ReadOnly = true;
-            gridGroupingControl2.TableDescriptor.Columns[7].ReadOnly = true;
-            gridGroupingControl2.TableDescriptor.Columns[8].ReadOnly = true;
-            gridGroupingControl2.TableDescriptor.Columns[9].ReadOnly = true;
-            gridGroupingControl2.TableDescriptor.VisibleColumns.Remove("IDPuntoRojo");
-            this.gridGroupingControl2.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
-            this.gridGroupingControl2.TopLevelGroupOptions.ShowCaption = false;
-            this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
-            this.gridGroupingControl2.GridVisualStyles = GridVisualStyles.Metro;
-            this.gridGroupingControl2.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
-            this.gridGroupingControl2.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
+            //System.Collections.Specialized.StringCollection list1 = new System.Collections.Specialized.StringCollection();
+            //list1.Add("Retrasada");
+            //list1.Add("En curso");
+            //list1.Add("Terminada");
+            //list1.Add("Abandonada");
+            //list1.Add("Planificada");
+            //this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.ComboBox;
+            //this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.ChoiceList = list1;
+            //this.gridGroupingControl2.TableDescriptor.Columns[6].Appearance.AnyRecordFieldCell.CellValue = "Trial1";
+            //gridGroupingControl2.TableDescriptor.Columns[0].ReadOnly = true;
+            //this.gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyRecordFieldCell.CellType = GridCellTypeName.MonthCalendar;
+            //gridGroupingControl2.TableDescriptor.Columns[2].ReadOnly = true;
+            //gridGroupingControl2.TableDescriptor.Columns[7].ReadOnly = true;
+            //gridGroupingControl2.TableDescriptor.Columns[8].ReadOnly = true;
+            //gridGroupingControl2.TableDescriptor.Columns[9].ReadOnly = true;
+            //gridGroupingControl2.TableDescriptor.VisibleColumns.Remove("IDPuntoRojo");
+            //this.gridGroupingControl2.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            //this.gridGroupingControl2.TopLevelGroupOptions.ShowCaption = false;
+            //this.gridGroupingControl2.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
+            //this.gridGroupingControl2.GridVisualStyles = GridVisualStyles.Metro;
+            //this.gridGroupingControl2.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
+            //this.gridGroupingControl2.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
+            this.gridGroupingControl2.QueryCellStyleInfo += new GridTableCellStyleInfoEventHandler(gridGroupingControl2_QueryCellStyleInfo);
+            //gridGroupingControl1.TableModel.RowHeights.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.ResizeCoveredCells);
+            this.gridGroupingControl2.TableControlCellClick += new GridTableControlCellClickEventHandler(gridGroupingControl2_TableControlCellClick);
+            this.gridGroupingControl2.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl2_TableControlCellDoubleClick);
+        
+        }
+
+        void gridGroupingControl2_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            if (e.Inner.MouseEventArgs.Button == MouseButtons.Right)
+            {
+                Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
+
+                if (el != null)
+                {
+                    GridTable table = el.ParentTable as GridTable;
+                    GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
+                                      (table.TableDescriptor.Name);
+                    GridCurrentCell cc = tableControl.CurrentCell;
+                    //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                    GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                    GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
+                    GridRecord rec = el as GridRecord;
+                    if (rec == null && el is GridRecordRow)
+                    {
+                        rec = el.ParentRecord as GridRecord;
+                    }
+                    if (rec != null)
+                    {
+                        if (styleID.TableCellIdentity.Column != null)
+                        {
+                            DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        else
+                        {
+                            DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        //ObtenerDatos();
+                        this.gridGroupingControl2.DataSource = tareas[0];
+                        MostrarGridGroupingControl();
+                    }
+                }
+            }
+        }
+
+        private void gridGroupingControl2_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    if (styleID.TableCellIdentity.Column != null)
+                    {
+                        EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                        formIT.ShowDialog();
+                    }
+                    else
+                    {
+                        EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                        formIT.ShowDialog();
+                    }
+                    //ObtenerDatos();
+                    this.gridGroupingControl2.DataSource = tareas[0];
+                    MostrarGridGroupingControl();
+                }
+            }
+        }
+
+        void gridGroupingControl2_QueryCellStyleInfo(object sender, GridTableCellStyleInfoEventArgs e)
+        {
+            if (e.TableCellIdentity.TableCellType == GridTableCellType.RecordPlusMinusCell)
+            {
+                Element cell = e.TableCellIdentity.DisplayElement;
+                Record r = cell.ParentRecord as Record;
+                bool makeStatic = true;
+                if (r != null && r.NestedTables.Count > 0)
+                {
+                    foreach (NestedTable nt in r.NestedTables)
+                    {
+                        if (nt.ChildTable.GetFilteredRecordCount() != 0)
+                            makeStatic = false;
+                    }
+                }
+                if (makeStatic)
+                {
+                    e.Style.CellType = "Static";
+                    e.Style.Borders.Bottom = new GridBorder(GridBorderStyle.Solid, Color.FromArgb(208, 215, 229));
+                }
+            }
         }
 
         //This event is triggered when the row height is changed.
@@ -254,13 +364,17 @@ namespace PresentacionEscritorio
             else if ((sender as CaptionImage).Name == "CaptionImage3")
             {
                 this.Hide();
-                var form2 = new MisTareas();
+                //var form2 = new MisTareas();
+                var form2 = new TodasTareas();
                 form2.Closed += (s, args) => this.Close();
                 form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage4")
             {
-                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                var form2 = new ListaEmpleados();
+                form2.Closed += (s, args) => this.Close();
+                form2.Show();
             }
             else if ((sender as CaptionImage).Name == "CaptionImage5")
             {
@@ -340,6 +454,79 @@ namespace PresentacionEscritorio
             }
         }
 
+        private void MostrarGridGroupingControl()
+        {
+            filter2.UnWireGrid(gridGroupingControl2);
+            filter2.ClearFilters(gridGroupingControl2);
+            for (int j = 0; j < gridGroupingControl2.TableDescriptor.Columns.Count; j++)
+                gridGroupingControl2.TableDescriptor.Columns[j].AllowFilter = false;
+
+            gridGroupingControl2.TableDescriptor.Relations.Clear();
+            this.gridGroupingControl2.Table.CollapseAllRecords();
+            this.gridGroupingControl2.Engine.SourceListSet.Clear();
+            gridGroupingControl2.Update();
+            this.gridGroupingControl2.Refresh();
+
+            gridGroupingControl2.TableDescriptor.Columns.Reset();
+
+            GridRelationDescriptor childToChildRelationDescriptor = null;
+            for (int i = 0; i < tareas.Count; i++)
+            {
+                if (i == 0)
+                {
+                    this.gridGroupingControl2.DataSource = tareas[0];
+                    this.gridGroupingControl2.Engine.SourceListSet.Add("lista" + i, tareas[i]);
+                }
+                else
+                {
+                    GridRelationDescriptor parentToChildRelationDescriptor = new GridRelationDescriptor();
+                    parentToChildRelationDescriptor.ChildTableName = "lista" + i;    // same as SourceListSetEntry.Name for childTable (see below)
+                    parentToChildRelationDescriptor.RelationKind = RelationKind.RelatedMasterDetails;
+                    parentToChildRelationDescriptor.ChildTableDescriptor.TopLevelGroupOptions.ShowCaption = false;
+
+                    parentToChildRelationDescriptor.RelationKeys.Add("ID", "IDTareaPadre");
+
+                    // Add relation to ParentTable 
+                    if (childToChildRelationDescriptor == null)
+                        gridGroupingControl2.TableDescriptor.Relations.Add(parentToChildRelationDescriptor);
+                    else
+                        childToChildRelationDescriptor.ChildTableDescriptor.Relations.Add(parentToChildRelationDescriptor);
+
+                    this.gridGroupingControl2.Engine.SourceListSet.Add("lista" + i, tareas[i]);
+
+                    for (int j = 0; j < parentToChildRelationDescriptor.ChildTableDescriptor.Columns.Count; j++)
+                    //parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
+                    {
+                        parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].AllowFilter = true;
+                        parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
+                    }
+                    //filter.WireGrid(parentToChildRelationDescriptor);
+
+                    //gridGroupingControl1.TableModel.RowHeights.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.ResizeCoveredCells);
+
+                    //this.gridGroupingControl1.GetTableDescriptor("lista" + i).AllowCalculateMaxColumnWidth = false; 
+                    //GridTableModel tm = this.gridGroupingControl1.GetTableModel("lista"+i); 
+                    ////tm.Table.FilteredChildTable = null; 
+                    //tm.ColWidths.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.IncludeHeaders);
+                    childToChildRelationDescriptor = parentToChildRelationDescriptor;
+                }
+            }
+
+            for (int j = 0; j < gridGroupingControl2.TableDescriptor.Columns.Count; j++)
+            {
+                gridGroupingControl2.TableDescriptor.Columns[j].AllowFilter = true;
+                gridGroupingControl2.TableDescriptor.Columns[j].ReadOnly = true;
+            }
+            this.gridGroupingControl2.TopLevelGroupOptions.ShowFilterBar = true;
+            this.gridGroupingControl2.NestedTableGroupOptions.ShowFilterBar = true;
+            this.gridGroupingControl2.ChildGroupOptions.ShowFilterBar = true;
+
+            // Enable Optimized Filter in GridGRoupingControl.
+            this.gridGroupingControl2.OptimizeFilterPerformance = true;
+
+            filter2.WireGrid(gridGroupingControl2);
+        }
+
         private void gridGroupingControl1_SelectedRecordsChanged(object sender, SelectedRecordsChangedEventArgs e)
         {
             Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
@@ -367,8 +554,10 @@ namespace PresentacionEscritorio
                         richTextBox1.Rtf = agenda.Contenido;
                         acta = negocio.getActaReunion(idReu);
                         richTextBox2.Rtf = acta.Contenido;
+                        
                         tareas = negocio.getTareasReunion(idReu);
-                        gridGroupingControl2.DataSource = tareas;
+                        //gridGroupingControl2.DataSource = tareas;
+                        MostrarGridGroupingControl();
 
                         invitados = negocio.getInvitadoReunion(idReu);
                         asistentes = negocio.getAsistenteReunion(idReu);
@@ -659,7 +848,8 @@ namespace PresentacionEscritorio
             formIT.ShowDialog();
 
             tareas = negocio.getTareasReunion(idReu);
-            gridGroupingControl2.DataSource = tareas;
+            //gridGroupingControl2.DataSource = tareas;
+            MostrarGridGroupingControl();
 
             ActualizarIndicadores(true);
         }
@@ -724,7 +914,8 @@ namespace PresentacionEscritorio
             acta = negocio.getActaReunion(idReu);
             richTextBox2.Rtf = acta.Contenido;
             tareas = negocio.getTareasReunion(idReu);
-            gridGroupingControl2.DataSource = tareas;
+            //gridGroupingControl2.DataSource = tareas;
+            MostrarGridGroupingControl();
 
             invitados = negocio.getInvitadoReunion(idReu);
             asistentes = negocio.getAsistenteReunion(idReu);
@@ -798,7 +989,8 @@ namespace PresentacionEscritorio
             acta = negocio.getActaReunion(idReu);
             richTextBox2.Rtf = acta.Contenido;
             tareas = negocio.getTareasReunion(idReu);
-            gridGroupingControl2.DataSource = tareas;
+            //gridGroupingControl2.DataSource = tareas;
+            MostrarGridGroupingControl();
 
             invitados = negocio.getInvitadoReunion(idReu);
             asistentes = negocio.getAsistenteReunion(idReu);
@@ -812,33 +1004,34 @@ namespace PresentacionEscritorio
             ActualizarIndicadores(true);
         }
 
-        private void gridGroupingControl2_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
-        {
-            Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
+        //private void gridGroupingControl2_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
+        //{
+        //    Element el = this.gridGroupingControl2.Table.GetInnerMostCurrentElement();
 
-            if (el != null)
-            {
-                GridTable table = el.ParentTable as GridTable;
-                GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
-                                  (table.TableDescriptor.Name);
-                GridCurrentCell cc = tableControl.CurrentCell;
-                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
-                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
-                GridRecord rec = el as GridRecord;
-                if (rec == null && el is GridRecordRow)
-                {
-                    rec = el.ParentRecord as GridRecord;
-                }
-                if (rec != null)
-                {
-                    EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
-                    formIT.ShowDialog();
+        //    if (el != null)
+        //    {
+        //        GridTable table = el.ParentTable as GridTable;
+        //        GridTableControl tableControl = this.gridGroupingControl2.GetTableControl
+        //                          (table.TableDescriptor.Name);
+        //        GridCurrentCell cc = tableControl.CurrentCell;
+        //        GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+        //        GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+        //        GridRecord rec = el as GridRecord;
+        //        if (rec == null && el is GridRecordRow)
+        //        {
+        //            rec = el.ParentRecord as GridRecord;
+        //        }
+        //        if (rec != null)
+        //        {
+        //            EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+        //            formIT.ShowDialog();
 
-                    tareas = negocio.getTareasReunion(reunion.ID);
-                    gridGroupingControl2.DataSource = tareas;
-                }
-            }
-        }
+        //            tareas = negocio.getTareasReunion(reunion.ID);
+        //            //gridGroupingControl2.DataSource = tareas;
+        //            MostrarGridGroupingControl();
+        //        }
+        //    }
+        //}
     }
 
     public class InvitadoAsitente

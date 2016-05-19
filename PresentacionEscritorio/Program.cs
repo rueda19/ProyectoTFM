@@ -55,11 +55,13 @@ namespace PresentacionEscritorio
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new NuevaReunion());
             //Application.Run(new ProcesosPrincipalesAvanzado("P01"));
-            //Application.Run(new Form1());
+            Application.Run(new Form1());
             //Application.Run(new PuntosRojos("P01"));
             //Application.Run(new MisTareas());
             //Application.Run(new TareasProceso("GBL"));
-            Application.Run(new TodasTareas());
+            //Application.Run(new TodasTareas());
+            //Application.Run(new DetallesEmpleado("Pruebas"));
+            //Application.Run(new ListaEmpleados());
         }
     }
 }

@@ -160,7 +160,6 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
             "Procesos",
-            "PuntosRojos",
             "Tareas"});
             this.listBox1.Location = new System.Drawing.Point(151, 21);
             this.listBox1.Margin = new System.Windows.Forms.Padding(1);

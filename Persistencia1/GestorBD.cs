@@ -10,6 +10,35 @@ namespace Persistencia
 {
     public class GestorBD
     {
+        public Byte[] getEmpleadoFoto(string user)
+        {
+            Byte[] foto = null;
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Foto FROM [Fw_GrupoGarnica].[dbo].[GP_Empleado] WHERE Usuario=@user", conn);
+                cmd.Parameters.AddWithValue("@user", user);
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    foto = (byte[])dr.GetValue(0);
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+            return foto;
+        }
+
         public DataTable getEmpleadosFoto()
         {
             DataTable table = new DataTable();
@@ -19,7 +48,7 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT Usuario, Foto, NombreCompleto, Departamento FROM [Fw_GrupoGarnica].[dbo].[GP_Empleado]", conn);
+                SqlCommand cmd = new SqlCommand("SELECT Foto, Usuario, NombreCompleto, Departamento FROM [Fw_GrupoGarnica].[dbo].[GP_Empleado]", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(table);
             }
@@ -44,7 +73,7 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_Tarea] SET " + fila + "=@valor WHERE Usuario=@user", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE [Fw_GrupoGarnica].[dbo].[GP_Empleado] SET " + fila + "=@valor WHERE Usuario=@user", conn);
                 cmd.Parameters.AddWithValue("@user", empleado);
                 if(fila!="Foto")
                     cmd.Parameters.AddWithValue("@valor", valor);
@@ -179,6 +208,47 @@ namespace Persistencia
                 cmd.Parameters.AddWithValue("@Usuario", usuario);
                 cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
                 cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+                SqlDataReader dr = cmd.ExecuteReader();
+                int i = -1;
+                List<Tarea> tareas = null;
+                while (dr.Read())
+                {
+                    if (dr.GetInt32(12) != i)
+                    {
+                        i = dr.GetInt32(12);
+                        if (tareas != null)
+                            listaTareas.Add(tareas);
+                        tareas = new List<Tarea>();
+                    }
+                    tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9)), (dr.GetValue(10) is DBNull ? null : dr.GetString(10)), (dr.GetValue(11) is DBNull ? null : (int?)dr.GetInt32(11))));
+                }
+                listaTareas.Add(tareas);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return listaTareas;
+        }
+
+        public List<List<Tarea>> getTareasReunion(int idReunion)
+        {
+            List<List<Tarea>> listaTareas = new List<List<Tarea>>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("GP_TareasReunion", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IDReunion", idReunion);
                 SqlDataReader dr = cmd.ExecuteReader();
                 int i = -1;
                 List<Tarea> tareas = null;
@@ -836,7 +906,7 @@ namespace Persistencia
             return reuniones;
         }
 
-        public List<Tarea> getTareasReunion(int idReunion)
+        /*public List<Tarea> getTareasReunion(int idReunion)
         {
             List<Tarea> tareas = new List<Tarea>();
             SqlConnection conn = null;
@@ -864,7 +934,7 @@ namespace Persistencia
             }
 
             return tareas;
-        }
+        }*/
 
         public List<Tarea> getTareasUsuarioTerminadas(string Usuario)
         {

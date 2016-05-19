@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBoxFoto = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonAceptar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -36,17 +35,9 @@
             this.textBoxUsuario = new System.Windows.Forms.TextBox();
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.textBoxDepartamento = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBoxFoto = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBoxFoto
-            // 
-            this.pictureBoxFoto.Location = new System.Drawing.Point(12, 12);
-            this.pictureBoxFoto.Name = "pictureBoxFoto";
-            this.pictureBoxFoto.Size = new System.Drawing.Size(188, 214);
-            this.pictureBoxFoto.TabIndex = 0;
-            this.pictureBoxFoto.TabStop = false;
             // 
             // label1
             // 
@@ -60,12 +51,13 @@
             // 
             // buttonAceptar
             // 
-            this.buttonAceptar.Location = new System.Drawing.Point(12, 233);
+            this.buttonAceptar.Location = new System.Drawing.Point(119, 232);
             this.buttonAceptar.Name = "buttonAceptar";
-            this.buttonAceptar.Size = new System.Drawing.Size(221, 23);
+            this.buttonAceptar.Size = new System.Drawing.Size(263, 23);
             this.buttonAceptar.TabIndex = 2;
-            this.buttonAceptar.Text = "button1";
+            this.buttonAceptar.Text = "Aceptar";
             this.buttonAceptar.UseVisualStyleBackColor = true;
+            this.buttonAceptar.Click += new System.EventHandler(this.buttonAceptar_Click);
             // 
             // label2
             // 
@@ -87,6 +79,7 @@
             // 
             // textBoxUsuario
             // 
+            this.textBoxUsuario.Enabled = false;
             this.textBoxUsuario.Location = new System.Drawing.Point(230, 38);
             this.textBoxUsuario.Name = "textBoxUsuario";
             this.textBoxUsuario.Size = new System.Drawing.Size(246, 20);
@@ -98,6 +91,7 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(246, 20);
             this.textBoxNombre.TabIndex = 6;
+            this.textBoxNombre.Leave += new System.EventHandler(this.textBoxNombre_Leave);
             // 
             // textBoxDepartamento
             // 
@@ -105,15 +99,20 @@
             this.textBoxDepartamento.Name = "textBoxDepartamento";
             this.textBoxDepartamento.Size = new System.Drawing.Size(246, 20);
             this.textBoxDepartamento.TabIndex = 7;
+            this.textBoxDepartamento.Leave += new System.EventHandler(this.textBoxDepartamento_Leave);
             // 
-            // button2
+            // pictureBoxFoto
             // 
-            this.button2.Location = new System.Drawing.Point(239, 233);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(237, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.pictureBoxFoto.ErrorImage = global::PresentacionEscritorio.Properties.Resources.anonimo;
+            this.pictureBoxFoto.Image = global::PresentacionEscritorio.Properties.Resources.anonimo;
+            this.pictureBoxFoto.InitialImage = global::PresentacionEscritorio.Properties.Resources.anonimo;
+            this.pictureBoxFoto.Location = new System.Drawing.Point(12, 12);
+            this.pictureBoxFoto.Name = "pictureBoxFoto";
+            this.pictureBoxFoto.Size = new System.Drawing.Size(188, 214);
+            this.pictureBoxFoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxFoto.TabIndex = 0;
+            this.pictureBoxFoto.TabStop = false;
+            this.pictureBoxFoto.DoubleClick += new System.EventHandler(this.pictureBoxFoto_DoubleClick);
             // 
             // DetallesEmpleado
             // 
@@ -125,7 +124,6 @@
             this.CaptionFont = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold);
             this.ClientSize = new System.Drawing.Size(488, 271);
             this.ControlBox = false;
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.textBoxDepartamento);
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.textBoxUsuario);
@@ -154,6 +152,5 @@
         private System.Windows.Forms.TextBox textBoxUsuario;
         private System.Windows.Forms.TextBox textBoxNombre;
         private System.Windows.Forms.TextBox textBoxDepartamento;
-        private System.Windows.Forms.Button button2;
     }
 }
