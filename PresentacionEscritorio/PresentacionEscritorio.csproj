@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icono.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Interop.Outlook, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -59,8 +62,20 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Grid.Windows.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.GridConverter.Windows, Version=13.4400.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.GridConverter.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.GridHelperClasses.Windows, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Grouping.Base, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
+    <Reference Include="Syncfusion.Schedule.Base, Version=13.4400.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Schedule.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Schedule.Windows, Version=13.4400.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Schedule.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Shared.Base, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Shared.Base.dll</HintPath>
@@ -77,10 +92,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.Tools.Windows.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.XlsIO.ClientProfile, Version=13.4350.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.XlsIO.Base, Version=13.4400.0.53, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Syncfusion\Essential Studio\13.4.0.53\Assemblies\3.5\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -112,6 +131,12 @@
     </Compile>
     <Compile Include="AnadirNuevaInvitacion.Designer.cs">
       <DependentUpon>AnadirNuevaInvitacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AnadirPerosnasInforme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnadirPerosnasInforme.Designer.cs">
+      <DependentUpon>AnadirPerosnasInforme.cs</DependentUpon>
     </Compile>
     <Compile Include="AnadirPuntoRojo.cs">
       <SubType>Form</SubType>
@@ -160,6 +185,13 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GridGroupingExcelConverterControl.cs" />
+    <Compile Include="IniciarReunion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IniciarReunion.Designer.cs">
+      <DependentUpon>IniciarReunion.cs</DependentUpon>
     </Compile>
     <Compile Include="ListaEmpleados.cs">
       <SubType>Form</SubType>
@@ -212,6 +244,18 @@
     <Compile Include="PuntosRojos.Designer.cs">
       <DependentUpon>PuntosRojos.cs</DependentUpon>
     </Compile>
+    <Compile Include="ReunionesEnFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReunionesEnFecha.Designer.cs">
+      <DependentUpon>ReunionesEnFecha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TareasEnFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TareasEnFecha.Designer.cs">
+      <DependentUpon>TareasEnFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="TareasProceso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +268,9 @@
     <Compile Include="TodasTareas.Designer.cs">
       <DependentUpon>TodasTareas.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AnadirPerosnasInforme.resx">
+      <DependentUpon>AnadirPerosnasInforme.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnadirPuntoRojo.resx">
       <DependentUpon>AnadirPuntoRojo.cs</DependentUpon>
     </EmbeddedResource>
@@ -239,11 +286,20 @@
     <EmbeddedResource Include="EstadisticasTareas.resx">
       <DependentUpon>EstadisticasTareas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="IniciarReunion.resx">
+      <DependentUpon>IniciarReunion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListaEmpleados.resx">
       <DependentUpon>ListaEmpleados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PuntosRojos.resx">
       <DependentUpon>PuntosRojos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReunionesEnFecha.resx">
+      <DependentUpon>ReunionesEnFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TareasEnFecha.resx">
+      <DependentUpon>TareasEnFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TareasProceso.resx">
       <DependentUpon>TareasProceso.cs</DependentUpon>
@@ -414,6 +470,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\anonimo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icono.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

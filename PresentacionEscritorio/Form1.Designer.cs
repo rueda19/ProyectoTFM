@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.CaptionImage captionImage6 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage7 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage8 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage9 = new Syncfusion.Windows.Forms.CaptionImage();
-            Syncfusion.Windows.Forms.CaptionImage captionImage10 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage1 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage2 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage3 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage4 = new Syncfusion.Windows.Forms.CaptionImage();
+            Syncfusion.Windows.Forms.CaptionImage captionImage5 = new Syncfusion.Windows.Forms.CaptionImage();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,12 +83,14 @@
             // 
             this.label2.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 3);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(180, 306);
             this.label2.Name = "label2";
             this.tableLayoutPanel1.SetRowSpan(this.label2, 2);
-            this.label2.Size = new System.Drawing.Size(101, 21);
+            this.label2.Size = new System.Drawing.Size(525, 204);
             this.label2.TabIndex = 1;
             this.label2.Text = "Introduccion";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -99,43 +102,43 @@
             this.CaptionBarColor = System.Drawing.Color.FromArgb(((int)(((byte)(179)))), ((int)(((byte)(207)))), ((int)(((byte)(96)))));
             this.CaptionBarHeight = 74;
             this.CaptionFont = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            captionImage6.BackColor = System.Drawing.Color.Transparent;
-            captionImage6.Image = global::PresentacionEscritorio.Properties.Resources.HOME;
-            captionImage6.Name = "CaptionImage1";
-            captionImage6.Size = new System.Drawing.Size(64, 64);
-            captionImage7.BackColor = System.Drawing.Color.Transparent;
-            captionImage7.Image = global::PresentacionEscritorio.Properties.Resources.REUNION;
-            captionImage7.Location = new System.Drawing.Point(100, 4);
-            captionImage7.Name = "CaptionImage2";
-            captionImage7.Size = new System.Drawing.Size(64, 64);
-            captionImage8.BackColor = System.Drawing.Color.Transparent;
-            captionImage8.Image = global::PresentacionEscritorio.Properties.Resources.TAREA;
-            captionImage8.Location = new System.Drawing.Point(170, 4);
-            captionImage8.Name = "CaptionImage3";
-            captionImage8.Size = new System.Drawing.Size(64, 64);
-            captionImage9.BackColor = System.Drawing.Color.Transparent;
-            captionImage9.Image = global::PresentacionEscritorio.Properties.Resources.EMPLEADO;
-            captionImage9.Location = new System.Drawing.Point(240, 4);
-            captionImage9.Name = "CaptionImage4";
-            captionImage9.Size = new System.Drawing.Size(64, 64);
-            captionImage10.BackColor = System.Drawing.Color.Transparent;
-            captionImage10.Image = global::PresentacionEscritorio.Properties.Resources.PROCESOS;
-            captionImage10.Location = new System.Drawing.Point(310, 4);
-            captionImage10.Name = "CaptionImage5";
-            captionImage10.Size = new System.Drawing.Size(64, 64);
-            this.CaptionImages.Add(captionImage6);
-            this.CaptionImages.Add(captionImage7);
-            this.CaptionImages.Add(captionImage8);
-            this.CaptionImages.Add(captionImage9);
-            this.CaptionImages.Add(captionImage10);
+            captionImage1.BackColor = System.Drawing.Color.Transparent;
+            captionImage1.Image = global::PresentacionEscritorio.Properties.Resources.HOME;
+            captionImage1.Name = "CaptionImage1";
+            captionImage1.Size = new System.Drawing.Size(64, 64);
+            captionImage2.BackColor = System.Drawing.Color.Transparent;
+            captionImage2.Image = global::PresentacionEscritorio.Properties.Resources.REUNION;
+            captionImage2.Location = new System.Drawing.Point(100, 4);
+            captionImage2.Name = "CaptionImage2";
+            captionImage2.Size = new System.Drawing.Size(64, 64);
+            captionImage3.BackColor = System.Drawing.Color.Transparent;
+            captionImage3.Image = global::PresentacionEscritorio.Properties.Resources.TAREA;
+            captionImage3.Location = new System.Drawing.Point(170, 4);
+            captionImage3.Name = "CaptionImage3";
+            captionImage3.Size = new System.Drawing.Size(64, 64);
+            captionImage4.BackColor = System.Drawing.Color.Transparent;
+            captionImage4.Image = global::PresentacionEscritorio.Properties.Resources.EMPLEADO;
+            captionImage4.Location = new System.Drawing.Point(240, 4);
+            captionImage4.Name = "CaptionImage4";
+            captionImage4.Size = new System.Drawing.Size(64, 64);
+            captionImage5.BackColor = System.Drawing.Color.Transparent;
+            captionImage5.Image = global::PresentacionEscritorio.Properties.Resources.PROCESOS;
+            captionImage5.Location = new System.Drawing.Point(310, 4);
+            captionImage5.Name = "CaptionImage5";
+            captionImage5.Size = new System.Drawing.Size(64, 64);
+            this.CaptionImages.Add(captionImage1);
+            this.CaptionImages.Add(captionImage2);
+            this.CaptionImages.Add(captionImage3);
+            this.CaptionImages.Add(captionImage4);
+            this.CaptionImages.Add(captionImage5);
             this.ClientSize = new System.Drawing.Size(888, 820);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MinimumSize = new System.Drawing.Size(900, 900);
             this.Name = "Form1";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ShowIcon = false;
             this.Text = "PÁGINA PRINCIPAL";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -30,8 +30,21 @@ namespace PresentacionEscritorio
                 textBoxDepartamento.Enabled = false;
                 textBoxNombre.Enabled = false;
                 pictureBoxFoto.Enabled = false;
+                textBoxTelefono.Enabled = false;
+            }
+            object[] emp = (object[])negocio.getEmpleadosFoto().Select("Usuario = '" + usu + "'")[0].ItemArray;
+            textBoxDepartamento.Text = emp[3].ToString();
+            textBoxNombre.Text = emp[2].ToString();
+            textBoxUsuario.Text = emp[1].ToString();
+            textBoxTelefono.Text = emp[4].ToString();
+            //Byte[] foto = negocio.getEmpleadoFoto(Usuario);
+            if (emp[0].ToString() != "")
+            {
+                Byte[] foto = (Byte[])emp[0];
+                pictureBoxFoto.Image = ByteToImage(foto);
             }
 
+            /*
             Empleado em = negocio.getEmpleado(Usuario);
             textBoxDepartamento.Text = em.Departamento;
             textBoxNombre.Text = em.NombreCompleto;
@@ -39,6 +52,7 @@ namespace PresentacionEscritorio
             Byte[] foto = negocio.getEmpleadoFoto(Usuario);
             if (foto != null)
                 pictureBoxFoto.Image = ByteToImage(foto);
+            textBoxTelefono.Text = negocio.getEmpleadosFoto().Select("Usuario = '" + em.Usuario + "'")[0].ItemArray[4].ToString();*/
         }
 
         private void textBoxNombre_Leave(object sender, EventArgs e)
@@ -84,6 +98,11 @@ namespace PresentacionEscritorio
             mStream.Dispose();
             return bm;
 
+        }
+
+        private void textBoxTelefono_Leave(object sender, EventArgs e)
+        {
+            negocio.updateEmpleado(Usuario, "Telefono", textBoxTelefono.Text, null);
         }
     }
 }

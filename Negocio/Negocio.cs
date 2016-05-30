@@ -12,6 +12,11 @@ namespace Negocio
     {
         private GestorBD gbd;
 
+        public int getNumTareasUsuarioReunion(int idReunion, string user)
+        {
+            return gbd.getNumTareasUsuarioReunion(idReunion, user);
+        }
+
         public Byte[] getEmpleadoFoto(string user)
         {
             return gbd.getEmpleadoFoto(user);
@@ -147,6 +152,11 @@ namespace Negocio
             gbd = new GestorBD();
         }
 
+        public List<Reunion> getReunionBase()
+        {
+            return gbd.getReunionBase();
+        }
+
         public List<Reunion> getReunionUsuario(string user)
         {
             return gbd.getReunionUsuario(user);
@@ -224,7 +234,7 @@ namespace Negocio
 
         public int removeReunion(int ID)
         {
-            return gbd.removeTarea(ID);
+            return gbd.removeReunion(ID);
         }
 
         public Agenda getAgendaReunion(int IDReunion)
@@ -295,6 +305,16 @@ namespace Negocio
         public List<Invitado> getInvitadoEmpleado(string IDEmpleado)
         {
             return gbd.getInvitadoEmpleado(IDEmpleado);
+        }
+
+        public int setEmpIndicadores(EmpleadoIndicadores empleadoIndicadores)
+        {
+            return gbd.setEmpIndicadores(empleadoIndicadores);
+        }
+
+        public int removeEmpIndicadores(EmpleadoIndicadores empleadoIndicadores)
+        {
+            return gbd.removeEmpIndicadores(empleadoIndicadores);
         }
 
         public int setInvitado(Invitado invitado)

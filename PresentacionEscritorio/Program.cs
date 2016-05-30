@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Security.Principal;
+using System.DirectoryServices;
 
 namespace PresentacionEscritorio
 {
@@ -13,6 +15,26 @@ namespace PresentacionEscritorio
         [STAThread]
         static void Main()
         {
+            //string dominio=Environment.UserDomainName;
+            //string usuario = Environment.UserName;
+            //// get a DirectorySearcher object
+            //DirectorySearcher search = new DirectorySearcher();
+            //// specify the search filter
+            //search.Filter = "(&(objectClass=user)(anr=" + usuario + "))";
+            //// specify which property values to return in the search
+            //search.PropertiesToLoad.Add("givenName");   // first name David
+            //search.PropertiesToLoad.Add("sn");          // last name Rueda
+            //search.PropertiesToLoad.Add("mail");        // smtp mail address David.Rueda@garnica.com
+            //search.PropertiesToLoad.Add("sAMAccountName"); // smtp mail address DRueda
+            //search.PropertiesToLoad.Add("cn"); // smtp mail address David Rueda Lejarraga
+            //search.PropertiesToLoad.Add("dc"); // smtp mail address David Rueda Lejarraga
+            ////search.PropertiesToLoad.Add("mail");        // smtp mail address David.Rueda@garnica.com
+            ////search.PropertiesToLoad.Add("mail");        // smtp mail address David.Rueda@garnica.com
+            //// perform the search
+            //SearchResult result = search.FindOne();
+            //string correo = result.Properties["mail"][0].ToString();
+
+
             //try
             //{
             //    Microsoft.Office.Interop.Outlook.Application app = null;
@@ -55,13 +77,16 @@ namespace PresentacionEscritorio
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new NuevaReunion());
             //Application.Run(new ProcesosPrincipalesAvanzado("P01"));
-            Application.Run(new Form1());
+            //Application.Run(new Form1());
             //Application.Run(new PuntosRojos("P01"));
             //Application.Run(new MisTareas());
             //Application.Run(new TareasProceso("GBL"));
             //Application.Run(new TodasTareas());
             //Application.Run(new DetallesEmpleado("Pruebas"));
             //Application.Run(new ListaEmpleados());
+            //Application.Run(new TareasEnFecha());
+
+            Application.Run(new Form1());
         }
     }
 }

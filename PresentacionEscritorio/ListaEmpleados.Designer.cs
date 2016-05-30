@@ -111,7 +111,6 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.MinimumSize = new System.Drawing.Size(900, 657);
             this.Name = "ListaEmpleados";
-            this.ShowIcon = false;
             this.Text = "ListaEmpleados";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);

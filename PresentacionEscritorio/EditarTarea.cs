@@ -26,8 +26,14 @@ namespace PresentacionEscritorio
             this.tarea = tarea;
             FechaInicio.Value = this.tarea.FechaInicio;
             FechaFin.Value = this.tarea.FechaFin;
-            if (this.tarea.FechaEjecutado != null)
-                FechaEjecucion.Value = this.tarea.FechaEjecutado.Value;
+
+            if (tarea.Estado == "Terminada")
+            {
+                if (this.tarea.FechaEjecutado != null)
+                    FechaEjecucion.Value = this.tarea.FechaEjecutado.Value;
+            }
+            else
+                FechaEjecucion.Enabled = false;
 
             procesos = negocio.getProcesos();
             ComboBoxPuntoRojoID.DataSource = procesos;
@@ -42,6 +48,7 @@ namespace PresentacionEscritorio
             ComboBoxTareaPadre.DisplayMember = "ID";
             ComboBoxTareaPadre.Text = "";
 
+            //cbResponsable.Text = this.tarea.IDResponsable;
             List<Empleado> s = negocio.getEmpleados();
             cbResponsable.DataSource = s;
             cbResponsable.DisplayMember = "Usuario";
@@ -65,15 +72,22 @@ namespace PresentacionEscritorio
                 Tarea tPadre = negocio.getTarea(tarea.IDTareaPadre.Value);
                 textBoxTareaPadre.Text = tPadre.Tipo + " " + tPadre.Descripcion;
             }
-            tbOrigen.Text = this.tarea.Tipo;
+            this.comboBoxTipo.AutoCompleteControl.ChangeDataManagerPosition = true;
+            this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxTipo.AutoCompleteControl.DataSource = negocio.getTiposTareas();
+            comboBoxTipo.Text = this.tarea.Tipo;
 
             tbTiempoDedicado.Text = this.tarea.TiempoDedicado.ToString();
             tbDescripcion.Text = this.tarea.Descripcion;
 
             cbEstado.Text = this.tarea.Estado;
 
-            this.ComboBoxPuntoRojoID.TextChanged += new System.EventHandler(this.ComboBoxPuntoRojoID_TextChanged);
-            this.ComboBoxTareaPadre.TextChanged += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
+            this.ComboBoxPuntoRojoID.Leave += new System.EventHandler(this.ComboBoxPuntoRojoID_TextChanged);
+            //this.ComboBoxTareaPadre.TextChanged += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
+            this.ComboBoxTareaPadre.Leave += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
+            this.cbResponsable.Leave += new System.EventHandler(this.cbResponsable_TextChanged);
+            this.comboBoxTipo.Leave += new EventHandler(tbOrigen_TextChanged);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -103,12 +117,29 @@ namespace PresentacionEscritorio
 
         private void tbTiempoDedicado_TextChanged(object sender, EventArgs e)
         {
-            this.tarea.TiempoDedicado = Double.Parse(tbTiempoDedicado.Text);
+            Double tiemDedi;
+            if (tbTiempoDedicado.Text != "" && Double.TryParse(tbTiempoDedicado.Text, out tiemDedi))
+                this.tarea.TiempoDedicado = tiemDedi;
+            else
+            {
+                //tbTiempoDedicado.Text = "0";
+                this.tarea.TiempoDedicado = 0;
+            }   
         }
 
         private void cbEstado_TextChanged(object sender, EventArgs e)
         {
             this.tarea.Estado = cbEstado.Text;
+            if (tarea.Estado == "Terminada")
+            {
+                FechaEjecucion.Enabled = true;
+                tarea.FechaEjecutado = FechaEjecucion.Value;
+            }
+            else
+            {
+                FechaEjecucion.Enabled = false;
+                tarea.FechaEjecutado = null;
+            }
         }
 
         private void FechaEjecucion_ValueChanged(object sender, EventArgs e)
@@ -156,47 +187,75 @@ namespace PresentacionEscritorio
                 textBoxPuntoRojoProceso.Text = "";
                 tbReunionID.Text = "";
                 tbReunionNombre.Text = "";
+                tarea.IDTareaPadre = null;
             }
             else if (Int32.TryParse(ComboBoxTareaPadre.Text, out i))
             {
-                Tarea t = tareas.Single(p => p.ID == i);
-                textBoxTareaPadre.Text = t.Tipo + " " + t.Descripcion;
-                if (t.IDReunion != null)
+                if (tareas.Any(t => t.ID == i))
                 {
-                    tbReunionID.Text = t.IDReunion.ToString();
-                    tbReunionNombre.Text = negocio.getReunion(t.IDReunion.Value).Titulo;
-                }
-                else
-                {
-                    tbReunionID.Text = "";
-                    tbReunionNombre.Text = "";
-                }
-
-                if (t.IDProceso != null)
-                {
-                    ComboBoxPuntoRojoID.Text = t.IDProceso;
-                    if (ComboBoxPuntoRojoID.Text == "")
+                    Tarea t = tareas.Single(p => p.ID == i);
+                    textBoxTareaPadre.Text = t.Tipo + " " + t.Descripcion;
+                    if (t.IDReunion != null)
                     {
-                        textBoxPuntoRojoProceso.Text = "";
+                        tbReunionID.Text = t.IDReunion.ToString();
+                        tbReunionNombre.Text = negocio.getReunion(t.IDReunion.Value).Titulo;
                     }
                     else
                     {
-                        Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
-                        textBoxPuntoRojoProceso.Text = pr.Nombre;
+                        tbReunionID.Text = "";
+                        tbReunionNombre.Text = "";
                     }
+
+                    if (t.IDProceso != null)
+                    {
+                        ComboBoxPuntoRojoID.Text = t.IDProceso;
+                        if (ComboBoxPuntoRojoID.Text == "")
+                        {
+                            textBoxPuntoRojoProceso.Text = "";
+                        }
+                        else
+                        {
+                            Proceso pr = procesos.Single(p => p.ID == ComboBoxPuntoRojoID.Text);
+                            textBoxPuntoRojoProceso.Text = pr.Nombre;
+                        }
+                    }
+                    else
+                    {
+                        ComboBoxPuntoRojoID.Text = "";
+                        textBoxPuntoRojoProceso.Text = "";
+                    }
+                    ComboBoxPuntoRojoID.Enabled = false;
+
+                    tarea.IDTareaPadre = t.ID;
                 }
                 else
                 {
+                    MessageBox.Show("No existe la tarea con ID=" + ComboBoxTareaPadre.Text);
+                    ComboBoxTareaPadre.Text = "";
+                    textBoxTareaPadre.Text = "";
+                    ComboBoxPuntoRojoID.Enabled = true;
                     ComboBoxPuntoRojoID.Text = "";
                     textBoxPuntoRojoProceso.Text = "";
+                    tbReunionID.Text = "";
+                    tbReunionNombre.Text = "";
+                    tarea.IDTareaPadre = null;
                 }
-                ComboBoxPuntoRojoID.Enabled = false;
             }
             else
             {
-                ComboBoxTareaPadre.Text = "";
+                textBoxTareaPadre.Text = "";
                 ComboBoxPuntoRojoID.Enabled = true;
+                ComboBoxPuntoRojoID.Text = "";
+                textBoxPuntoRojoProceso.Text = "";
+                tbReunionID.Text = "";
+                tbReunionNombre.Text = "";
+                tarea.IDTareaPadre = null;
             }
+        }
+
+        private void tbOrigen_TextChanged(object sender, EventArgs e)
+        {
+            this.tarea.Tipo = comboBoxTipo.Text;
         }
     }
 }

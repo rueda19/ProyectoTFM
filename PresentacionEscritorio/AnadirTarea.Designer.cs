@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.MetroColorTable metroColorTable4 = new Syncfusion.Windows.Forms.MetroColorTable();
             Syncfusion.Windows.Forms.MetroColorTable metroColorTable1 = new Syncfusion.Windows.Forms.MetroColorTable();
             Syncfusion.Windows.Forms.MetroColorTable metroColorTable2 = new Syncfusion.Windows.Forms.MetroColorTable();
+            Syncfusion.Windows.Forms.MetroColorTable metroColorTable3 = new Syncfusion.Windows.Forms.MetroColorTable();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.FechaInicio = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
             this.FechaFin = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
+            this.FechaInicio = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +44,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.tbDescripcion = new System.Windows.Forms.TextBox();
-            this.tbOrigen = new System.Windows.Forms.TextBox();
             this.tbReunionNombre = new System.Windows.Forms.TextBox();
             this.cbEstado = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             this.label8 = new System.Windows.Forms.Label();
@@ -56,13 +55,15 @@
             this.label10 = new System.Windows.Forms.Label();
             this.ComboBoxTareaPadre = new Syncfusion.Windows.Forms.Tools.MultiColumnComboBox();
             this.textBoxTareaPadre = new System.Windows.Forms.TextBox();
+            this.comboBoxTipo = new Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FechaFin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FechaInicio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbEstado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbResponsable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxPuntoRojoID)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxTareaPadre)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxTipo.AutoCompleteControl)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -71,8 +72,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.FechaInicio, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.FechaFin, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.FechaFin, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.FechaInicio, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
@@ -83,7 +84,6 @@
             this.tableLayoutPanel1.Controls.Add(this.btnAceptar, 0, 14);
             this.tableLayoutPanel1.Controls.Add(this.btnCancelar, 2, 14);
             this.tableLayoutPanel1.Controls.Add(this.tbDescripcion, 1, 10);
-            this.tableLayoutPanel1.Controls.Add(this.tbOrigen, 1, 7);
             this.tableLayoutPanel1.Controls.Add(this.tbReunionNombre, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.cbEstado, 1, 8);
             this.tableLayoutPanel1.Controls.Add(this.label8, 0, 9);
@@ -95,6 +95,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label10, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.ComboBoxTareaPadre, 1, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBoxTareaPadre, 2, 6);
+            this.tableLayoutPanel1.Controls.Add(this.comboBoxTipo, 1, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -117,25 +118,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(488, 538);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // FechaInicio
-            // 
-            this.FechaInicio.BorderColor = System.Drawing.Color.Empty;
-            this.FechaInicio.CalendarSize = new System.Drawing.Size(189, 176);
-            this.tableLayoutPanel1.SetColumnSpan(this.FechaInicio, 2);
-            this.FechaInicio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FechaInicio.DropDownImage = null;
-            this.FechaInicio.DropDownNormalColor = System.Drawing.SystemColors.Control;
-            this.FechaInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaInicio.Location = new System.Drawing.Point(153, 112);
-            this.FechaInicio.Margin = new System.Windows.Forms.Padding(7);
-            this.FechaInicio.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
-            this.FechaInicio.MinValue = new System.DateTime(((long)(0)));
-            this.FechaInicio.Name = "FechaInicio";
-            this.FechaInicio.ShowCheckBox = false;
-            this.FechaInicio.Size = new System.Drawing.Size(328, 21);
-            this.FechaInicio.TabIndex = 0;
-            this.FechaInicio.Value = new System.DateTime(2016, 4, 14, 11, 44, 43, 483);
-            // 
             // FechaFin
             // 
             this.FechaFin.BorderColor = System.Drawing.Color.Empty;
@@ -145,15 +127,34 @@
             this.FechaFin.DropDownImage = null;
             this.FechaFin.DropDownNormalColor = System.Drawing.SystemColors.Control;
             this.FechaFin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FechaFin.Location = new System.Drawing.Point(153, 77);
+            this.FechaFin.Location = new System.Drawing.Point(153, 112);
             this.FechaFin.Margin = new System.Windows.Forms.Padding(7);
             this.FechaFin.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.FechaFin.MinValue = new System.DateTime(((long)(0)));
             this.FechaFin.Name = "FechaFin";
             this.FechaFin.ShowCheckBox = false;
             this.FechaFin.Size = new System.Drawing.Size(328, 21);
-            this.FechaFin.TabIndex = 1;
-            this.FechaFin.Value = new System.DateTime(2016, 4, 14, 11, 47, 21, 730);
+            this.FechaFin.TabIndex = 0;
+            this.FechaFin.Value = new System.DateTime(2016, 4, 14, 11, 44, 43, 483);
+            // 
+            // FechaInicio
+            // 
+            this.FechaInicio.BorderColor = System.Drawing.Color.Empty;
+            this.FechaInicio.CalendarSize = new System.Drawing.Size(189, 176);
+            this.tableLayoutPanel1.SetColumnSpan(this.FechaInicio, 2);
+            this.FechaInicio.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FechaInicio.DropDownImage = null;
+            this.FechaInicio.DropDownNormalColor = System.Drawing.SystemColors.Control;
+            this.FechaInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FechaInicio.Location = new System.Drawing.Point(153, 77);
+            this.FechaInicio.Margin = new System.Windows.Forms.Padding(7);
+            this.FechaInicio.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
+            this.FechaInicio.MinValue = new System.DateTime(((long)(0)));
+            this.FechaInicio.Name = "FechaInicio";
+            this.FechaInicio.ShowCheckBox = false;
+            this.FechaInicio.Size = new System.Drawing.Size(328, 21);
+            this.FechaInicio.TabIndex = 1;
+            this.FechaInicio.Value = new System.DateTime(2016, 4, 14, 11, 47, 21, 730);
             // 
             // label1
             // 
@@ -274,17 +275,6 @@
             this.tbDescripcion.Size = new System.Drawing.Size(328, 126);
             this.tbDescripcion.TabIndex = 11;
             // 
-            // tbOrigen
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.tbOrigen, 2);
-            this.tbOrigen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbOrigen.Enabled = false;
-            this.tbOrigen.Location = new System.Drawing.Point(153, 252);
-            this.tbOrigen.Margin = new System.Windows.Forms.Padding(7);
-            this.tbOrigen.Name = "tbOrigen";
-            this.tbOrigen.Size = new System.Drawing.Size(328, 20);
-            this.tbOrigen.TabIndex = 13;
-            // 
             // tbReunionNombre
             // 
             this.tbReunionNombre.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -339,19 +329,19 @@
             this.cbResponsable.Margin = new System.Windows.Forms.Padding(7);
             this.cbResponsable.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.cbResponsable.Name = "cbResponsable";
-            metroColorTable4.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable4.ArrowInActive = System.Drawing.Color.White;
-            metroColorTable4.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable4.ArrowNormalBackGround = System.Drawing.Color.Empty;
-            metroColorTable4.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable4.ArrowPushedBackGround = System.Drawing.Color.Empty;
-            metroColorTable4.ScrollerBackground = System.Drawing.Color.White;
-            metroColorTable4.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable4.ThumbInActive = System.Drawing.Color.White;
-            metroColorTable4.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable4.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable4.ThumbPushedBorder = System.Drawing.Color.Empty;
-            this.cbResponsable.ScrollMetroColorTable = metroColorTable4;
+            metroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable1.ArrowInActive = System.Drawing.Color.White;
+            metroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty;
+            metroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty;
+            metroColorTable1.ScrollerBackground = System.Drawing.Color.White;
+            metroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable1.ThumbInActive = System.Drawing.Color.White;
+            metroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty;
+            this.cbResponsable.ScrollMetroColorTable = metroColorTable1;
             this.cbResponsable.Size = new System.Drawing.Size(328, 21);
             this.cbResponsable.TabIndex = 18;
             this.cbResponsable.Text = "multiColumnComboBox1";
@@ -385,19 +375,19 @@
             this.ComboBoxPuntoRojoID.Margin = new System.Windows.Forms.Padding(7);
             this.ComboBoxPuntoRojoID.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.ComboBoxPuntoRojoID.Name = "ComboBoxPuntoRojoID";
-            metroColorTable1.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable1.ArrowInActive = System.Drawing.Color.White;
-            metroColorTable1.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable1.ArrowNormalBackGround = System.Drawing.Color.Empty;
-            metroColorTable1.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable1.ArrowPushedBackGround = System.Drawing.Color.Empty;
-            metroColorTable1.ScrollerBackground = System.Drawing.Color.White;
-            metroColorTable1.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable1.ThumbInActive = System.Drawing.Color.White;
-            metroColorTable1.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable1.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty;
-            this.ComboBoxPuntoRojoID.ScrollMetroColorTable = metroColorTable1;
+            metroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable2.ArrowInActive = System.Drawing.Color.White;
+            metroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty;
+            metroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty;
+            metroColorTable2.ScrollerBackground = System.Drawing.Color.White;
+            metroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable2.ThumbInActive = System.Drawing.Color.White;
+            metroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty;
+            this.ComboBoxPuntoRojoID.ScrollMetroColorTable = metroColorTable2;
             this.ComboBoxPuntoRojoID.Size = new System.Drawing.Size(83, 21);
             this.ComboBoxPuntoRojoID.TabIndex = 22;
             this.ComboBoxPuntoRojoID.Text = "multiColumnComboBox1";
@@ -431,19 +421,19 @@
             this.ComboBoxTareaPadre.Margin = new System.Windows.Forms.Padding(7);
             this.ComboBoxTareaPadre.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.ComboBoxTareaPadre.Name = "ComboBoxTareaPadre";
-            metroColorTable2.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable2.ArrowInActive = System.Drawing.Color.White;
-            metroColorTable2.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable2.ArrowNormalBackGround = System.Drawing.Color.Empty;
-            metroColorTable2.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable2.ArrowPushedBackGround = System.Drawing.Color.Empty;
-            metroColorTable2.ScrollerBackground = System.Drawing.Color.White;
-            metroColorTable2.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
-            metroColorTable2.ThumbInActive = System.Drawing.Color.White;
-            metroColorTable2.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
-            metroColorTable2.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
-            metroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty;
-            this.ComboBoxTareaPadre.ScrollMetroColorTable = metroColorTable2;
+            metroColorTable3.ArrowChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable3.ArrowInActive = System.Drawing.Color.White;
+            metroColorTable3.ArrowNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable3.ArrowNormalBackGround = System.Drawing.Color.Empty;
+            metroColorTable3.ArrowPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable3.ArrowPushedBackGround = System.Drawing.Color.Empty;
+            metroColorTable3.ScrollerBackground = System.Drawing.Color.White;
+            metroColorTable3.ThumbChecked = System.Drawing.Color.FromArgb(((int)(((byte)(147)))), ((int)(((byte)(149)))), ((int)(((byte)(152)))));
+            metroColorTable3.ThumbInActive = System.Drawing.Color.White;
+            metroColorTable3.ThumbNormal = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(198)))), ((int)(((byte)(198)))));
+            metroColorTable3.ThumbPushed = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(90)))));
+            metroColorTable3.ThumbPushedBorder = System.Drawing.Color.Empty;
+            this.ComboBoxTareaPadre.ScrollMetroColorTable = metroColorTable3;
             this.ComboBoxTareaPadre.Size = new System.Drawing.Size(83, 21);
             this.ComboBoxTareaPadre.TabIndex = 25;
             this.ComboBoxTareaPadre.Text = "multiColumnComboBox1";
@@ -456,6 +446,29 @@
             this.textBoxTareaPadre.Name = "textBoxTareaPadre";
             this.textBoxTareaPadre.Size = new System.Drawing.Size(231, 20);
             this.textBoxTareaPadre.TabIndex = 26;
+            // 
+            // comboBoxTipo
+            // 
+            // 
+            // 
+            // 
+            this.comboBoxTipo.AutoCompleteControl.ChangeDataManagerPosition = true;
+            this.comboBoxTipo.AutoCompleteControl.HeaderFont = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.comboBoxTipo.AutoCompleteControl.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.comboBoxTipo.AutoCompleteControl.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
+            this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxTipo.AutoCompleteControl.ParentForm = this.tableLayoutPanel1;
+            this.comboBoxTipo.AutoCompleteControl.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
+            this.tableLayoutPanel1.SetColumnSpan(this.comboBoxTipo, 2);
+            this.comboBoxTipo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxTipo.DropDownWidth = 121;
+            this.comboBoxTipo.Location = new System.Drawing.Point(153, 252);
+            this.comboBoxTipo.Margin = new System.Windows.Forms.Padding(7);
+            this.comboBoxTipo.Name = "comboBoxTipo";
+            this.comboBoxTipo.ParentForm = this.tableLayoutPanel1;
+            this.comboBoxTipo.Size = new System.Drawing.Size(328, 21);
+            this.comboBoxTipo.TabIndex = 27;
+            this.comboBoxTipo.Text = "comboBoxAutoComplete1";
             // 
             // AnadirTarea
             // 
@@ -473,12 +486,13 @@
             this.Text = "Añadir Tarea";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FechaFin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FechaInicio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbEstado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbResponsable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxPuntoRojoID)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ComboBoxTareaPadre)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxTipo.AutoCompleteControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -486,8 +500,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv FechaInicio;
         private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv FechaFin;
+        private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv FechaInicio;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -498,7 +512,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox tbDescripcion;
-        private System.Windows.Forms.TextBox tbOrigen;
         private System.Windows.Forms.TextBox tbReunionNombre;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cbEstado;
         private System.Windows.Forms.Label label8;
@@ -510,5 +523,6 @@
         private System.Windows.Forms.Label label10;
         private Syncfusion.Windows.Forms.Tools.MultiColumnComboBox ComboBoxTareaPadre;
         private System.Windows.Forms.TextBox textBoxTareaPadre;
+        private Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete comboBoxTipo;
     }
 }

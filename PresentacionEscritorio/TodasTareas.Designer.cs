@@ -39,7 +39,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonEstadisticas = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimeDesde = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
@@ -52,6 +51,8 @@
             this.comboBoxTipo = new Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxUsuario = new Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonTareasFecha = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -121,11 +122,12 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.label3, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonEstadisticas, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.buttonActualizar, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonAnadirTarea, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonAnadirTarea, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonTareasFecha, 6, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 100);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -160,18 +162,6 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Criterios";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonEstadisticas
-            // 
-            this.buttonEstadisticas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonEstadisticas.Image = global::PresentacionEscritorio.Properties.Resources.estadisticas;
-            this.buttonEstadisticas.Location = new System.Drawing.Point(553, 3);
-            this.buttonEstadisticas.Name = "buttonEstadisticas";
-            this.tableLayoutPanel2.SetRowSpan(this.buttonEstadisticas, 2);
-            this.buttonEstadisticas.Size = new System.Drawing.Size(144, 94);
-            this.buttonEstadisticas.TabIndex = 4;
-            this.buttonEstadisticas.Text = "Estadisticas";
-            this.buttonEstadisticas.UseVisualStyleBackColor = true;
             // 
             // flowLayoutPanel1
             // 
@@ -260,13 +250,14 @@
             // buttonAnadirTarea
             // 
             this.buttonAnadirTarea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAnadirTarea.Location = new System.Drawing.Point(703, 3);
+            this.buttonAnadirTarea.Location = new System.Drawing.Point(553, 3);
             this.buttonAnadirTarea.Name = "buttonAnadirTarea";
             this.tableLayoutPanel2.SetRowSpan(this.buttonAnadirTarea, 2);
             this.buttonAnadirTarea.Size = new System.Drawing.Size(144, 94);
             this.buttonAnadirTarea.TabIndex = 9;
             this.buttonAnadirTarea.Text = "Añadir Tarea";
             this.buttonAnadirTarea.UseVisualStyleBackColor = true;
+            this.buttonAnadirTarea.Click += new System.EventHandler(this.buttonAnadirTarea_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -347,6 +338,30 @@
             this.comboBoxUsuario.Text = "comboBoxAutoComplete1";
             this.comboBoxUsuario.TextChanged += new System.EventHandler(this.comboBoxUsuario_SelectedValueChanged);
             // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(703, 3);
+            this.button1.Name = "button1";
+            this.tableLayoutPanel2.SetRowSpan(this.button1, 2);
+            this.button1.Size = new System.Drawing.Size(144, 94);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Expotar a Excel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonTareasFecha
+            // 
+            this.buttonTareasFecha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonTareasFecha.Location = new System.Drawing.Point(853, 3);
+            this.buttonTareasFecha.Name = "buttonTareasFecha";
+            this.tableLayoutPanel2.SetRowSpan(this.buttonTareasFecha, 2);
+            this.buttonTareasFecha.Size = new System.Drawing.Size(144, 94);
+            this.buttonTareasFecha.TabIndex = 12;
+            this.buttonTareasFecha.Text = "Ver mis Tareas en Fecha";
+            this.buttonTareasFecha.UseVisualStyleBackColor = true;
+            this.buttonTareasFecha.Click += new System.EventHandler(this.buttonTareasFecha_Click);
+            // 
             // TodasTareas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -390,7 +405,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(1200, 900);
             this.Name = "TodasTareas";
-            this.ShowIcon = false;
             this.Text = "TodasTareas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -418,7 +432,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonEstadisticas;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label4;
         private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv dateTimeDesde;
@@ -431,5 +444,7 @@
         private System.Windows.Forms.Label label8;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete comboBoxTipo;
         private Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete comboBoxUsuario;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonTareasFecha;
     }
 }

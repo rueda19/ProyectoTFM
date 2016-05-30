@@ -100,11 +100,11 @@
             this.model1.DocumentScale.Height = 1F;
             this.model1.DocumentScale.Width = 1F;
             this.model1.DocumentSize.DisplayName = "SameAsPrinter";
-            this.model1.DocumentSize.Height = 1100F;
-            this.model1.DocumentSize.Width = 790F;
+            this.model1.DocumentSize.Height = 1090F;
+            this.model1.DocumentSize.Width = 780F;
             this.model1.LineStyle.DashPattern = null;
             this.model1.LineStyle.LineColor = System.Drawing.Color.Black;
-            this.model1.LogicalSize = new System.Drawing.SizeF(790F, 1100F);
+            this.model1.LogicalSize = new System.Drawing.SizeF(780F, 1090F);
             this.model1.ShadowStyle.Color = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             this.model1.ShadowStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
             // 
@@ -376,7 +376,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(900, 900);
             this.Name = "ProcesosPrincipales";
-            this.ShowIcon = false;
             this.Text = "ProcesosPrincipales";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.diagram1)).EndInit();

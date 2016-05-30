@@ -50,6 +50,7 @@
             this.dateTimeHasta = new Syncfusion.Windows.Forms.Tools.DateTimePickerAdv();
             this.buttonActualizar = new System.Windows.Forms.Button();
             this.buttonAnadirTarea = new System.Windows.Forms.Button();
+            this.buttonExportarExcel = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -122,6 +123,7 @@
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.buttonActualizar, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonAnadirTarea, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonExportarExcel, 6, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 100);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -202,6 +204,7 @@
             this.buttonEstadisticas.TabIndex = 4;
             this.buttonEstadisticas.Text = "Estadisticas";
             this.buttonEstadisticas.UseVisualStyleBackColor = true;
+            this.buttonEstadisticas.Click += new System.EventHandler(this.buttonEstadisticas_Click);
             // 
             // flowLayoutPanel1
             // 
@@ -285,6 +288,7 @@
             this.buttonActualizar.TabIndex = 7;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
+            this.buttonActualizar.Click += new System.EventHandler(this.buttonActualizar_Click);
             // 
             // buttonAnadirTarea
             // 
@@ -296,6 +300,19 @@
             this.buttonAnadirTarea.TabIndex = 9;
             this.buttonAnadirTarea.Text = "Añadir Tarea";
             this.buttonAnadirTarea.UseVisualStyleBackColor = true;
+            this.buttonAnadirTarea.Click += new System.EventHandler(this.buttonAnadirTarea_Click);
+            // 
+            // buttonExportarExcel
+            // 
+            this.buttonExportarExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonExportarExcel.Location = new System.Drawing.Point(953, 3);
+            this.buttonExportarExcel.Name = "buttonExportarExcel";
+            this.tableLayoutPanel2.SetRowSpan(this.buttonExportarExcel, 2);
+            this.buttonExportarExcel.Size = new System.Drawing.Size(144, 94);
+            this.buttonExportarExcel.TabIndex = 10;
+            this.buttonExportarExcel.Text = "Exportar a Excel";
+            this.buttonExportarExcel.UseVisualStyleBackColor = true;
+            this.buttonExportarExcel.Click += new System.EventHandler(this.buttonExportarExcel_Click);
             // 
             // TareasProceso
             // 
@@ -340,7 +357,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(1200, 900);
             this.Name = "TareasProceso";
-            this.ShowIcon = false;
             this.Text = "TareasProceso";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -375,5 +391,6 @@
         private Syncfusion.Windows.Forms.Tools.DateTimePickerAdv dateTimeHasta;
         private System.Windows.Forms.Button buttonActualizar;
         private System.Windows.Forms.Button buttonAnadirTarea;
+        private System.Windows.Forms.Button buttonExportarExcel;
     }
 }

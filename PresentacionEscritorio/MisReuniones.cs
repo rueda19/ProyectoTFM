@@ -51,6 +51,8 @@ namespace PresentacionEscritorio
 
         public MisReuniones()
         {
+            this.Icon = Properties.Resources.icono;
+            this.MetroColor = Color.FromArgb(179, 207, 96);
             InitializeComponent();
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1).ToUpper();
             this.Text = user;
@@ -164,7 +166,83 @@ namespace PresentacionEscritorio
             //gridGroupingControl1.TableModel.RowHeights.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.ResizeCoveredCells);
             this.gridGroupingControl2.TableControlCellClick += new GridTableControlCellClickEventHandler(gridGroupingControl2_TableControlCellClick);
             this.gridGroupingControl2.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl2_TableControlCellDoubleClick);
-        
+            
+            this.gridGroupingControl1.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl1_TableControlCellDoubleClick);
+
+            //this.gridGroupingControl1.TableControlCellClick +=new GridTableControlCellClickEventHandler(gridGroupingControl0_TableControlCellClick);
+        }
+
+        void gridGroupingControl0_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            if (e.Inner.MouseEventArgs.Button == MouseButtons.Right)
+            {
+                Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
+
+                if (el != null)
+                {
+                    GridTable table = el.ParentTable as GridTable;
+                    GridTableControl tableControl = this.gridGroupingControl1.GetTableControl
+                                      (table.TableDescriptor.Name);
+                    GridCurrentCell cc = tableControl.CurrentCell;
+                    //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                    GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                    GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
+                    GridRecord rec = el as GridRecord;
+                    if (rec == null && el is GridRecordRow)
+                    {
+                        rec = el.ParentRecord as GridRecord;
+                    }
+                    if (rec != null)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("¿Estas seguro que quieres eliminar esta reunion y todas sus tareas?", "Eliminar Reunión", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            if (styleID.TableCellIdentity.Column != null)
+                            {
+                                negocio.removeReunion((int)rec.GetValue(styleID.TableCellIdentity.Column.Name));
+                            }
+                            else
+                            {
+                                negocio.removeReunion((int)rec.GetValue(style.TableCellIdentity.Column.Name));
+                            }
+
+                            if (checkBox1.Checked)
+                            {
+                                reuniones = negocio.getReunionUsuarioPasadas(user);
+                                gridGroupingControl1.DataSource = reuniones;
+                            }
+                            else
+                            {
+                                reuniones = negocio.getReunionUsuario(user);
+                                gridGroupingControl1.DataSource = reuniones;
+                            }
+
+                            gridGroupingControl1.Table.Records[0].SetCurrent();
+                            gridGroupingControl1.TableControl.CurrentCell.Activate(0, 0);
+
+                            idReu = reuniones[0].ID;
+                            reunion = negocio.getReunion(idReu);
+                            agenda = negocio.getAgendaReunion(idReu);
+                            richTextBox1.Rtf = agenda.Contenido;
+                            acta = negocio.getActaReunion(idReu);
+                            richTextBox2.Rtf = acta.Contenido;
+                            tareas = negocio.getTareasReunion(idReu);
+                            MostrarGridGroupingControl();
+
+                            invitados = negocio.getInvitadoReunion(idReu);
+                            asistentes = negocio.getAsistenteReunion(idReu);
+                            ia = new List<InvitadoAsitente>();
+                            foreach (Invitado inv in invitados)
+                            {
+                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            }
+                            gridGroupingControl3.DataSource = ia;
+
+                            ActualizarIndicadores(true);
+                        }
+                    }
+                }
+            }
         }
 
         void gridGroupingControl2_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
@@ -202,7 +280,81 @@ namespace PresentacionEscritorio
                         //ObtenerDatos();
                         this.gridGroupingControl2.DataSource = tareas[0];
                         MostrarGridGroupingControl();
+                        ActualizarIndicadores(true);
                     }
+                }
+            }
+        }
+
+        private void gridGroupingControl1_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)
+        {
+            Element el = this.gridGroupingControl1.Table.GetInnerMostCurrentElement();
+
+            if (el != null)
+            {
+                GridTable table = el.ParentTable as GridTable;
+                GridTableControl tableControl = this.gridGroupingControl1.GetTableControl
+                                  (table.TableDescriptor.Name);
+                GridCurrentCell cc = tableControl.CurrentCell;
+                //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
+                GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
+                GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
+                GridRecord rec = el as GridRecord;
+                if (rec == null && el is GridRecordRow)
+                {
+                    rec = el.ParentRecord as GridRecord;
+                }
+                if (rec != null)
+                {
+                    DialogResult dialogResult = MessageBox.Show("¿Quieres iniciar la Reunión?", "Iniciar Reunión", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        if (styleID.TableCellIdentity.Column != null)
+                        {
+                            IniciarReunion ir = new IniciarReunion(negocio.getReunion((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                            ir.ShowDialog();
+                        }
+                        else
+                        {
+                            IniciarReunion ir = new IniciarReunion(negocio.getReunion((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                            ir.ShowDialog();
+                        }
+
+                        if (checkBox1.Checked)
+                        {
+                            reuniones = negocio.getReunionUsuarioPasadas(user);
+                            gridGroupingControl1.DataSource = reuniones;
+                        }
+                        else
+                        {
+                            reuniones = negocio.getReunionUsuario(user);
+                            gridGroupingControl1.DataSource = reuniones;
+                        }
+
+                        gridGroupingControl1.Table.Records[0].SetCurrent();
+                        gridGroupingControl1.TableControl.CurrentCell.Activate(0, 0);
+
+                        idReu = reuniones[0].ID;
+                        reunion = negocio.getReunion(idReu);
+                        agenda = negocio.getAgendaReunion(idReu);
+                        richTextBox1.Rtf = agenda.Contenido;
+                        acta = negocio.getActaReunion(idReu);
+                        richTextBox2.Rtf = acta.Contenido;
+                        tareas = negocio.getTareasReunion(idReu);
+                        MostrarGridGroupingControl();
+
+                        invitados = negocio.getInvitadoReunion(idReu);
+                        asistentes = negocio.getAsistenteReunion(idReu);
+                        ia = new List<InvitadoAsitente>();
+                        foreach (Invitado inv in invitados)
+                        {
+                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                        }
+                        gridGroupingControl3.DataSource = ia;
+
+                        ActualizarIndicadores(true);
+                    }
+                    
                 }
             }
         }
@@ -238,8 +390,10 @@ namespace PresentacionEscritorio
                         formIT.ShowDialog();
                     }
                     //ObtenerDatos();
-                    this.gridGroupingControl2.DataSource = tareas[0];
+                    //this.gridGroupingControl2.DataSource = tareas[0];
+                    tareas = negocio.getTareasReunion(idReu);
                     MostrarGridGroupingControl();
+                    ActualizarIndicadores(true);
                 }
             }
         }
@@ -468,14 +622,20 @@ namespace PresentacionEscritorio
             this.gridGroupingControl2.Refresh();
 
             gridGroupingControl2.TableDescriptor.Columns.Reset();
+            this.gridGroupingControl2.DataSource = tareas[0];
 
             GridRelationDescriptor childToChildRelationDescriptor = null;
             for (int i = 0; i < tareas.Count; i++)
             {
+                if(tareas[0]!=null)
                 if (i == 0)
                 {
-                    this.gridGroupingControl2.DataSource = tareas[0];
+                    //this.gridGroupingControl2.DataSource = tareas[0];
                     this.gridGroupingControl2.Engine.SourceListSet.Add("lista" + i, tareas[i]);
+
+                    gridGroupingControl2.TableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    gridGroupingControl2.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    gridGroupingControl2.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
                 }
                 else
                 {
@@ -500,6 +660,10 @@ namespace PresentacionEscritorio
                         parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].AllowFilter = true;
                         parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
                     }
+
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
                     //filter.WireGrid(parentToChildRelationDescriptor);
 
                     //gridGroupingControl1.TableModel.RowHeights.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.ResizeCoveredCells);
@@ -517,9 +681,9 @@ namespace PresentacionEscritorio
                 gridGroupingControl2.TableDescriptor.Columns[j].AllowFilter = true;
                 gridGroupingControl2.TableDescriptor.Columns[j].ReadOnly = true;
             }
-            this.gridGroupingControl2.TopLevelGroupOptions.ShowFilterBar = true;
-            this.gridGroupingControl2.NestedTableGroupOptions.ShowFilterBar = true;
-            this.gridGroupingControl2.ChildGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl2.TopLevelGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl2.NestedTableGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl2.ChildGroupOptions.ShowFilterBar = true;
 
             // Enable Optimized Filter in GridGRoupingControl.
             this.gridGroupingControl2.OptimizeFilterPerformance = true;
@@ -1002,6 +1166,14 @@ namespace PresentacionEscritorio
             gridGroupingControl3.DataSource = ia;
 
             ActualizarIndicadores(true);
+        }
+
+        private void buttonReunionesEnFecha_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form2 = new ReunionesEnFecha();
+            form2.Closed += (s, args) => this.Close();
+            form2.Show();
         }
 
         //private void gridGroupingControl2_TableControlCellDoubleClick(object sender, GridTableControlCellClickEventArgs e)

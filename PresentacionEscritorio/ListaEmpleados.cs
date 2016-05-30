@@ -26,7 +26,9 @@ namespace PresentacionEscritorio
 
         public ListaEmpleados()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            this.MetroColor = Color.FromArgb(179, 207, 96);
+            this.Icon = Properties.Resources.icono;
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
             this.Text = user;
 

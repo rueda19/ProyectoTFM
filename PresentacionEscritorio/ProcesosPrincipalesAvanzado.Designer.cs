@@ -58,13 +58,13 @@
             this.abrirToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.guardarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.imprimirToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.exportToolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.cortarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copiarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pegarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.deshacerToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.rehacerToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.exportToolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.propertyEditor1 = new Syncfusion.Windows.Forms.Diagram.Controls.PropertyEditor(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.diagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.model1)).BeginInit();
@@ -325,6 +325,16 @@
             this.imprimirToolStripButton.Text = "&Imprimir";
             this.imprimirToolStripButton.Click += new System.EventHandler(this.imprimirToolStripButton_Click);
             // 
+            // exportToolStripButton3
+            // 
+            this.exportToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.exportToolStripButton3.Image = global::PresentacionEscritorio.Properties.Resources.image_export;
+            this.exportToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.exportToolStripButton3.Name = "exportToolStripButton3";
+            this.exportToolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.exportToolStripButton3.Text = "Export";
+            this.exportToolStripButton3.Click += new System.EventHandler(this.exportToolStripButton3_Click);
+            // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
@@ -379,16 +389,6 @@
             this.rehacerToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.rehacerToolStripButton.Text = "Rehacer";
             this.rehacerToolStripButton.Click += new System.EventHandler(this.rehacerToolStripButton_Click);
-            // 
-            // exportToolStripButton3
-            // 
-            this.exportToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.exportToolStripButton3.Image = global::PresentacionEscritorio.Properties.Resources.image_export;
-            this.exportToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.exportToolStripButton3.Name = "exportToolStripButton3";
-            this.exportToolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.exportToolStripButton3.Text = "Export";
-            this.exportToolStripButton3.Click += new System.EventHandler(this.exportToolStripButton3_Click);
             // 
             // propertyEditor1
             // 
@@ -447,7 +447,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(1292, 798);
             this.Name = "ProcesosPrincipalesAvanzado";
-            this.ShowIcon = false;
             this.Text = "ProcesosPrincipalesAvanzado";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.diagram1)).EndInit();

@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using Syncfusion.GridHelperClasses;
 using Syncfusion.Grouping;
 using Syncfusion.Windows.Forms.Grid;
+using System.DirectoryServices;
 
 namespace PresentacionEscritorio
 {
@@ -38,7 +39,7 @@ namespace PresentacionEscritorio
             InitializeComponent();
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1).ToUpper();
 
-            List<Reunion> reuniones = negocio.getReunionUsuario(user);
+            List<Reunion> reuniones = negocio.getReunionBase();
             multiColumnComboBoxBase.DataSource = reuniones;
             multiColumnComboBoxBase.DisplayMember = "Titulo";
             multiColumnComboBoxBase.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -247,10 +248,62 @@ namespace PresentacionEscritorio
             if (Double.TryParse(textBoxDuracion.Text.Replace(".", ","), out horas))
             {
                 negocio.setNuevaReunion(new Reunion(0, textBoxTitulo.Text, textBoxUbicacion.Text, Double.Parse(textBoxDuracion.Text.Replace(".", ",")),0.0, dateTimePickerFecha.Value, user), new Agenda(richTextBox1.Rtf, 0), invitados);
+                avisarReunion();
                 this.Close();
             }
             else
                 MessageBox.Show("El campo horas no es de tipo numerico");
+        }
+
+        private void avisarReunion()
+        {
+            try
+            {
+                Microsoft.Office.Interop.Outlook.Application app = null;
+                Microsoft.Office.Interop.Outlook.AppointmentItem appt = null;
+
+                app = new Microsoft.Office.Interop.Outlook.Application();
+
+                appt = (Microsoft.Office.Interop.Outlook.AppointmentItem)app
+                    .CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olAppointmentItem);
+                appt.MeetingStatus = Microsoft.Office.Interop.Outlook.OlMeetingStatus.olMeeting;
+                appt.Subject = textBoxTitulo.Text;
+                appt.Body = richTextBox1.Text;
+                appt.Location = textBoxUbicacion.Text;
+                appt.Start = dateTimePickerFecha.Value;
+                //appt.Recipients.Add("drueda@garnicaplywood.com");
+                appt.End = dateTimePickerFecha.Value.AddHours(Double.Parse(textBoxDuracion.Text.Replace(".", ",")));
+                appt.ReminderSet = true;
+                appt.ReminderMinutesBeforeStart = 15;
+                appt.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
+                appt.BusyStatus = Microsoft.Office.Interop.Outlook.OlBusyStatus.olBusy;
+
+                foreach (string inv in this.invitados)
+                {
+                    DirectorySearcher search = new DirectorySearcher();
+                    search.Filter = "(&(objectClass=user)(anr=" + inv + "))";
+                    search.PropertiesToLoad.Add("mail");
+                    SearchResult result = search.FindOne();
+                    string correo = result.Properties["mail"][0].ToString();
+
+                    Microsoft.Office.Interop.Outlook.Recipient recipient = appt.Recipients.Add(correo);
+                    recipient.Type = (int)Microsoft.Office.Interop.Outlook.OlMeetingRecipientType.olRequired;
+                }
+
+                //Microsoft.Office.Interop.Outlook.Recipient recipient1 = appt.Recipients.Add("raul.boveda@garnica.one");
+                //recipient1.Type = (int)Microsoft.Office.Interop.Outlook.OlMeetingRecipientType.olOptional;
+                ((Microsoft.Office.Interop.Outlook._AppointmentItem)appt).Send();
+
+                //appt.Save();
+                //appt.Send();
+                //Microsoft.Office.Interop.Outlook.MailItem mailItem = appt.ForwardAsVcal();
+                //mailItem.Recipients.Add("drueda@garnicaplywood.com");
+                //mailItem.Send();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
         }
 
         private void multiColumnComboBoxBase_SelectionChangeCommitted(object sender, EventArgs e)

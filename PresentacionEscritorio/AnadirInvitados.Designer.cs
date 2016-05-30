@@ -85,7 +85,7 @@
             this.ClientSize = new System.Drawing.Size(288, 288);
             this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.MinimumSize = new System.Drawing.Size(300, 324);
             this.Name = "AnadirInvitados";
             this.ShowIcon = false;
             this.Text = "Añadir Invitados";

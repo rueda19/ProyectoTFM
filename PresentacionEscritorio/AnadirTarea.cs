@@ -22,8 +22,8 @@ namespace PresentacionEscritorio
         public AnadirTarea(Reunion reunion, Proceso proceso, Tarea tarea)
         {
             InitializeComponent();
-            FechaInicio.Value = DateTime.Now;
             FechaFin.Value = DateTime.Now;
+            FechaInicio.Value = DateTime.Now;
             
             //puntosRojos = negocio.getPuntosRojos();
             procesos = negocio.getProcesos();
@@ -32,6 +32,12 @@ namespace PresentacionEscritorio
             ComboBoxPuntoRojoID.DisplayMember = "ID"; 
             ComboBoxPuntoRojoID.Text="";
             //ComboBoxPuntoRojoID.col.HideCols.SetRange(1, 3, true);
+
+            this.comboBoxTipo.AutoCompleteControl.ChangeDataManagerPosition = true;
+            this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxTipo.AutoCompleteControl.DataSource = negocio.getTiposTareas();
+            this.comboBoxTipo.Text = "";
 
             tareas = negocio.getTareas();
             ComboBoxTareaPadre.DataSource = tareas;
@@ -68,7 +74,7 @@ namespace PresentacionEscritorio
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, tbOrigen.Text, cbEstado.Text, cbResponsable.Text, tbReunionID.Text.Equals("") ? (int?)null : Int32.Parse(tbReunionID.Text), ComboBoxPuntoRojoID.Text.Equals("") ? null : ComboBoxPuntoRojoID.Text, ComboBoxTareaPadre.Text.Equals("") ? (int?)null : Int32.Parse(ComboBoxTareaPadre.Text)));
+            negocio.setTarea(new Tarea(0, tbDescripcion.Text, FechaInicio.Value, FechaFin.Value, null, 0.0, comboBoxTipo.Text, cbEstado.Text, cbResponsable.Text, tbReunionID.Text.Equals("") ? (int?)null : Int32.Parse(tbReunionID.Text), ComboBoxPuntoRojoID.Text.Equals("") ? null : ComboBoxPuntoRojoID.Text, ComboBoxTareaPadre.Text.Equals("") ? (int?)null : Int32.Parse(ComboBoxTareaPadre.Text)));
             this.Close();
         }
 

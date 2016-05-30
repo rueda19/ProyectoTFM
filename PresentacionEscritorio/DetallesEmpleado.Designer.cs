@@ -36,6 +36,8 @@
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.textBoxDepartamento = new System.Windows.Forms.TextBox();
             this.pictureBoxFoto = new System.Windows.Forms.PictureBox();
+            this.textBoxTelefono = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFoto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +64,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 87);
+            this.label2.Location = new System.Drawing.Point(227, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 3;
@@ -71,7 +73,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(227, 153);
+            this.label3.Location = new System.Drawing.Point(227, 120);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 13);
             this.label3.TabIndex = 4;
@@ -87,7 +89,7 @@
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(230, 103);
+            this.textBoxNombre.Location = new System.Drawing.Point(230, 87);
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(246, 20);
             this.textBoxNombre.TabIndex = 6;
@@ -95,7 +97,7 @@
             // 
             // textBoxDepartamento
             // 
-            this.textBoxDepartamento.Location = new System.Drawing.Point(230, 169);
+            this.textBoxDepartamento.Location = new System.Drawing.Point(230, 136);
             this.textBoxDepartamento.Name = "textBoxDepartamento";
             this.textBoxDepartamento.Size = new System.Drawing.Size(246, 20);
             this.textBoxDepartamento.TabIndex = 7;
@@ -114,6 +116,23 @@
             this.pictureBoxFoto.TabStop = false;
             this.pictureBoxFoto.DoubleClick += new System.EventHandler(this.pictureBoxFoto_DoubleClick);
             // 
+            // textBoxTelefono
+            // 
+            this.textBoxTelefono.Location = new System.Drawing.Point(230, 189);
+            this.textBoxTelefono.Name = "textBoxTelefono";
+            this.textBoxTelefono.Size = new System.Drawing.Size(246, 20);
+            this.textBoxTelefono.TabIndex = 9;
+            this.textBoxTelefono.Leave += new System.EventHandler(this.textBoxTelefono_Leave);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(227, 173);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Telefono";
+            // 
             // DetallesEmpleado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -124,6 +143,8 @@
             this.CaptionFont = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold);
             this.ClientSize = new System.Drawing.Size(488, 271);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxTelefono);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxDepartamento);
             this.Controls.Add(this.textBoxNombre);
             this.Controls.Add(this.textBoxUsuario);
@@ -152,5 +173,7 @@
         private System.Windows.Forms.TextBox textBoxUsuario;
         private System.Windows.Forms.TextBox textBoxNombre;
         private System.Windows.Forms.TextBox textBoxDepartamento;
+        private System.Windows.Forms.TextBox textBoxTelefono;
+        private System.Windows.Forms.Label label4;
     }
 }

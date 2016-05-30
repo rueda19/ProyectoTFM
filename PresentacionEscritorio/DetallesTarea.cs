@@ -42,7 +42,7 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.GridVisualStyles = GridVisualStyles.Metro;
             this.gridGroupingControl1.TableOptions.ListBoxSelectionMode = SelectionMode.MultiExtended;
-
+            
             this.gridGroupingControl1.QueryCellStyleInfo += new GridTableCellStyleInfoEventHandler(gridGroupingControl1_QueryCellStyleInfo);
 
             this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
@@ -138,14 +138,18 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.Refresh();
 
             gridGroupingControl1.TableDescriptor.Columns.Reset();
+            this.gridGroupingControl1.DataSource = tareas[0];
 
             GridRelationDescriptor childToChildRelationDescriptor = null;
             for (int i = 0; i < tareas.Count; i++)
             {
                 if (i == 0)
                 {
-                    this.gridGroupingControl1.DataSource = tareas[0];
+                    //this.gridGroupingControl1.DataSource = tareas[0];
                     this.gridGroupingControl1.Engine.SourceListSet.Add("lista" + i, tareas[i]);
+                    gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    gridGroupingControl1.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    gridGroupingControl1.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
                 }
                 else
                 {
@@ -170,6 +174,10 @@ namespace PresentacionEscritorio
                         parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
                     }
 
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                    parentToChildRelationDescriptor.ChildTableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
+
                     parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                     childToChildRelationDescriptor = parentToChildRelationDescriptor;
                 }
@@ -179,9 +187,9 @@ namespace PresentacionEscritorio
                     gridGroupingControl1.TableDescriptor.Columns[j].AllowFilter = true;
                     gridGroupingControl1.TableDescriptor.Columns[j].ReadOnly = true;
                 }
-                this.gridGroupingControl1.TopLevelGroupOptions.ShowFilterBar = true;
-                this.gridGroupingControl1.NestedTableGroupOptions.ShowFilterBar = true;
-                this.gridGroupingControl1.ChildGroupOptions.ShowFilterBar = true;
+                //this.gridGroupingControl1.TopLevelGroupOptions.ShowFilterBar = true;
+                //this.gridGroupingControl1.NestedTableGroupOptions.ShowFilterBar = true;
+                //this.gridGroupingControl1.ChildGroupOptions.ShowFilterBar = true;
 
                 // Enable Optimized Filter in GridGRoupingControl.
                 this.gridGroupingControl1.OptimizeFilterPerformance = true;

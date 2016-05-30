@@ -26,6 +26,8 @@ namespace PresentacionEscritorio
         public ProcesosPrincipales(string idProceso)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono;
+            this.MetroColor = Color.FromArgb(179, 207, 96);
 
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
             this.Text = user;

@@ -195,7 +195,6 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.MinimumSize = new System.Drawing.Size(900, 900);
             this.Name = "MisTareas";
-            this.ShowIcon = false;
             this.Text = "MisTareas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -18,7 +18,10 @@ namespace PresentacionEscritorio
         private string user;
         public Form1()
         {
+            //Program.formulario = false;
             InitializeComponent();
+            this.Icon = Properties.Resources.icono;
+            this.MetroColor = Color.FromArgb(179, 207, 96);
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
             //String user = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
             this.Text = user;
@@ -31,7 +34,7 @@ namespace PresentacionEscritorio
             }
 
             label2.Text = "Bienvenidos a la aplicación de gestión de Reuniones, Tareas y Procesos Principales de Garnica.\n"+
-                            "La aplicación tratará de ayudarnos en la creación y en el control de todos los apartados.";
+                            "La aplicación tratará de ayudarnos en la creación y en el control de los apartados anteriores.";
 
             
         }

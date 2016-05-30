@@ -14,6 +14,8 @@ using Syncfusion.GridHelperClasses;
 using Syncfusion.Windows.Forms.Grid.Grouping;
 using Syncfusion.Grouping;
 using Syncfusion.Windows.Forms.Grid;
+using Syncfusion.GroupingGridExcelConverter;
+using Syncfusion.XlsIO;
 
 namespace PresentacionEscritorio
 {
@@ -27,10 +29,14 @@ namespace PresentacionEscritorio
         private string IDProc;
         List<List<Tarea>> tareas = new List<List<Tarea>>();
         List<Proceso> procesos = new List<Proceso>();
-
+        private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor1 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
+        private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor2 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
+        
         public TareasProceso(string idProc)
         {
             InitializeComponent();
+            this.Icon = Properties.Resources.icono;
+            this.MetroColor = Color.FromArgb(179, 207, 96);
             IDProc = idProc;
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
             this.Text = user;
@@ -43,6 +49,15 @@ namespace PresentacionEscritorio
 
             dateTimeDesde.Value = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);//DateTime.Parse(DateTime.Now.Year+"/1/1");
             dateTimeHasta.Value = new DateTime(DateTime.Now.Year + 1, 1, 1, 0, 0, 0);
+
+            gridConditionalFormatDescriptor1.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))));
+            gridConditionalFormatDescriptor1.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
+            DateTime d = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day + 1, 0, 0, 0);
+            gridConditionalFormatDescriptor1.Expression = "[FechaFin] < '" + d + "' and [FechaEjecutado] = ''";
+
+            gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))));
+            gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
+            gridConditionalFormatDescriptor2.Expression = "[FechaEjecutado] <> ''";
 
             ObtenerDatos();
             MostrarGridGroupingControl();
@@ -121,25 +136,28 @@ namespace PresentacionEscritorio
                     //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
                     GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
                     GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
-                    GridRecord rec = el as GridRecord;
-                    if (rec == null && el is GridRecordRow)
+                    if (!(style.Text.StartsWith("P") && style.Text.Length == 3))
                     {
-                        rec = el.ParentRecord as GridRecord;
-                    }
-                    if (rec != null)
-                    {
-                        if (styleID.TableCellIdentity.Column != null)
+                        GridRecord rec = el as GridRecord;
+                        if (rec == null && el is GridRecordRow)
                         {
-                            DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
-                            formIT.ShowDialog();
+                            rec = el.ParentRecord as GridRecord;
                         }
-                        else
+                        if (rec != null)
                         {
-                            DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
-                            formIT.ShowDialog();
+                            if (styleID.TableCellIdentity.Column != null)
+                            {
+                                DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                                formIT.ShowDialog();
+                            }
+                            else
+                            {
+                                DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                                formIT.ShowDialog();
+                            }
+                            ObtenerDatos();
+                            MostrarGridGroupingControl();
                         }
-                        ObtenerDatos();
-                        MostrarGridGroupingControl();
                     }
                 }
             }
@@ -245,6 +263,9 @@ namespace PresentacionEscritorio
 
             gridGroupingControl1.TableDescriptor.Columns.Reset();
 
+            if (listBox1.Items.Count==0)
+                this.gridGroupingControl1.DataSource = null;
+
             if (listBox1.Items.Contains("Procesos"))
             {
                 this.gridGroupingControl1.DataSource = procesos;
@@ -256,6 +277,7 @@ namespace PresentacionEscritorio
                 GridRelationDescriptor childToChildRelationDescriptor = null;
                 for (int i = 0; i < tareas.Count; i++)
                 {
+                    if (tareas[0] != null)
                     if (i == 0)
                     {
                         if (listBox1.Items.Contains("Procesos"))
@@ -263,6 +285,7 @@ namespace PresentacionEscritorio
                             GridRelationDescriptor parentToChildRelationDescriptor = new GridRelationDescriptor();
                             parentToChildRelationDescriptor.ChildTableName = "lista" + i;    // same as SourceListSetEntry.Name for childTable (see below)
                             parentToChildRelationDescriptor.RelationKind = RelationKind.RelatedMasterDetails;
+                            parentToChildRelationDescriptor.ChildTableDescriptor.TopLevelGroupOptions.ShowCaption = false;
 
                             parentToChildRelationDescriptor.RelationKeys.Add("ID", "IDProceso");
 
@@ -280,7 +303,12 @@ namespace PresentacionEscritorio
                                 parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].AllowFilter = true;
                                 parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
                             }
+                            parentToChildRelationDescriptor.ChildTableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                            parentToChildRelationDescriptor.ChildTableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                            parentToChildRelationDescriptor.ChildTableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
 
+                            parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
+                            parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
                             childToChildRelationDescriptor = parentToChildRelationDescriptor;
                             //this.gridGroupingControl1.DataSource = tareas[0];
                         }
@@ -288,6 +316,13 @@ namespace PresentacionEscritorio
                         {
                             this.gridGroupingControl1.DataSource = tareas[0];
                             this.gridGroupingControl1.Engine.SourceListSet.Add("lista" + i, tareas[i]);
+
+                            gridGroupingControl1.TableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                            gridGroupingControl1.TableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                            gridGroupingControl1.TableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
+
+                            this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
+                            this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
                         }
                     }
                     else
@@ -295,6 +330,7 @@ namespace PresentacionEscritorio
                         GridRelationDescriptor parentToChildRelationDescriptor = new GridRelationDescriptor();
                         parentToChildRelationDescriptor.ChildTableName = "lista" + i;    // same as SourceListSetEntry.Name for childTable (see below)
                         parentToChildRelationDescriptor.RelationKind = RelationKind.RelatedMasterDetails;
+                        parentToChildRelationDescriptor.ChildTableDescriptor.TopLevelGroupOptions.ShowCaption = false;
 
                         parentToChildRelationDescriptor.RelationKeys.Add("ID", "IDTareaPadre");
 
@@ -313,6 +349,12 @@ namespace PresentacionEscritorio
                             parentToChildRelationDescriptor.ChildTableDescriptor.Columns[j].ReadOnly = true;
                         }
 
+                        parentToChildRelationDescriptor.ChildTableDescriptor.Columns[5].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                        parentToChildRelationDescriptor.ChildTableDescriptor.Columns[3].Appearance.AnyCell.Format = "dd-MM-yyyy";
+                        parentToChildRelationDescriptor.ChildTableDescriptor.Columns[4].Appearance.AnyCell.Format = "dd-MM-yyyy";
+
+                        parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
+                        parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
                         childToChildRelationDescriptor = parentToChildRelationDescriptor;
                     }
                 }
@@ -322,9 +364,9 @@ namespace PresentacionEscritorio
                 gridGroupingControl1.TableDescriptor.Columns[j].AllowFilter = true;
                 gridGroupingControl1.TableDescriptor.Columns[j].ReadOnly = true;
             }
-            this.gridGroupingControl1.TopLevelGroupOptions.ShowFilterBar = true;
-            this.gridGroupingControl1.NestedTableGroupOptions.ShowFilterBar = true;
-            this.gridGroupingControl1.ChildGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl1.TopLevelGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl1.NestedTableGroupOptions.ShowFilterBar = true;
+            //this.gridGroupingControl1.ChildGroupOptions.ShowFilterBar = true;
             this.gridGroupingControl1.OptimizeFilterPerformance = true;
 
             filter.WireGrid(gridGroupingControl1);
@@ -469,25 +511,127 @@ namespace PresentacionEscritorio
                 //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
                 GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
                 GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
-                GridRecord rec = el as GridRecord;
-                if (rec == null && el is GridRecordRow)
+                if (!(style.Text.StartsWith("P") && style.Text.Length == 3))
                 {
-                    rec = el.ParentRecord as GridRecord;
+                    GridRecord rec = el as GridRecord;
+                    if (rec == null && el is GridRecordRow)
+                    {
+                        rec = el.ParentRecord as GridRecord;
+                    }
+                    if (rec != null)
+                    {
+                        if (styleID.TableCellIdentity.Column != null)
+                        {
+                            EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        else
+                        {
+                            EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        ObtenerDatos();
+                        MostrarGridGroupingControl();
+                    }
                 }
-                if (rec != null)
+            }
+        }
+
+        private void buttonEstadisticas_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var form2 = new EstadisticasTareas(IDProc);
+            form2.Closed += (s, args) => this.Close();
+            form2.Show();
+        }
+
+        private void buttonAnadirTarea_Click(object sender, EventArgs e)
+        {
+            if (IDProc != "GBL")
+            {
+                AnadirTarea formIT = new AnadirTarea(null, procesos.Single(s => s.ID == IDProc), null);
+                formIT.ShowDialog();
+            }
+            else
+            {
+                AnadirTarea formIT = new AnadirTarea(null, null, null);
+                formIT.ShowDialog();
+            }
+            ObtenerDatos();
+            MostrarGridGroupingControl();
+        }
+
+        private void buttonActualizar_Click(object sender, EventArgs e)
+        {
+            ObtenerDatos();
+            MostrarGridGroupingControl();
+        }
+
+        private void buttonExportarExcel_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Files(*.xlsx)|*xlsx|Files(*.xls)|*.xls";
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.DefaultExt = ".xlsx";
+            saveFileDialog.FileName = "Untitled";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK && saveFileDialog.CheckPathExists)
+            {
+                GridGroupingExcelConverterControl excelConverter = new GridGroupingExcelConverterControl();
+                ExcelExportingOptions exportingOptions = new ExcelExportingOptions();
+
+                excelConverter.ExportBorders = true;
+                excelConverter.ApplyExcelFilter = true;
+                excelConverter.CanExportColumnWidth = true;
+                excelConverter.CanExportRowHeight = true;
+                excelConverter.AllowGroupOutlining = true;
+                excelConverter.AllowNestedTableOutling = true;
+                //This property is used to export the GGc with optimized manner. If you enable this property, the grid will be exported without creating the styles. 
+                //The data will be taken from Table.Records and number format will be set as column wise.
+                excelConverter.EnableOptimization = true;
+
+                excelConverter.ExportNestedTableCaption = true;
+                excelConverter.ShowGridLines = true;
+
+                exportingOptions.ExportGroupSummary = true;
+                exportingOptions.ExportTableSummary = true;
+
+                excelConverter.QueryExportRowRange += new GridGroupingExcelConverterControl.QueryExportRowRangeEventHandler(excelConverter_QueryExportRowRange);
+                excelConverter.QueryExportNestedTable += new GridGroupingExcelConverterControl.ExportNestedTableEventHandler(gridExcelConverter_QueryExportNestedTable);
+
+                excelConverter.ExportStyle = true;
+                excelConverter.ExportNestedTableCaption = false;
+                excelConverter.ExportToExcel(this.gridGroupingControl1, saveFileDialog.FileName, exportingOptions);
+                if (MessageBox.Show("¿Queires abrir el fichero xlsx ahora?", "Exportar a Excel", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (styleID.TableCellIdentity.Column != null)
-                    {
-                        EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
-                        formIT.ShowDialog();
-                    }
-                    else
-                    {
-                        EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
-                        formIT.ShowDialog();
-                    }
-                    ObtenerDatos();
-                    MostrarGridGroupingControl();
+                    System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                    proc.StartInfo.FileName = saveFileDialog.FileName;
+                    proc.Start();
+                }
+            }
+        }
+
+        void gridExcelConverter_QueryExportNestedTable(object sender, ExportNestedTableEventArgs e)
+        {
+            // Hide the empty elements being exported to Excel.
+            if (e.NestedTable.Records.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void excelConverter_QueryExportRowRange(object sender, QueryExportRowRangeEventArgs e)
+        {
+            GridTableDescriptor tableDescriptor = (GridTableDescriptor)e.Element.ParentTableDescriptor;
+            int excelRowIndex = e.ExcelRange.Row;
+            if (e.Element.Kind == DisplayElementKind.ColumnHeader)
+            {
+                for (int columnIndex = 0; columnIndex < tableDescriptor.VisibleColumns.Count; columnIndex++)
+                {
+                    IRange range = e.ExcelRange[excelRowIndex, e.ExcelRange.Column + columnIndex];
+                    //range.CellStyle.ColorIndex = Syncfusion.XlsIO.ExcelKnownColors.Light_blue;
+                    //range.CellStyle.Font.RGBColor = Color.DarkRed;
+                    range.CellStyle.Font.FontName = "Segoe UI";
+                    range.CellStyle.Font.Size = 10;
+                    range.CellStyle.Font.Bold = true;
+                    range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 }
             }
         }
