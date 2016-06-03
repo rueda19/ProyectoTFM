@@ -281,6 +281,7 @@
             // buttonActualizar
             // 
             this.buttonActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActualizar.Image = global::PresentacionEscritorio.Properties.Resources.Refresh;
             this.buttonActualizar.Location = new System.Drawing.Point(3, 3);
             this.buttonActualizar.Name = "buttonActualizar";
             this.tableLayoutPanel2.SetRowSpan(this.buttonActualizar, 2);
@@ -293,6 +294,7 @@
             // buttonAnadirTarea
             // 
             this.buttonAnadirTarea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAnadirTarea.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
             this.buttonAnadirTarea.Location = new System.Drawing.Point(803, 3);
             this.buttonAnadirTarea.Name = "buttonAnadirTarea";
             this.tableLayoutPanel2.SetRowSpan(this.buttonAnadirTarea, 2);
@@ -305,6 +307,7 @@
             // buttonExportarExcel
             // 
             this.buttonExportarExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonExportarExcel.Image = global::PresentacionEscritorio.Properties.Resources.exportar_excel;
             this.buttonExportarExcel.Location = new System.Drawing.Point(953, 3);
             this.buttonExportarExcel.Name = "buttonExportarExcel";
             this.tableLayoutPanel2.SetRowSpan(this.buttonExportarExcel, 2);

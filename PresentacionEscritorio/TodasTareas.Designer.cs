@@ -238,6 +238,7 @@
             // buttonActualizar
             // 
             this.buttonActualizar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonActualizar.Image = global::PresentacionEscritorio.Properties.Resources.Refresh;
             this.buttonActualizar.Location = new System.Drawing.Point(3, 3);
             this.buttonActualizar.Name = "buttonActualizar";
             this.tableLayoutPanel2.SetRowSpan(this.buttonActualizar, 2);
@@ -250,6 +251,7 @@
             // buttonAnadirTarea
             // 
             this.buttonAnadirTarea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonAnadirTarea.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
             this.buttonAnadirTarea.Location = new System.Drawing.Point(553, 3);
             this.buttonAnadirTarea.Name = "buttonAnadirTarea";
             this.tableLayoutPanel2.SetRowSpan(this.buttonAnadirTarea, 2);
@@ -341,6 +343,7 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Image = global::PresentacionEscritorio.Properties.Resources.exportar_excel;
             this.button1.Location = new System.Drawing.Point(703, 3);
             this.button1.Name = "button1";
             this.tableLayoutPanel2.SetRowSpan(this.button1, 2);
@@ -353,6 +356,7 @@
             // buttonTareasFecha
             // 
             this.buttonTareasFecha.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonTareasFecha.Image = global::PresentacionEscritorio.Properties.Resources.calendario;
             this.buttonTareasFecha.Location = new System.Drawing.Point(853, 3);
             this.buttonTareasFecha.Name = "buttonTareasFecha";
             this.tableLayoutPanel2.SetRowSpan(this.buttonTareasFecha, 2);

@@ -93,6 +93,16 @@ namespace PresentacionEscritorio.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendario {
+            get {
+                object obj = ResourceManager.GetObject("calendario", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
@@ -186,6 +196,16 @@ namespace PresentacionEscritorio.Properties {
         internal static System.Drawing.Bitmap exportar {
             get {
                 object obj = ResourceManager.GetObject("exportar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap exportar_excel {
+            get {
+                object obj = ResourceManager.GetObject("exportar_excel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -436,6 +456,26 @@ namespace PresentacionEscritorio.Properties {
         internal static System.Drawing.Bitmap redo {
             get {
                 object obj = ResourceManager.GetObject("redo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refresh {
+            get {
+                object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Refresh2 {
+            get {
+                object obj = ResourceManager.GetObject("Refresh2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

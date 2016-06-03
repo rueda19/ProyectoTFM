@@ -821,6 +821,7 @@
             // 
             // buttonReunionesEnFecha
             // 
+            this.buttonReunionesEnFecha.Image = global::PresentacionEscritorio.Properties.Resources.calendario;
             this.buttonReunionesEnFecha.Location = new System.Drawing.Point(83, 3);
             this.buttonReunionesEnFecha.Name = "buttonReunionesEnFecha";
             this.buttonReunionesEnFecha.Size = new System.Drawing.Size(75, 66);
