@@ -225,6 +225,7 @@ namespace Persistencia
 
         public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin)
         {
+            string aa = "";
             List<List<Tarea>> listaTareas = new List<List<Tarea>>();
             SqlConnection conn = null;
             try
@@ -252,10 +253,14 @@ namespace Persistencia
                     }
                     tareas.Add(new Tarea(dr.GetInt32(0), dr.GetString(1), dr.GetDateTime(2), dr.GetDateTime(3), (dr.GetValue(4) is DBNull) ? null : (DateTime?)dr.GetDateTime(4), Double.Parse(dr.GetValue(5).ToString()), dr.GetString(6), dr.GetString(7), dr.GetString(8), (dr.GetValue(9) is DBNull ? null : (int?)dr.GetInt32(9)), (dr.GetValue(10) is DBNull ? null : dr.GetString(10)), (dr.GetValue(11) is DBNull ? null : (int?)dr.GetInt32(11))));
                 }
+                if (tareas == null)
+                    tareas = new List<Tarea>();
                 listaTareas.Add(tareas);
             }
             catch (Exception e)
             {
+                listaTareas.Add(new List<Tarea>());
+                aa = e.Message;
                 System.Diagnostics.Debug.Write(e.Message);
             }
             finally
@@ -264,6 +269,7 @@ namespace Persistencia
                     conn.Close();
             }
 
+            throw new Exception("" + aa);
             return listaTareas;
         }
 

@@ -36,6 +36,7 @@ namespace PresentacionEscritorio
             this.Icon = Properties.Resources.icono;
             this.MetroColor = Color.FromArgb(179, 207, 96);
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
+            user = "AndoniH";
             this.Text = user;
             empleado = user.ToUpper();
             tipo = "Tarea";
@@ -71,9 +72,13 @@ namespace PresentacionEscritorio
             dateTimeDesde.Value = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);//DateTime.Parse(DateTime.Now.Year+"/1/1");
             dateTimeHasta.Value = new DateTime(DateTime.Now.Year + 1, 1, 1, 0, 0, 0);
 
+            MessageBox.Show(user + "2");
             ObtenerDatos();
+
+            MessageBox.Show(user + "3");
             MostrarGridGroupingControl();
 
+            MessageBox.Show(user + "4");
             this.gridGroupingControl1.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
@@ -236,7 +241,10 @@ namespace PresentacionEscritorio
 
         private void ObtenerDatos()
         {
+            MessageBox.Show(tipo + " " + empleado + " " + dateTimeDesde.Value + " " + dateTimeHasta.Value);
             tareas = negocio.getTareasTipoUsuario(tipo, empleado, dateTimeDesde.Value, dateTimeHasta.Value);
+
+            MessageBox.Show(tareas.Count+"");
         }
 
         private void MostrarGridGroupingControl()
