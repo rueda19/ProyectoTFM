@@ -48,6 +48,9 @@ namespace PresentacionEscritorio
             List<Empleado> s = negocio.getEmpleados();
             cbResponsable.DataSource = s;
             cbResponsable.DisplayMember = "Usuario";
+            string user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1).ToUpper();
+            if(s.Exists(em => em.Usuario == user))
+                cbResponsable.Text = user;
 
             if (reunion != null)
             {

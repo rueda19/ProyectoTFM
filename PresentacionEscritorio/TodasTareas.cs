@@ -29,14 +29,15 @@ namespace PresentacionEscritorio
         private string empleado, tipo;
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor1 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor2 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
-        
+        private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor3 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
+        private string filtrarPor = "Todas";
+
         public TodasTareas()
         {
             InitializeComponent();
             this.Icon = Properties.Resources.icono;
             this.MetroColor = Color.FromArgb(179, 207, 96);
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
-            user = "AndoniH";
             this.Text = user;
             empleado = user.ToUpper();
             tipo = "Tarea";
@@ -51,11 +52,18 @@ namespace PresentacionEscritorio
             gridConditionalFormatDescriptor1.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
             //DateTime d = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day+1, 0, 0, 0);
             DateTime d = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            d = d.AddDays(1);
+            DateTime d1 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            d1 = d1.AddDays(16);
             gridConditionalFormatDescriptor1.Expression = "[FechaFin] <= '" + d + "' and [FechaEjecutado] = ''";
 
             gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))));
             gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
             gridConditionalFormatDescriptor2.Expression = "[FechaEjecutado] <> ''";
+
+            gridConditionalFormatDescriptor3.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(0))))));
+            gridConditionalFormatDescriptor3.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
+            gridConditionalFormatDescriptor3.Expression = "[FechaFin] <= '" + d1 + "' and [FechaEjecutado] = ''"; ;
 
             this.comboBoxTipo.AutoCompleteControl.ChangeDataManagerPosition = true;
             this.comboBoxTipo.AutoCompleteControl.OverrideCombo = true;
@@ -72,13 +80,10 @@ namespace PresentacionEscritorio
             dateTimeDesde.Value = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);//DateTime.Parse(DateTime.Now.Year+"/1/1");
             dateTimeHasta.Value = new DateTime(DateTime.Now.Year + 1, 1, 1, 0, 0, 0);
 
-            MessageBox.Show(user + "2");
             ObtenerDatos();
 
-            MessageBox.Show(user + "3");
             MostrarGridGroupingControl();
 
-            MessageBox.Show(user + "4");
             this.gridGroupingControl1.TopLevelGroupOptions.ShowAddNewRecordBeforeDetails = false;
             this.gridGroupingControl1.TopLevelGroupOptions.ShowCaption = false;
             this.gridGroupingControl1.NestedTableGroupOptions.ShowAddNewRecordBeforeDetails = false;
@@ -89,6 +94,8 @@ namespace PresentacionEscritorio
             //gridGroupingControl1.TableModel.RowHeights.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.ResizeCoveredCells);
             this.gridGroupingControl1.TableControlCellClick += new GridTableControlCellClickEventHandler(gridGroupingControl1_TableControlCellClick);
             this.gridGroupingControl1.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl1_TableControlCellDoubleClick);
+
+            this.gridGroupingControl1.RecordExpanding += new Syncfusion.Grouping.RecordEventHandler(this.gridGroupingControl1_RecordExpanding);
         }
 
         void gridGroupingControl1_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
@@ -118,9 +125,14 @@ namespace PresentacionEscritorio
                             DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
                             formIT.ShowDialog();
                         }
-                        else
+                        else if (style.TableCellIdentity.Column != null)
                         {
                             DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        else
+                        {
+                            DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue("ID")));
                             formIT.ShowDialog();
                         }
                         ObtenerDatos();
@@ -155,9 +167,14 @@ namespace PresentacionEscritorio
                         EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
                         formIT.ShowDialog();
                     }
-                    else
+                    else if (style.TableCellIdentity.Column != null)
                     {
                         EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                        formIT.ShowDialog();
+                    }
+                    else
+                    {
+                        EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue("ID")));
                         formIT.ShowDialog();
                     }
                     ObtenerDatos();
@@ -241,10 +258,29 @@ namespace PresentacionEscritorio
 
         private void ObtenerDatos()
         {
-            MessageBox.Show(tipo + " " + empleado + " " + dateTimeDesde.Value + " " + dateTimeHasta.Value);
-            tareas = negocio.getTareasTipoUsuario(tipo, empleado, dateTimeDesde.Value, dateTimeHasta.Value);
+            tareas = negocio.getTareasTipoUsuario(tipo, empleado, dateTimeDesde.Value, dateTimeHasta.Value, filtrarPor);
+            MostrarIndicadores();
+        }
 
-            MessageBox.Show(tareas.Count+"");
+        private void MostrarIndicadores()
+        {
+            int tareasTotales=0;
+            int tareasPasadas = 0;
+            int tareasCercanas = 0;
+            int tareasTerminadas = 0;
+            foreach (List<Tarea> tar in tareas)
+            {
+                tareasTotales += tar.Count;
+                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now).Count();
+                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15)).Count();
+                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null).Count();
+            }
+            tareasCercanas = tareasCercanas - tareasPasadas;
+
+            labelTotales.Text = tareasTotales.ToString();
+            labelPasadas.Text = tareasPasadas.ToString();
+            labelCeranas.Text = tareasCercanas.ToString();
+            labelTerminadas.Text = tareasTerminadas.ToString();
         }
 
         private void MostrarGridGroupingControl()
@@ -277,6 +313,7 @@ namespace PresentacionEscritorio
 
                     this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
                     this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
+                    this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                 }
                 else
                 {
@@ -314,7 +351,10 @@ namespace PresentacionEscritorio
                     //tm.ColWidths.ResizeToFit(GridRangeInfo.Table(), GridResizeToFitOptions.IncludeHeaders);
                     parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
                     parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
+                    parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                     childToChildRelationDescriptor = parentToChildRelationDescriptor;
+                    //this.gridGroupingControl1.TableModel.QueryRowHeight += TableModel_QueryRowHeight;
+                    //parentToChildRelationDescriptor.ChildTableDescriptor.Columns[0].hei
                 }
             }
 
@@ -331,6 +371,10 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.OptimizeFilterPerformance = true;
 
             filter.WireGrid(gridGroupingControl1);
+            if (checkBoxExpandir.Checked)
+                this.gridGroupingControl1.Table.ExpandAllRecords();
+            else
+                this.gridGroupingControl1.Table.CollapseAllRecords();
         }
 
         private void comboBoxTipo_SelectedValueChanged(object sender, EventArgs e)
@@ -432,6 +476,42 @@ namespace PresentacionEscritorio
             var form2 = new TareasEnFecha();
             form2.Closed += (s, args) => this.Close();
             form2.Show();
+        }
+
+        private void radioButtonTodas_CheckedChanged(object sender, EventArgs e)
+        {
+            var buttons = groupBoxFiltrar.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            //var buttons = this.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            if (buttons.Name != filtrarPor)
+            {
+                if (buttons.Name == "Todas" || buttons.Name == "TodasTerminadas")
+                {
+                    dateTimeDesde.Enabled = true;
+                    dateTimeHasta.Enabled = true;
+                }
+                else
+                {
+                    dateTimeDesde.Enabled = false;
+                    dateTimeHasta.Enabled = false;
+                }
+                filtrarPor = buttons.Name;
+                ObtenerDatos();
+                MostrarGridGroupingControl();
+            }
+        }
+
+        private void gridGroupingControl1_RecordExpanding(object sender, Syncfusion.Grouping.RecordEventArgs e)
+        {
+            if (e.Record != null && e.Record.NestedTables.Count > 0 && e.Record.NestedTables[0].ChildTable.Records.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void checkBoxExpandir_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBoxExpandir.Checked)
+                this.gridGroupingControl1.Table.ExpandAllRecords();
+            else
+                this.gridGroupingControl1.Table.CollapseAllRecords();
         }
     }
 }

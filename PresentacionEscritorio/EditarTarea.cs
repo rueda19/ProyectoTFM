@@ -23,6 +23,8 @@ namespace PresentacionEscritorio
         public EditarTarea(Tarea tarea)
         {
             InitializeComponent();
+            FechaEjecucion.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+
             this.tarea = tarea;
             FechaInicio.Value = this.tarea.FechaInicio;
             FechaFin.Value = this.tarea.FechaFin;
@@ -88,6 +90,7 @@ namespace PresentacionEscritorio
             this.ComboBoxTareaPadre.Leave += new System.EventHandler(this.ComboBoxTareaPadre_TextChanged);
             this.cbResponsable.Leave += new System.EventHandler(this.cbResponsable_TextChanged);
             this.comboBoxTipo.Leave += new EventHandler(tbOrigen_TextChanged);
+            this.FechaEjecucion.ValueChanged += new System.EventHandler(this.FechaEjecucion_ValueChanged);
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -130,7 +133,7 @@ namespace PresentacionEscritorio
         private void cbEstado_TextChanged(object sender, EventArgs e)
         {
             this.tarea.Estado = cbEstado.Text;
-            if (tarea.Estado == "Terminada")
+            if (tarea.Estado == "Terminada" || tarea.Estado == "Abandonada")
             {
                 FechaEjecucion.Enabled = true;
                 tarea.FechaEjecutado = FechaEjecucion.Value;

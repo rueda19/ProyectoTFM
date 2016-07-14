@@ -31,13 +31,17 @@ namespace PresentacionEscritorio
         List<Proceso> procesos = new List<Proceso>();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor1 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor2 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
-        
+        private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor3 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
+        private string filtrarPor = "Todas";
+
         public TareasProceso(string idProc)
         {
             InitializeComponent();
             this.Icon = Properties.Resources.icono;
             this.MetroColor = Color.FromArgb(179, 207, 96);
             IDProc = idProc;
+            if (IDProc == "GBL")
+                checkBoxAgrupar.Checked = true;
             user = System.Security.Principal.WindowsIdentity.GetCurrent().Name.Substring(System.Security.Principal.WindowsIdentity.GetCurrent().Name.IndexOf("\\") + 1);
             this.Text = user;
             foreach (CaptionImage image in this.CaptionImages)
@@ -53,11 +57,20 @@ namespace PresentacionEscritorio
             gridConditionalFormatDescriptor1.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(0)))), ((int)(((byte)(0))))));
             gridConditionalFormatDescriptor1.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
             DateTime d = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            d = d.AddDays(1);
+            DateTime d1 = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            d1 = d1.AddDays(16);
             gridConditionalFormatDescriptor1.Expression = "[FechaFin] <= '" + d + "' and [FechaEjecutado] = ''";
 
             gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(0))))));
             gridConditionalFormatDescriptor2.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
             gridConditionalFormatDescriptor2.Expression = "[FechaEjecutado] <> ''";
+
+            gridConditionalFormatDescriptor3.Appearance.AnyRecordFieldCell.Interior = new Syncfusion.Drawing.BrushInfo(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(200)))), ((int)(((byte)(0))))));
+            gridConditionalFormatDescriptor3.Appearance.AnyRecordFieldCell.TextColor = System.Drawing.Color.Black;
+            gridConditionalFormatDescriptor3.Expression = "[FechaFin] <= '" + d1 + "' and [FechaEjecutado] = ''"; ;
+
+            this.gridGroupingControl1.RecordExpanding += new Syncfusion.Grouping.RecordEventHandler(this.gridGroupingControl1_RecordExpanding);
 
             ObtenerDatos();
             MostrarGridGroupingControl();
@@ -71,54 +84,7 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.QueryCellStyleInfo += new GridTableCellStyleInfoEventHandler(gridGroupingControl1_QueryCellStyleInfo);
             this.gridGroupingControl1.TableControlCellDoubleClick += new Syncfusion.Windows.Forms.Grid.Grouping.GridTableControlCellClickEventHandler(this.gridGroupingControl1_TableControlCellDoubleClick);
             this.gridGroupingControl1.TableControlCellClick += new GridTableControlCellClickEventHandler(gridGroupingControl1_TableControlCellClick);
-
-            this.listBox1.AllowDrop = true;
-            this.listBox2.AllowDrop = true;
-
-            this.listBox1.MouseDown += new MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox2.DragDrop += new DragEventHandler(listBox2_DragDrop);
-            this.listBox2.DragOver += new DragEventHandler(listBox2_DragOver);
-            this.listBox2.MouseDown += new MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox1.DragDrop += new DragEventHandler(listBox2_DragDrop);
-            this.listBox1.DragOver += new DragEventHandler(listBox2_DragOver);
-        }
-
-        private void listBox2_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.StringFormat))
-            {
-                string str = (string)e.Data.GetData(DataFormats.StringFormat);
-                ((ListBox)sender).Items.Add(str);
-            }
-
-        }
-
-        private void listBox2_DragOver(object sender, System.Windows.Forms.DragEventArgs e)
-        {
-            e.Effect = DragDropEffects.All;
-        }
-
-        private void listBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            if (((ListBox)sender).Items.Count == 0)
-                return;
-            if (((ListBox)sender).IndexFromPoint(e.X, e.Y) == -1)
-                return;
-            string s = ((ListBox)sender).Items[((ListBox)sender).IndexFromPoint(e.X, e.Y)].ToString();
-            DragDropEffects dde1 = DoDragDrop(s,
-                DragDropEffects.All);
-
-            if (dde1 == DragDropEffects.All)
-            {
-                ((ListBox)sender).Items.RemoveAt(((ListBox)sender).IndexFromPoint(e.X, e.Y));
-                MostrarGridGroupingControl();
-                //MostrarGridGroupingControl();
-                //if (listBox1.Items.Count == 1)
-                //    this.gridGroupingControl1.TableModel.QueryRowHeight += new GridRowColSizeEventHandler(TableModel_QueryRowHeight);
-                //else
-                //    this.gridGroupingControl1.TableModel.QueryRowHeight += null;
-            }
-
+            this.checkBoxAgrupar.CheckedChanged += new System.EventHandler(this.buttonActualizar_Click);
         }
 
         void gridGroupingControl1_TableControlCellClick(object sender, GridTableControlCellClickEventArgs e)
@@ -149,10 +115,14 @@ namespace PresentacionEscritorio
                             {
                                 DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
                                 formIT.ShowDialog();
+                            } if (style.TableCellIdentity.Column != null)
+                            {
+                                DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                                formIT.ShowDialog();
                             }
                             else
                             {
-                                DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                                DetallesTarea formIT = new DetallesTarea(negocio.getTarea((int)rec.GetValue("ID")));
                                 formIT.ShowDialog();
                             }
                             ObtenerDatos();
@@ -238,7 +208,8 @@ namespace PresentacionEscritorio
 
         private void ObtenerDatos()
         {
-            tareas = negocio.getTareasProcesos(IDProc, dateTimeDesde.Value, dateTimeHasta.Value);
+            tareas = negocio.getTareasProcesos(IDProc, dateTimeDesde.Value, dateTimeHasta.Value, filtrarPor);
+            MostrarIndicadores();
             if (IDProc == "GBL")
                 procesos = negocio.getProcesos();
             else
@@ -246,6 +217,27 @@ namespace PresentacionEscritorio
                 procesos = new List<Proceso>();
                 procesos.Add(negocio.getProceso(IDProc));
             }
+        }
+
+        private void MostrarIndicadores()
+        {
+            int tareasTotales = 0;
+            int tareasPasadas = 0;
+            int tareasCercanas = 0;
+            int tareasTerminadas = 0;
+            foreach (List<Tarea> tar in tareas)
+            {
+                tareasTotales += tar.Count;
+                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now).Count();
+                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15)).Count();
+                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null).Count();
+            }
+            tareasCercanas = tareasCercanas - tareasPasadas;
+
+            labelTotales.Text = tareasTotales.ToString();
+            labelPasadas.Text = tareasPasadas.ToString();
+            labelCeranas.Text = tareasCercanas.ToString();
+            labelTerminadas.Text = tareasTerminadas.ToString();
         }
 
         private void MostrarGridGroupingControl()
@@ -262,17 +254,17 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.Refresh();
 
             gridGroupingControl1.TableDescriptor.Columns.Reset();
+            gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = 15;
+            //if (listBox1.Items.Count==0)
+            //    this.gridGroupingControl1.DataSource = null;
 
-            if (listBox1.Items.Count==0)
-                this.gridGroupingControl1.DataSource = null;
-
-            if (listBox1.Items.Contains("Procesos"))
+            if (checkBoxAgrupar.Checked)
             {
                 this.gridGroupingControl1.DataSource = procesos;
                 this.gridGroupingControl1.Engine.SourceListSet.Add("Procesos", procesos);
             }
 
-            if (listBox1.Items.Contains("Tareas"))
+            if (true)
             {
                 GridRelationDescriptor childToChildRelationDescriptor = null;
                 for (int i = 0; i < tareas.Count; i++)
@@ -280,7 +272,7 @@ namespace PresentacionEscritorio
                     if (tareas[0] != null)
                     if (i == 0)
                     {
-                        if (listBox1.Items.Contains("Procesos"))
+                        if (checkBoxAgrupar.Checked)
                         {
                             GridRelationDescriptor parentToChildRelationDescriptor = new GridRelationDescriptor();
                             parentToChildRelationDescriptor.ChildTableName = "lista" + i;    // same as SourceListSetEntry.Name for childTable (see below)
@@ -309,6 +301,7 @@ namespace PresentacionEscritorio
 
                             parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
                             parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
+                            parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                             childToChildRelationDescriptor = parentToChildRelationDescriptor;
                             //this.gridGroupingControl1.DataSource = tareas[0];
                         }
@@ -323,6 +316,7 @@ namespace PresentacionEscritorio
 
                             this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
                             this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
+                            this.gridGroupingControl1.TableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                         }
                     }
                     else
@@ -355,6 +349,7 @@ namespace PresentacionEscritorio
 
                         parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor1);
                         parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor2);
+                        parentToChildRelationDescriptor.ChildTableDescriptor.ConditionalFormats.Add(gridConditionalFormatDescriptor3);
                         childToChildRelationDescriptor = parentToChildRelationDescriptor;
                     }
                 }
@@ -370,6 +365,10 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.OptimizeFilterPerformance = true;
 
             filter.WireGrid(gridGroupingControl1);
+            if (checkBoxExpandir.Checked)
+                this.gridGroupingControl1.Table.ExpandAllRecords();
+            else
+                this.gridGroupingControl1.Table.CollapseAllRecords();
         }
 
         private void MostrarGridGroupingControl1()
@@ -511,6 +510,7 @@ namespace PresentacionEscritorio
                 //GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, cc.ColIndex);
                 GridTableCellStyleInfo styleID = table.GetTableCellStyle(cc.RowIndex, 1);
                 GridTableCellStyleInfo style = table.GetTableCellStyle(cc.RowIndex, 2);
+                //e.Inner.RowIndex && cc.RowIndex
                 if (!(style.Text.StartsWith("P") && style.Text.Length == 3))
                 {
                     GridRecord rec = el as GridRecord;
@@ -525,9 +525,14 @@ namespace PresentacionEscritorio
                             EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(styleID.TableCellIdentity.Column.Name)));
                             formIT.ShowDialog();
                         }
-                        else
+                        else if (style.TableCellIdentity.Column != null)
                         {
                             EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue(style.TableCellIdentity.Column.Name)));
+                            formIT.ShowDialog();
+                        }
+                        else
+                        {
+                            EditarTarea formIT = new EditarTarea(negocio.getTarea((int)rec.GetValue("ID")));
                             formIT.ShowDialog();
                         }
                         ObtenerDatos();
@@ -633,6 +638,42 @@ namespace PresentacionEscritorio
                     range.CellStyle.Font.Bold = true;
                     range.CellStyle.HorizontalAlignment = ExcelHAlign.HAlignCenter;
                 }
+            }
+        }
+
+        private void gridGroupingControl1_RecordExpanding(object sender, Syncfusion.Grouping.RecordEventArgs e)
+        {
+            if (e.Record != null && e.Record.NestedTables.Count > 0 && e.Record.NestedTables[0].ChildTable.Records.Count == 0)
+                e.Cancel = true;
+        }
+
+        private void checkBoxExpandir_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxExpandir.Checked)
+                this.gridGroupingControl1.Table.ExpandAllRecords();
+            else
+                this.gridGroupingControl1.Table.CollapseAllRecords();
+        }
+
+        private void radioButtonTodas_CheckedChanged(object sender, EventArgs e)
+        {
+            var buttons = groupBoxFiltrar.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            //var buttons = this.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked);
+            if (buttons.Name != filtrarPor)
+            {
+                if (buttons.Name == "Todas" || buttons.Name == "TodasTerminadas")
+                {
+                    dateTimeDesde.Enabled = true;
+                    dateTimeHasta.Enabled = true;
+                }
+                else
+                {
+                    dateTimeDesde.Enabled = false;
+                    dateTimeHasta.Enabled = false;
+                }
+                filtrarPor = buttons.Name;
+                ObtenerDatos();
+                MostrarGridGroupingControl();
             }
         }
     }

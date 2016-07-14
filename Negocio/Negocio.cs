@@ -47,14 +47,14 @@ namespace Negocio
             return gbd.getTiposTareas();
         }
 
-        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin)
+        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
         {
-            return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin);
+            return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin, filtrarPor);
         }
 
-        public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
         {
-            return gbd.getTareasProcesos(idProceso, fechaInicio, fechaFin);
+            return gbd.getTareasProcesos(idProceso, fechaInicio, fechaFin, filtrarPor);
         }
 
         public DataTable getEstadisticasTareasResponsable(string idProceso, DateTime fechaInicio, DateTime fechaFin)

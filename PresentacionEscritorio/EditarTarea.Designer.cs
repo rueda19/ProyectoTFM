@@ -309,7 +309,6 @@
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(328, 21);
             this.cbEstado.TabIndex = 16;
-            this.cbEstado.Text = "Planificada";
             this.cbEstado.TextChanged += new System.EventHandler(this.cbEstado_TextChanged);
             // 
             // label8
@@ -400,7 +399,6 @@
             this.FechaEjecucion.Size = new System.Drawing.Size(328, 17);
             this.FechaEjecucion.TabIndex = 22;
             this.FechaEjecucion.Value = new System.DateTime(2016, 4, 25, 12, 53, 15, 999);
-            this.FechaEjecucion.ValueChanged += new System.EventHandler(this.FechaEjecucion_ValueChanged);
             // 
             // tableLayoutPanel2
             // 

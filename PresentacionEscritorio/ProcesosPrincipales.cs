@@ -14,6 +14,9 @@ using Syncfusion.Windows.Forms.Diagram;
 using System.IO;
 using System.Drawing.Printing;
 using System.Drawing.Imaging;
+using System.Diagnostics;
+using Microsoft.Win32;
+using System.Net;
 
 namespace PresentacionEscritorio
 {
@@ -156,7 +159,56 @@ namespace PresentacionEscritorio
 
         private void buttonIndicadores_Click(object sender, EventArgs e)
         {
+            Process.Start("http://kpis.garnica.one/");
 
+
+            //string browser = string.Empty;
+            //RegistryKey key = null;
+            //try
+            //{
+            //    key = Registry.ClassesRoot.OpenSubKey(@"HTTP\shell\open\command", false);
+ 
+            //    //trim off quotes
+            //    //browser = key.GetValue(null).ToString().ToLower().Replace("\\", "");
+            //    browser = key.GetValue(null).ToString();
+            //    if (!browser.EndsWith("exe"))
+            //    {
+            //        //get rid of everything after the ".exe"
+            //        browser = browser.Substring(0, browser.LastIndexOf(".exe")+4);
+            //    }
+            //}
+            //finally
+            //{
+            //    if (key != null) key.Close();
+            //}
+            ////open default system browser
+            //System.Diagnostics.Process.Start(browser.Substring(1), "http://kpis.garnica.one/arcplan/8/scripts/arcCGI8.exe");
+ 
+
+//***************************************************
+ 
+            // Convert string data into byte array 
+            //string strData = "<?xml version='1.0' encoding='UTF-8' standalone='no' ?><soap:Envelope xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Header><ServerName>SVRDCPORTAL.GarnicaPlywood.com:28251</ServerName><NetworkDuration>44</NetworkDuration></soap:Header><soap:Body><OpenStartDoc xmlns='http://schemas.arcplan.com/arcplan/clientCommunication'><OpenStartDocParam><SessionID>755</SessionID><SessionToken>SVRDCPORTAL.GarnicaPlywood.com:28251&amp;755&amp;m0KFCYKNBJWj2jXS3wfO6hVLAM</SessionToken><UserInformation><LoginUser><AuthMode>243</AuthMode><UserName>garnica\\drueda</UserName><Password>JxwlKxo0</Password><StoreCredentials>false</StoreCredentials></LoginUser></UserInformation></OpenStartDocParam></OpenStartDoc></soap:Body></soap:Envelope>";
+            //byte[] dataByte = Encoding.UTF8.GetBytes(strData);
+
+            //HttpWebRequest POSTRequest = (HttpWebRequest)WebRequest.Create("http://kpis.garnica.one/arcplan/8/scripts/arcCGI8.exe");
+            //POSTRequest.Method = "POST";
+            //// Set the content type - Mine was xml.
+            //POSTRequest.ContentType = "text/xml";
+            //POSTRequest.KeepAlive = false;
+            //POSTRequest.Timeout = 5000;
+            //POSTRequest.ContentLength = dataByte.Length;
+            //// Get the request stream
+            //Stream POSTstream = POSTRequest.GetRequestStream();
+            //// Write the data bytes in the request stream
+            //POSTstream.Write(dataByte, 0, dataByte.Length);
+ 
+            ////Get response from server
+            //HttpWebResponse POSTResponse = (HttpWebResponse)POSTRequest.GetResponse();
+            //Stream receiveStream = POSTResponse.GetResponseStream();
+
+            //WebBrowser webBrowser = new WebBrowser();
+            //webBrowser.DocumentStream = receiveStream;  
         }
 
         private void buttonPr_Click(object sender, EventArgs e)

@@ -223,9 +223,8 @@ namespace Persistencia
             return tiposTareas;
         }
 
-        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin)
+        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
         {
-            string aa = "";
             List<List<Tarea>> listaTareas = new List<List<Tarea>>();
             SqlConnection conn = null;
             try
@@ -239,6 +238,7 @@ namespace Persistencia
                 cmd.Parameters.AddWithValue("@Usuario", usuario);
                 cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
                 cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("@FiltrarPor", filtrarPor);
                 SqlDataReader dr = cmd.ExecuteReader();
                 int i = -1;
                 List<Tarea> tareas = null;
@@ -260,7 +260,6 @@ namespace Persistencia
             catch (Exception e)
             {
                 listaTareas.Add(new List<Tarea>());
-                aa = e.Message;
                 System.Diagnostics.Debug.Write(e.Message);
             }
             finally
@@ -268,8 +267,6 @@ namespace Persistencia
                 if (conn != null)
                     conn.Close();
             }
-
-            throw new Exception("" + aa);
             return listaTareas;
         }
 
@@ -314,7 +311,7 @@ namespace Persistencia
             return listaTareas;
         }
 
-        public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin)
+        public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
         {
             List<List<Tarea>> listaTareas = new List<List<Tarea>>();
             SqlConnection conn = null;
@@ -328,6 +325,7 @@ namespace Persistencia
                 cmd.Parameters.AddWithValue("@IDProceso", idProceso);
                 cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
                 cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
+                cmd.Parameters.AddWithValue("@FiltrarPor", filtrarPor);
                 SqlDataReader dr = cmd.ExecuteReader();
                 int i = -1;
                 List<Tarea> tareas = null;
@@ -1240,8 +1238,10 @@ namespace Persistencia
                 conn = new SqlConnection();
                 conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM GP_Tarea WHERE ID=@id", conn);
-                cmd.Parameters.AddWithValue("@id", ID);
+                //SqlCommand cmd = new SqlCommand("DELETE FROM GP_Tarea WHERE ID=@id", conn);
+                SqlCommand cmd = new SqlCommand("[GP_EliminarTareaRecursiva]", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IDTarea", ID);
                 i = cmd.ExecuteNonQuery();
             }
             catch (Exception e)
