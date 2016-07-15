@@ -33,6 +33,7 @@ namespace PresentacionEscritorio
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor2 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor3 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private string filtrarPor = "Todas";
+        private int tamanioLetra = 8;
 
         public TareasProceso(string idProc)
         {
@@ -227,10 +228,10 @@ namespace PresentacionEscritorio
             int tareasTerminadas = 0;
             foreach (List<Tarea> tar in tareas)
             {
-                tareasTotales += tar.Count;
-                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now).Count();
-                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15)).Count();
-                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null).Count();
+                tareasTotales += tar.Where(t => t.Tipo == "Tarea").Count();
+                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now && t.FechaEjecutado == null && t.Tipo == "Tarea").Count();
+                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15) && t.FechaEjecutado == null && t.Tipo == "Tarea").Count();
+                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null && t.Tipo == "Tarea").Count();
             }
             tareasCercanas = tareasCercanas - tareasPasadas;
 
@@ -254,7 +255,7 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.Refresh();
 
             gridGroupingControl1.TableDescriptor.Columns.Reset();
-            gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = 15;
+            gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = tamanioLetra;
             //if (listBox1.Items.Count==0)
             //    this.gridGroupingControl1.DataSource = null;
 
@@ -674,6 +675,28 @@ namespace PresentacionEscritorio
                 filtrarPor = buttons.Name;
                 ObtenerDatos();
                 MostrarGridGroupingControl();
+            }
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int tam;
+            if (!Int32.TryParse(cbTamanoLetra.Text, out tam))
+            {
+                MessageBox.Show("Debe ser un tipo numerico");
+            }
+            else if (tam > 72)
+            {
+                MessageBox.Show("El tamaño de letra no puede ser mayor de 72");
+            }
+            else if (tam < 6)
+            {
+                MessageBox.Show("El tamaño de letra no puede ser menor de 6");
+            }
+            else
+            {
+                tamanioLetra = tam;
+                gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = tamanioLetra;
             }
         }
     }

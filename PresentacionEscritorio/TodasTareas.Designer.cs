@@ -54,10 +54,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonTareasFecha = new System.Windows.Forms.Button();
             this.groupBoxFiltrar = new System.Windows.Forms.GroupBox();
-            this.Todas = new System.Windows.Forms.RadioButton();
-            this.Pasadas = new System.Windows.Forms.RadioButton();
-            this.Cercanas = new System.Windows.Forms.RadioButton();
             this.TodasTerminadas = new System.Windows.Forms.RadioButton();
+            this.Cercanas = new System.Windows.Forms.RadioButton();
+            this.Pasadas = new System.Windows.Forms.RadioButton();
+            this.Todas = new System.Windows.Forms.RadioButton();
             this.checkBoxExpandir = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -69,6 +69,11 @@
             this.labelCeranas = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.labelTerminadas = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cbTamanoLetra = new System.Windows.Forms.ComboBox();
+            this.comboBoxProceso = new Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete();
+            this.label14 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -80,6 +85,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxUsuario.AutoCompleteControl)).BeginInit();
             this.groupBoxFiltrar.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxProceso.AutoCompleteControl)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -129,29 +136,30 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 10;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnCount = 11;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.label3, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 4, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel1, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.buttonActualizar, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonAnadirTarea, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.buttonAnadirTarea, 5, 0);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonTareasFecha, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.groupBoxFiltrar, 7, 0);
-            this.tableLayoutPanel2.Controls.Add(this.checkBoxExpandir, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 8, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 8, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonTareasFecha, 7, 0);
+            this.tableLayoutPanel2.Controls.Add(this.groupBoxFiltrar, 8, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 9, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 9, 1);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 3, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 100);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -167,7 +175,7 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label3.Location = new System.Drawing.Point(353, 0);
+            this.label3.Location = new System.Drawing.Point(413, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(194, 20);
             this.label3.TabIndex = 5;
@@ -177,12 +185,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.label1, 2);
+            this.tableLayoutPanel2.SetColumnSpan(this.label1, 3);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label1.Location = new System.Drawing.Point(153, 0);
+            this.label1.Location = new System.Drawing.Point(123, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 20);
+            this.label1.Size = new System.Drawing.Size(284, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Criterios";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -195,7 +203,7 @@
             this.flowLayoutPanel1.Controls.Add(this.dateTimeHasta);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(350, 20);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(410, 20);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 80);
@@ -266,7 +274,7 @@
             this.buttonActualizar.Location = new System.Drawing.Point(3, 3);
             this.buttonActualizar.Name = "buttonActualizar";
             this.tableLayoutPanel2.SetRowSpan(this.buttonActualizar, 2);
-            this.buttonActualizar.Size = new System.Drawing.Size(144, 94);
+            this.buttonActualizar.Size = new System.Drawing.Size(114, 94);
             this.buttonActualizar.TabIndex = 7;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
@@ -276,9 +284,10 @@
             // 
             this.buttonAnadirTarea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonAnadirTarea.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
-            this.buttonAnadirTarea.Location = new System.Drawing.Point(553, 23);
+            this.buttonAnadirTarea.Location = new System.Drawing.Point(613, 3);
             this.buttonAnadirTarea.Name = "buttonAnadirTarea";
-            this.buttonAnadirTarea.Size = new System.Drawing.Size(144, 74);
+            this.tableLayoutPanel2.SetRowSpan(this.buttonAnadirTarea, 2);
+            this.buttonAnadirTarea.Size = new System.Drawing.Size(114, 94);
             this.buttonAnadirTarea.TabIndex = 9;
             this.buttonAnadirTarea.Text = "Añadir Tarea";
             this.buttonAnadirTarea.UseVisualStyleBackColor = true;
@@ -293,10 +302,10 @@
             this.flowLayoutPanel2.Controls.Add(this.comboBoxUsuario);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(150, 20);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(120, 20);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(200, 80);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(170, 80);
             this.flowLayoutPanel2.TabIndex = 10;
             // 
             // label7
@@ -305,7 +314,7 @@
             this.label7.Dock = System.Windows.Forms.DockStyle.Top;
             this.label7.Location = new System.Drawing.Point(3, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(194, 13);
+            this.label7.Size = new System.Drawing.Size(164, 13);
             this.label7.TabIndex = 2;
             this.label7.Text = "Tipo";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -326,7 +335,7 @@
             this.comboBoxTipo.Location = new System.Drawing.Point(3, 16);
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.ParentForm = this.flowLayoutPanel2;
-            this.comboBoxTipo.Size = new System.Drawing.Size(194, 21);
+            this.comboBoxTipo.Size = new System.Drawing.Size(164, 21);
             this.comboBoxTipo.TabIndex = 6;
             this.comboBoxTipo.Text = "comboBoxAutoComplete1";
             this.comboBoxTipo.TextChanged += new System.EventHandler(this.comboBoxTipo_SelectedValueChanged);
@@ -337,7 +346,7 @@
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Location = new System.Drawing.Point(3, 40);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(194, 13);
+            this.label8.Size = new System.Drawing.Size(164, 13);
             this.label8.TabIndex = 3;
             this.label8.Text = "Usuario/Departamento";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -358,7 +367,7 @@
             this.comboBoxUsuario.Location = new System.Drawing.Point(3, 56);
             this.comboBoxUsuario.Name = "comboBoxUsuario";
             this.comboBoxUsuario.ParentForm = this.flowLayoutPanel2;
-            this.comboBoxUsuario.Size = new System.Drawing.Size(194, 21);
+            this.comboBoxUsuario.Size = new System.Drawing.Size(164, 21);
             this.comboBoxUsuario.TabIndex = 7;
             this.comboBoxUsuario.Text = "comboBoxAutoComplete1";
             this.comboBoxUsuario.TextChanged += new System.EventHandler(this.comboBoxUsuario_SelectedValueChanged);
@@ -367,10 +376,10 @@
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Image = global::PresentacionEscritorio.Properties.Resources.exportar_excel;
-            this.button1.Location = new System.Drawing.Point(703, 3);
+            this.button1.Location = new System.Drawing.Point(733, 3);
             this.button1.Name = "button1";
             this.tableLayoutPanel2.SetRowSpan(this.button1, 2);
-            this.button1.Size = new System.Drawing.Size(144, 94);
+            this.button1.Size = new System.Drawing.Size(114, 94);
             this.button1.TabIndex = 11;
             this.button1.Text = "Expotar a Excel";
             this.button1.UseVisualStyleBackColor = true;
@@ -383,7 +392,7 @@
             this.buttonTareasFecha.Location = new System.Drawing.Point(853, 3);
             this.buttonTareasFecha.Name = "buttonTareasFecha";
             this.tableLayoutPanel2.SetRowSpan(this.buttonTareasFecha, 2);
-            this.buttonTareasFecha.Size = new System.Drawing.Size(144, 94);
+            this.buttonTareasFecha.Size = new System.Drawing.Size(114, 94);
             this.buttonTareasFecha.TabIndex = 12;
             this.buttonTareasFecha.Text = "Ver mis Tareas en Fecha";
             this.buttonTareasFecha.UseVisualStyleBackColor = true;
@@ -396,13 +405,49 @@
             this.groupBoxFiltrar.Controls.Add(this.Pasadas);
             this.groupBoxFiltrar.Controls.Add(this.Todas);
             this.groupBoxFiltrar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFiltrar.Location = new System.Drawing.Point(1003, 3);
+            this.groupBoxFiltrar.Location = new System.Drawing.Point(973, 3);
             this.groupBoxFiltrar.Name = "groupBoxFiltrar";
             this.tableLayoutPanel2.SetRowSpan(this.groupBoxFiltrar, 2);
-            this.groupBoxFiltrar.Size = new System.Drawing.Size(144, 94);
+            this.groupBoxFiltrar.Size = new System.Drawing.Size(114, 94);
             this.groupBoxFiltrar.TabIndex = 13;
             this.groupBoxFiltrar.TabStop = false;
             this.groupBoxFiltrar.Text = "Filtrar por tareas";
+            // 
+            // TodasTerminadas
+            // 
+            this.TodasTerminadas.AutoSize = true;
+            this.TodasTerminadas.Location = new System.Drawing.Point(7, 74);
+            this.TodasTerminadas.Name = "TodasTerminadas";
+            this.TodasTerminadas.Size = new System.Drawing.Size(112, 17);
+            this.TodasTerminadas.TabIndex = 3;
+            this.TodasTerminadas.Tag = "";
+            this.TodasTerminadas.Text = "Todas -terminadas";
+            this.TodasTerminadas.UseVisualStyleBackColor = true;
+            this.TodasTerminadas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
+            // 
+            // Cercanas
+            // 
+            this.Cercanas.AutoSize = true;
+            this.Cercanas.Location = new System.Drawing.Point(7, 56);
+            this.Cercanas.Name = "Cercanas";
+            this.Cercanas.Size = new System.Drawing.Size(70, 17);
+            this.Cercanas.TabIndex = 2;
+            this.Cercanas.Tag = "";
+            this.Cercanas.Text = "Cercanas";
+            this.Cercanas.UseVisualStyleBackColor = true;
+            this.Cercanas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
+            // 
+            // Pasadas
+            // 
+            this.Pasadas.AutoSize = true;
+            this.Pasadas.Location = new System.Drawing.Point(7, 36);
+            this.Pasadas.Name = "Pasadas";
+            this.Pasadas.Size = new System.Drawing.Size(66, 17);
+            this.Pasadas.TabIndex = 1;
+            this.Pasadas.Tag = "";
+            this.Pasadas.Text = "Pasadas";
+            this.Pasadas.UseVisualStyleBackColor = true;
+            this.Pasadas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
             // 
             // Todas
             // 
@@ -418,51 +463,17 @@
             this.Todas.UseVisualStyleBackColor = true;
             this.Todas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
             // 
-            // Pasadas
-            // 
-            this.Pasadas.AutoSize = true;
-            this.Pasadas.Location = new System.Drawing.Point(7, 36);
-            this.Pasadas.Name = "Pasadas";
-            this.Pasadas.Size = new System.Drawing.Size(66, 17);
-            this.Pasadas.TabIndex = 1;
-            this.Pasadas.Tag = "";
-            this.Pasadas.Text = "Pasadas";
-            this.Pasadas.UseVisualStyleBackColor = true;
-            this.Pasadas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
-            // 
-            // Cercanas
-            // 
-            this.Cercanas.AutoSize = true;
-            this.Cercanas.Location = new System.Drawing.Point(7, 56);
-            this.Cercanas.Name = "Cercanas";
-            this.Cercanas.Size = new System.Drawing.Size(121, 17);
-            this.Cercanas.TabIndex = 2;
-            this.Cercanas.Tag = "";
-            this.Cercanas.Text = "Pasadas y cercanas";
-            this.Cercanas.UseVisualStyleBackColor = true;
-            this.Cercanas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
-            // 
-            // TodasTerminadas
-            // 
-            this.TodasTerminadas.AutoSize = true;
-            this.TodasTerminadas.Location = new System.Drawing.Point(7, 74);
-            this.TodasTerminadas.Name = "TodasTerminadas";
-            this.TodasTerminadas.Size = new System.Drawing.Size(112, 17);
-            this.TodasTerminadas.TabIndex = 3;
-            this.TodasTerminadas.Tag = "";
-            this.TodasTerminadas.Text = "Todas -terminadas";
-            this.TodasTerminadas.UseVisualStyleBackColor = true;
-            this.TodasTerminadas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
-            // 
             // checkBoxExpandir
             // 
             this.checkBoxExpandir.AutoSize = true;
             this.checkBoxExpandir.Checked = true;
             this.checkBoxExpandir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxExpandir.Location = new System.Drawing.Point(553, 3);
-            this.checkBoxExpandir.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
+            this.tableLayoutPanel4.SetColumnSpan(this.checkBoxExpandir, 2);
+            this.checkBoxExpandir.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBoxExpandir.Location = new System.Drawing.Point(12, 3);
+            this.checkBoxExpandir.Margin = new System.Windows.Forms.Padding(12, 3, 3, 0);
             this.checkBoxExpandir.Name = "checkBoxExpandir";
-            this.checkBoxExpandir.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxExpandir.Size = new System.Drawing.Size(105, 23);
             this.checkBoxExpandir.TabIndex = 14;
             this.checkBoxExpandir.Text = "Expandir todas";
             this.checkBoxExpandir.UseVisualStyleBackColor = true;
@@ -473,7 +484,7 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label2.Location = new System.Drawing.Point(1153, 0);
+            this.label2.Location = new System.Drawing.Point(1093, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 20);
             this.label2.TabIndex = 15;
@@ -493,7 +504,7 @@
             this.tableLayoutPanel3.Controls.Add(this.labelCeranas, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label12, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.labelTerminadas, 1, 3);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(1153, 23);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(1093, 23);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -601,6 +612,97 @@
             this.labelTerminadas.Text = "0";
             this.labelTerminadas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxExpandir, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label13, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxProceso, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.cbTamanoLetra, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label14, 0, 2);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(290, 20);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 3;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(120, 80);
+            this.tableLayoutPanel4.TabIndex = 17;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Location = new System.Drawing.Point(3, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 26);
+            this.label13.TabIndex = 15;
+            this.label13.Text = "Proceso";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cbTamanoLetra
+            // 
+            this.cbTamanoLetra.FormattingEnabled = true;
+            this.cbTamanoLetra.Items.AddRange(new object[] {
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24",
+            "26",
+            "28",
+            "36",
+            "48",
+            "72"});
+            this.cbTamanoLetra.Location = new System.Drawing.Point(63, 55);
+            this.cbTamanoLetra.Name = "cbTamanoLetra";
+            this.cbTamanoLetra.Size = new System.Drawing.Size(54, 21);
+            this.cbTamanoLetra.TabIndex = 16;
+            this.cbTamanoLetra.Text = "8";
+            this.cbTamanoLetra.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            // 
+            // comboBoxProceso
+            // 
+            // 
+            // 
+            // 
+            this.comboBoxProceso.AutoCompleteControl.ChangeDataManagerPosition = true;
+            this.comboBoxProceso.AutoCompleteControl.HeaderFont = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.World);
+            this.comboBoxProceso.AutoCompleteControl.ItemFont = new System.Drawing.Font("Segoe UI", 8.25F);
+            this.comboBoxProceso.AutoCompleteControl.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(158)))), ((int)(((byte)(218)))));
+            this.comboBoxProceso.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxProceso.AutoCompleteControl.ParentForm = this.tableLayoutPanel4;
+            this.comboBoxProceso.AutoCompleteControl.Style = Syncfusion.Windows.Forms.Tools.AutoCompleteStyle.Default;
+            this.comboBoxProceso.DropDownWidth = 121;
+            this.comboBoxProceso.Location = new System.Drawing.Point(63, 29);
+            this.comboBoxProceso.Name = "comboBoxProceso";
+            this.comboBoxProceso.ParentForm = this.tableLayoutPanel4;
+            this.comboBoxProceso.Size = new System.Drawing.Size(54, 21);
+            this.comboBoxProceso.TabIndex = 17;
+            this.comboBoxProceso.Text = "comboBoxAutoComplete1";
+            this.comboBoxProceso.TextChanged += new System.EventHandler(this.comboBoxProceso_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Location = new System.Drawing.Point(3, 52);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(54, 28);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Tamaño";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // TodasTareas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -663,6 +765,9 @@
             this.groupBoxFiltrar.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxProceso.AutoCompleteControl)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -705,5 +810,10 @@
         private System.Windows.Forms.Label labelCeranas;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label labelTerminadas;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox cbTamanoLetra;
+        private Syncfusion.Windows.Forms.Tools.ComboBoxAutoComplete comboBoxProceso;
+        private System.Windows.Forms.Label label14;
     }
 }

@@ -26,11 +26,12 @@ namespace PresentacionEscritorio
         private string user;
         private Negocio.Negocio negocio = new Negocio.Negocio();
         List<List<Tarea>> tareas = new List<List<Tarea>>();
-        private string empleado, tipo;
+        private string empleado, tipo, proceso;
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor1 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor2 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor gridConditionalFormatDescriptor3 = new Syncfusion.Windows.Forms.Grid.Grouping.GridConditionalFormatDescriptor();
         private string filtrarPor = "Todas";
+        private int tamanioLetra = 8;
 
         public TodasTareas()
         {
@@ -41,6 +42,7 @@ namespace PresentacionEscritorio
             this.Text = user;
             empleado = user.ToUpper();
             tipo = "Tarea";
+            proceso = "";
             foreach (CaptionImage image in this.CaptionImages)
             {
                 image.ImageMouseEnter += new CaptionImage.MouseEnter(image_ImageMouseEnter);
@@ -76,6 +78,14 @@ namespace PresentacionEscritorio
             this.comboBoxUsuario.AutoCompleteControl.OverrideCombo = true;
             this.comboBoxUsuario.AutoCompleteControl.DataSource = negocio.getUsuariosDepartamentos();
             comboBoxUsuario.Text = empleado;
+
+            this.comboBoxProceso.AutoCompleteControl.ChangeDataManagerPosition = true;
+            this.comboBoxProceso.AutoCompleteControl.OverrideCombo = true;
+            this.comboBoxProceso.AutoCompleteControl.OverrideCombo = true;
+            List<String> procesos = negocio.getProcesosListado();
+            procesos.Add("");
+            this.comboBoxProceso.AutoCompleteControl.DataSource = procesos;
+            comboBoxProceso.Text = proceso;
 
             dateTimeDesde.Value = new DateTime(DateTime.Now.Year, 1, 1, 0, 0, 0);//DateTime.Parse(DateTime.Now.Year+"/1/1");
             dateTimeHasta.Value = new DateTime(DateTime.Now.Year + 1, 1, 1, 0, 0, 0);
@@ -258,7 +268,7 @@ namespace PresentacionEscritorio
 
         private void ObtenerDatos()
         {
-            tareas = negocio.getTareasTipoUsuario(tipo, empleado, dateTimeDesde.Value, dateTimeHasta.Value, filtrarPor);
+            tareas = negocio.getTareasTipoUsuario(tipo, empleado, dateTimeDesde.Value, dateTimeHasta.Value, filtrarPor, proceso);
             MostrarIndicadores();
         }
 
@@ -270,10 +280,10 @@ namespace PresentacionEscritorio
             int tareasTerminadas = 0;
             foreach (List<Tarea> tar in tareas)
             {
-                tareasTotales += tar.Count;
-                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now).Count();
-                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15)).Count();
-                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null).Count();
+                tareasTotales += tar.Where(t => t.Tipo == "Tarea").Count();
+                tareasPasadas += tar.Where(t => t.FechaFin < DateTime.Now && t.FechaEjecutado == null && t.Tipo=="Tarea").Count();
+                tareasCercanas += tar.Where(t => t.FechaFin < DateTime.Now.AddDays(15) && t.FechaEjecutado == null && t.Tipo == "Tarea").Count();
+                tareasTerminadas += tar.Where(t => t.FechaEjecutado != null && t.Tipo == "Tarea").Count();
             }
             tareasCercanas = tareasCercanas - tareasPasadas;
 
@@ -295,6 +305,7 @@ namespace PresentacionEscritorio
             this.gridGroupingControl1.Engine.SourceListSet.Clear();
             gridGroupingControl1.Update();
             this.gridGroupingControl1.Refresh();
+            gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = tamanioLetra;
 
             gridGroupingControl1.TableDescriptor.Columns.Reset();
             this.gridGroupingControl1.DataSource = tareas[0];
@@ -512,6 +523,33 @@ namespace PresentacionEscritorio
                 this.gridGroupingControl1.Table.ExpandAllRecords();
             else
                 this.gridGroupingControl1.Table.CollapseAllRecords();
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int tam;
+            if (!Int32.TryParse(cbTamanoLetra.Text, out tam))
+            {
+                MessageBox.Show("Debe ser un tipo numerico");
+            }
+            else if (tam > 72)
+            {
+                MessageBox.Show("El tamaño de letra no puede ser mayor de 72");
+            }
+            else if (tam < 6)
+            {
+                MessageBox.Show("El tamaño de letra no puede ser menor de 6");
+            }
+            else
+            {
+                tamanioLetra = tam;
+                gridGroupingControl1.Appearance.AnyRecordFieldCell.Font.Size = tamanioLetra;
+            }
+        }
+
+        private void comboBoxProceso_TextChanged(object sender, EventArgs e)
+        {
+            proceso = comboBoxProceso.Text;
         }
     }
 }

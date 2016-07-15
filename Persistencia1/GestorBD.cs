@@ -223,7 +223,7 @@ namespace Persistencia
             return tiposTareas;
         }
 
-        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
+        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor, string proceso)
         {
             List<List<Tarea>> listaTareas = new List<List<Tarea>>();
             SqlConnection conn = null;
@@ -239,6 +239,7 @@ namespace Persistencia
                 cmd.Parameters.AddWithValue("@FechaInicio", fechaInicio);
                 cmd.Parameters.AddWithValue("@FechaFin", fechaFin);
                 cmd.Parameters.AddWithValue("@FiltrarPor", filtrarPor);
+                cmd.Parameters.AddWithValue("@Proceso", proceso);
                 SqlDataReader dr = cmd.ExecuteReader();
                 int i = -1;
                 List<Tarea> tareas = null;
@@ -585,6 +586,36 @@ namespace Persistencia
 
             return puntosRojos;
         }*/
+
+        public List<String> getProcesosListado()
+        {
+            List<String> procesos = new List<String>();
+            SqlConnection conn = null;
+            try
+            {
+                conn = new SqlConnection();
+                conn.ConnectionString = Persistencia.Properties.Settings.Default.ConnectionString;
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT ID FROM [GP_Proceso] WHERE ID<>'GBL'", conn);
+                //cmd.Prepare();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    procesos.Add(dr.GetString(0));
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.Write(e.Message);
+            }
+            finally
+            {
+                if (conn != null)
+                    conn.Close();
+            }
+
+            return procesos;
+        }
 
         public List<Proceso> getProcesos()
         {

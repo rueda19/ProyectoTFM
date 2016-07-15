@@ -47,9 +47,9 @@ namespace Negocio
             return gbd.getTiposTareas();
         }
 
-        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
+        public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor, string proceso)
         {
-            return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin, filtrarPor);
+            return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin, filtrarPor, proceso);
         }
 
         public List<List<Tarea>> getTareasProcesos(string idProceso, DateTime fechaInicio, DateTime fechaFin, string filtrarPor)
@@ -96,6 +96,11 @@ namespace Negocio
         {
             return gbd.getPuntosRojos();
         }*/
+
+        public List<String> getProcesosListado()
+        {
+            return gbd.getProcesosListado();
+        }
 
         public List<Proceso> getProcesos()
         {

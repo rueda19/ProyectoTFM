@@ -66,6 +66,7 @@
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBoxExpandir = new System.Windows.Forms.CheckBox();
             this.checkBoxAgrupar = new System.Windows.Forms.CheckBox();
+            this.cbTamanoLetra = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridGroupingControl1)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -125,13 +126,13 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 9;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.label2, 7, 0);
@@ -160,7 +161,7 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label2.Location = new System.Drawing.Point(1103, 0);
+            this.label2.Location = new System.Drawing.Point(983, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(144, 20);
             this.label2.TabIndex = 18;
@@ -180,7 +181,7 @@
             this.tableLayoutPanel3.Controls.Add(this.labelCeranas, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label7, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.labelTerminadas, 1, 3);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(1103, 23);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(983, 23);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
@@ -294,10 +295,10 @@
             this.groupBoxFiltrar.Controls.Add(this.Pasadas);
             this.groupBoxFiltrar.Controls.Add(this.Todas);
             this.groupBoxFiltrar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxFiltrar.Location = new System.Drawing.Point(953, 3);
+            this.groupBoxFiltrar.Location = new System.Drawing.Point(863, 3);
             this.groupBoxFiltrar.Name = "groupBoxFiltrar";
             this.tableLayoutPanel2.SetRowSpan(this.groupBoxFiltrar, 2);
-            this.groupBoxFiltrar.Size = new System.Drawing.Size(144, 94);
+            this.groupBoxFiltrar.Size = new System.Drawing.Size(114, 94);
             this.groupBoxFiltrar.TabIndex = 14;
             this.groupBoxFiltrar.TabStop = false;
             this.groupBoxFiltrar.Text = "Filtrar por tareas";
@@ -319,10 +320,10 @@
             this.Cercanas.AutoSize = true;
             this.Cercanas.Location = new System.Drawing.Point(7, 56);
             this.Cercanas.Name = "Cercanas";
-            this.Cercanas.Size = new System.Drawing.Size(121, 17);
+            this.Cercanas.Size = new System.Drawing.Size(70, 17);
             this.Cercanas.TabIndex = 2;
             this.Cercanas.Tag = "";
-            this.Cercanas.Text = "Pasadas y cercanas";
+            this.Cercanas.Text = "Cercanas";
             this.Cercanas.UseVisualStyleBackColor = true;
             this.Cercanas.CheckedChanged += new System.EventHandler(this.radioButtonTodas_CheckedChanged);
             // 
@@ -357,7 +358,7 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label3.Location = new System.Drawing.Point(303, 0);
+            this.label3.Location = new System.Drawing.Point(273, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(194, 20);
             this.label3.TabIndex = 5;
@@ -369,7 +370,7 @@
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F);
-            this.label1.Location = new System.Drawing.Point(153, 0);
+            this.label1.Location = new System.Drawing.Point(123, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 20);
             this.label1.TabIndex = 2;
@@ -380,10 +381,10 @@
             // 
             this.buttonEstadisticas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonEstadisticas.Image = global::PresentacionEscritorio.Properties.Resources.estadisticas;
-            this.buttonEstadisticas.Location = new System.Drawing.Point(503, 3);
+            this.buttonEstadisticas.Location = new System.Drawing.Point(473, 3);
             this.buttonEstadisticas.Name = "buttonEstadisticas";
             this.tableLayoutPanel2.SetRowSpan(this.buttonEstadisticas, 2);
-            this.buttonEstadisticas.Size = new System.Drawing.Size(144, 94);
+            this.buttonEstadisticas.Size = new System.Drawing.Size(114, 94);
             this.buttonEstadisticas.TabIndex = 4;
             this.buttonEstadisticas.Text = "Estadisticas";
             this.buttonEstadisticas.UseVisualStyleBackColor = true;
@@ -397,7 +398,7 @@
             this.flowLayoutPanel1.Controls.Add(this.dateTimeHasta);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(300, 20);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(270, 20);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 80);
@@ -468,7 +469,7 @@
             this.buttonActualizar.Location = new System.Drawing.Point(3, 3);
             this.buttonActualizar.Name = "buttonActualizar";
             this.tableLayoutPanel2.SetRowSpan(this.buttonActualizar, 2);
-            this.buttonActualizar.Size = new System.Drawing.Size(144, 94);
+            this.buttonActualizar.Size = new System.Drawing.Size(114, 94);
             this.buttonActualizar.TabIndex = 7;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
@@ -478,10 +479,10 @@
             // 
             this.buttonAnadirTarea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonAnadirTarea.Image = global::PresentacionEscritorio.Properties.Resources.ANADIRGRANDE;
-            this.buttonAnadirTarea.Location = new System.Drawing.Point(653, 3);
+            this.buttonAnadirTarea.Location = new System.Drawing.Point(593, 3);
             this.buttonAnadirTarea.Name = "buttonAnadirTarea";
             this.tableLayoutPanel2.SetRowSpan(this.buttonAnadirTarea, 2);
-            this.buttonAnadirTarea.Size = new System.Drawing.Size(144, 94);
+            this.buttonAnadirTarea.Size = new System.Drawing.Size(114, 94);
             this.buttonAnadirTarea.TabIndex = 9;
             this.buttonAnadirTarea.Text = "Añadir Tarea";
             this.buttonAnadirTarea.UseVisualStyleBackColor = true;
@@ -491,7 +492,7 @@
             // 
             this.buttonExportarExcel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonExportarExcel.Image = global::PresentacionEscritorio.Properties.Resources.exportar_excel;
-            this.buttonExportarExcel.Location = new System.Drawing.Point(803, 3);
+            this.buttonExportarExcel.Location = new System.Drawing.Point(713, 3);
             this.buttonExportarExcel.Name = "buttonExportarExcel";
             this.tableLayoutPanel2.SetRowSpan(this.buttonExportarExcel, 2);
             this.buttonExportarExcel.Size = new System.Drawing.Size(144, 94);
@@ -504,8 +505,9 @@
             // 
             this.flowLayoutPanel2.Controls.Add(this.checkBoxExpandir);
             this.flowLayoutPanel2.Controls.Add(this.checkBoxAgrupar);
+            this.flowLayoutPanel2.Controls.Add(this.cbTamanoLetra);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(153, 23);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(123, 23);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(144, 74);
             this.flowLayoutPanel2.TabIndex = 15;
@@ -532,6 +534,33 @@
             this.checkBoxAgrupar.TabIndex = 1;
             this.checkBoxAgrupar.Text = "Agrupar por Procesos";
             this.checkBoxAgrupar.UseVisualStyleBackColor = true;
+            // 
+            // cbTamanoLetra
+            // 
+            this.cbTamanoLetra.FormattingEnabled = true;
+            this.cbTamanoLetra.Items.AddRange(new object[] {
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24",
+            "26",
+            "28",
+            "36",
+            "48",
+            "72"});
+            this.cbTamanoLetra.Location = new System.Drawing.Point(3, 49);
+            this.cbTamanoLetra.Name = "cbTamanoLetra";
+            this.cbTamanoLetra.Size = new System.Drawing.Size(46, 21);
+            this.cbTamanoLetra.TabIndex = 2;
+            this.cbTamanoLetra.Text = "8";
+            this.cbTamanoLetra.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
             // 
             // TareasProceso
             // 
@@ -632,5 +661,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelTerminadas;
+        private System.Windows.Forms.ComboBox cbTamanoLetra;
     }
 }
