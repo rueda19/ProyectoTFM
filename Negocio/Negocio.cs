@@ -47,6 +47,11 @@ namespace Negocio
             return gbd.getTiposTareas();
         }
 
+        public List<List<TareaCompleta>> getTareasTipoUsuarioNuevo(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor, string proceso)
+        {
+            return gbd.getTareasTipoUsuarioNuevo(tipo, usuario, fechaInicio, fechaFin, filtrarPor, proceso);
+        }
+
         public List<List<Tarea>> getTareasTipoUsuario(string tipo, string usuario, DateTime fechaInicio, DateTime fechaFin, string filtrarPor, string proceso)
         {
             return gbd.getTareasTipoUsuario(tipo, usuario, fechaInicio, fechaFin, filtrarPor, proceso);
@@ -302,34 +307,34 @@ namespace Negocio
             return gbd.removeEmpleado(user);
         }
 
-        public List<Invitado> getInvitadoReunion(int IDReunion)
+        public List<string> getInvitadoReunion(int IDReunion)
         {
             return gbd.getInvitadoReunion(IDReunion);
         }
 
-        public List<Invitado> getInvitadoEmpleado(string IDEmpleado)
+        public List<int> getInvitadoEmpleado(string IDEmpleado)
         {
             return gbd.getInvitadoEmpleado(IDEmpleado);
         }
 
-        public int setEmpIndicadores(EmpleadoIndicadores empleadoIndicadores)
+        public int setEmpIndicadores(string IDEmpleado, int IDIndicadores)
         {
-            return gbd.setEmpIndicadores(empleadoIndicadores);
+            return gbd.setEmpIndicadores(IDEmpleado, IDIndicadores);
         }
 
-        public int removeEmpIndicadores(EmpleadoIndicadores empleadoIndicadores)
+        public int removeEmpIndicadores(string IDEmpleado, int IDIndicadores)
         {
-            return gbd.removeEmpIndicadores(empleadoIndicadores);
+            return gbd.removeEmpIndicadores(IDEmpleado, IDIndicadores);
         }
 
-        public int setInvitado(Invitado invitado)
+        public int setInvitado(string IDEmpleado, int IDReunion)
         {
-            return gbd.setInvitado(invitado);
+            return gbd.setInvitado(IDEmpleado, IDReunion);
         }
 
-        public int removeInvitado(Invitado invitado)
+        public int removeInvitado(string IDEmpleado, int IDReunion)
         {
-            return gbd.removeInvitado(invitado);
+            return gbd.removeInvitado(IDEmpleado, IDReunion);
         }
 
         public int removeInvitadoEmpleado(string IDEmpleado)
@@ -342,19 +347,19 @@ namespace Negocio
             return gbd.removeInvitadoReunion(IDReunion);
         }
 
-        public List<Asistente> getAsistenteReunion(int IDReunion)
+        public List<string> getAsistenteReunion(int IDReunion)
         {
             return gbd.getAsistenteReunion(IDReunion);
         }
 
-        public List<Asistente> getAsistenteEmpleado(string IDEmpleado)
+        public List<int> getAsistenteEmpleado(string IDEmpleado)
         {
             return gbd.getAsistenteEmpleado(IDEmpleado);
         }
 
-        public int setAsistente(Asistente asistente)
+        public int setAsistente(string IDEmpleado, int IDReunion)
         {
-            return gbd.setAsistente(asistente);
+            return gbd.setAsistente(IDEmpleado, IDReunion);
         }
 
         public int removeAsistenteReunion(int IDReunion)
@@ -362,9 +367,9 @@ namespace Negocio
             return gbd.removeAsistenteReunion(IDReunion);
         }
 
-        public int removeAsistente(Asistente asistente)
+        public int removeAsistente(string IDEmpleado, int IDReunion)
         {
-            return gbd.removeAsistente(asistente);
+            return gbd.removeAsistente(IDEmpleado, IDReunion);
         }
 
         public int removeAsistenteEmpleado(string IDEmpleado)
@@ -375,6 +380,11 @@ namespace Negocio
         public int setTareaFila(int ID, string fila, string valor)
         {
             return gbd.setTareaFila(ID, fila, valor);
+        }
+
+        public int setTareaFilaMeses(int ID, string fila, string valor)
+        {
+            return gbd.setTareaFilaMeses(ID, fila, valor);
         }
 
         public Indicadores getIndicadores(int IDReunion)

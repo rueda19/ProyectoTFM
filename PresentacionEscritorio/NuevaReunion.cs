@@ -247,7 +247,7 @@ namespace PresentacionEscritorio
             Double horas;
             if (Double.TryParse(textBoxDuracion.Text.Replace(".", ","), out horas))
             {
-                negocio.setNuevaReunion(new Reunion(0, textBoxTitulo.Text, textBoxUbicacion.Text, Double.Parse(textBoxDuracion.Text.Replace(".", ",")),0.0, dateTimePickerFecha.Value, user), new Agenda(richTextBox1.Rtf, 0), invitados);
+                negocio.setNuevaReunion(new Reunion(0, textBoxTitulo.Text, textBoxUbicacion.Text, Double.Parse(textBoxDuracion.Text.Replace(".", ",")),0.0, dateTimePickerFecha.Value, user, null, null), new Agenda(richTextBox1.Rtf, 0), invitados);
                 avisarReunion();
                 this.Close();
             }
@@ -310,7 +310,7 @@ namespace PresentacionEscritorio
         {
             Reunion reunionBase = ((Reunion)multiColumnComboBoxBase.SelectedItem);
             Agenda agendaBase = negocio.getAgendaReunion(reunionBase.ID);
-            List<Invitado> invitadosBase = negocio.getInvitadoReunion(reunionBase.ID);
+            List<string> invitadosBase = negocio.getInvitadoReunion(reunionBase.ID);
 
             textBoxDuracion.Text = reunionBase.DuracionEstimada + "";
             textBoxTitulo.Text = reunionBase.Titulo;
@@ -319,9 +319,9 @@ namespace PresentacionEscritorio
             richTextBox1.Rtf = agendaBase.Contenido;
 
             invitados.Clear();
-            foreach (Invitado inBase in invitadosBase)
+            foreach (string inBase in invitadosBase)
             {
-                invitados.Add(inBase.IDEmpleado); 
+                invitados.Add(inBase); 
             }
             gridGroupingControl1.DataSource = invitados.Select(x => new { Usuario = x }).ToList();
         }

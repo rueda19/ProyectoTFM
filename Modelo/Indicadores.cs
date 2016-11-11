@@ -14,8 +14,9 @@ namespace Modelo
         public double Abandonadas { get; set; }
         public double EnProceso { get; set; }
         public int IDReunion { get; set; }
+        List<Empleado> Empleados { get; set; }
 
-        public Indicadores(int id, double asistencia, int numTareas, double terminadas, double abandonadas, double enProceso, int idReunion)
+        public Indicadores(int id, double asistencia, int numTareas, double terminadas, double abandonadas, double enProceso, int idReunion, List<Empleado> empleados)
         {
             ID = id;
             Asistencia = asistencia;
@@ -24,6 +25,7 @@ namespace Modelo
             Abandonadas = abandonadas;
             EnProceso = enProceso;
             IDReunion = idReunion;
+            Empleados = empleados;
         }
     }
 }

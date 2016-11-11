@@ -85,7 +85,6 @@ namespace PresentacionEscritorio
             //Application.Run(new DetallesEmpleado("Pruebas"));
             //Application.Run(new ListaEmpleados());
             //Application.Run(new TareasEnFecha());
-
             Application.Run(new Form1());
         }
     }

@@ -24,10 +24,10 @@ namespace PresentacionEscritorio
         private List<Empleado> empleados = new List<Empleado>();
         private Negocio.Negocio negocio = new Negocio.Negocio();
         private List<InvitadoAceptado> ias = new List<InvitadoAceptado>();
-        private List<Invitado> invitados = new List<Invitado>();
+        private List<string> invitados = new List<string>();
         private Reunion reunion;
 
-        public AnadirInvitados(List<Invitado> invitados, Reunion reunion)
+        public AnadirInvitados(List<string> invitados, Reunion reunion)
         {
             InitializeComponent();
             this.reunion = reunion;
@@ -57,7 +57,7 @@ namespace PresentacionEscritorio
             int i = 0;
             while (invitados.Count > i && !b)
             {
-                if (invitados[i].IDEmpleado.Equals(p))
+                if (invitados[i].Equals(p))
                 {
                     b = true;
                 }
@@ -125,7 +125,7 @@ namespace PresentacionEscritorio
                     Boolean b = (bool)style.CellValue;
                     if (!b)
                     {
-                        if (negocio.setInvitado(new Invitado(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.setInvitado(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), reunion.ID) > 0)
                         {
                             //invitados = negocio.getInvitadoReunion(idReu);
                             //asistentes = negocio.getAsistenteActa(acta.ID);
@@ -138,7 +138,7 @@ namespace PresentacionEscritorio
                     }
                     else
                     {
-                        if (negocio.removeInvitado(new Invitado(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.removeInvitado(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), reunion.ID) > 0)
                         {
                             //asistentes = negocio.getAsistenteActa(acta.ID);
                             //ia = new List<InvitadoAsitente>();

@@ -30,8 +30,8 @@ namespace PresentacionEscritorio
         private List<Reunion> reuniones;
         Reunion reunion;
         List<List<Tarea>> tareas;
-        List<Asistente> asistentes;
-        List<Invitado> invitados;
+        List<string> asistentes;
+        List<string> invitados;
         List<InvitadoAsitente> ia;
         Agenda agenda;
         Acta acta;
@@ -232,9 +232,9 @@ namespace PresentacionEscritorio
                             invitados = negocio.getInvitadoReunion(idReu);
                             asistentes = negocio.getAsistenteReunion(idReu);
                             ia = new List<InvitadoAsitente>();
-                            foreach (Invitado inv in invitados)
+                            foreach (string inv in invitados)
                             {
-                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                             }
                             gridGroupingControl3.DataSource = ia;
 
@@ -346,9 +346,9 @@ namespace PresentacionEscritorio
                         invitados = negocio.getInvitadoReunion(idReu);
                         asistentes = negocio.getAsistenteReunion(idReu);
                         ia = new List<InvitadoAsitente>();
-                        foreach (Invitado inv in invitados)
+                        foreach (string inv in invitados)
                         {
-                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                         }
                         gridGroupingControl3.DataSource = ia;
 
@@ -726,9 +726,9 @@ namespace PresentacionEscritorio
                         invitados = negocio.getInvitadoReunion(idReu);
                         asistentes = negocio.getAsistenteReunion(idReu);
                         ia = new List<InvitadoAsitente>();
-                        foreach (Invitado inv in invitados)
+                        foreach (string inv in invitados)
                         {
-                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                         }
                         gridGroupingControl3.DataSource = ia;
 
@@ -744,7 +744,7 @@ namespace PresentacionEscritorio
             int i = 0;
             while (asistentes.Count > i && !b)
             {
-                if (asistentes[i].IDEmpleado.Equals(p))
+                if (asistentes[i].Equals(p))
                 {
                     b = true;
                 }
@@ -921,14 +921,14 @@ namespace PresentacionEscritorio
                     }
                     if (rec != null)
                     {
-                        negocio.removeInvitado(new Invitado(reunion.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
-                        negocio.removeAsistente(new Asistente(reunion.ID, rec.GetValue(style.TableCellIdentity.Column.Name).ToString()));
+                        negocio.removeInvitado(rec.GetValue(style.TableCellIdentity.Column.Name).ToString(), reunion.ID);
+                        negocio.removeAsistente(rec.GetValue(style.TableCellIdentity.Column.Name).ToString(), reunion.ID);
                         invitados = negocio.getInvitadoReunion(idReu);
                         asistentes = negocio.getAsistenteReunion(idReu);
                         ia = new List<InvitadoAsitente>();
-                        foreach (Invitado inv in invitados)
+                        foreach (string inv in invitados)
                         {
-                            ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                            ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                         }
                         gridGroupingControl3.DataSource = ia;
                         //MessageBox.Show(style.TableCellIdentity.Column.Name);
@@ -960,26 +960,26 @@ namespace PresentacionEscritorio
                     Boolean b = (bool)style.CellValue;
                     if (!b)
                     {
-                        if (negocio.setAsistente(new Asistente(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.setAsistente(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), reunion.ID) > 0)
                         {
                             invitados = negocio.getInvitadoReunion(idReu);
                             asistentes = negocio.getAsistenteReunion(idReu);
                             ia = new List<InvitadoAsitente>();
-                            foreach (Invitado inv in invitados)
+                            foreach (string inv in invitados)
                             {
-                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                             }
                         }
                     }
                     else
                     {
-                        if (negocio.removeAsistente(new Asistente(reunion.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.removeAsistente(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), reunion.ID) > 0)
                         {
                             asistentes = negocio.getAsistenteReunion(idReu);
                             ia = new List<InvitadoAsitente>();
-                            foreach (Invitado inv in invitados)
+                            foreach (string inv in invitados)
                             {
-                                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
                             }
                         }
                     }
@@ -997,9 +997,9 @@ namespace PresentacionEscritorio
             invitados = negocio.getInvitadoReunion(idReu);
             asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
-            foreach (Invitado inv in invitados)
+            foreach (string inv in invitados)
             {
-                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
             }
             gridGroupingControl3.DataSource = ia;
 
@@ -1084,9 +1084,9 @@ namespace PresentacionEscritorio
             invitados = negocio.getInvitadoReunion(idReu);
             asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
-            foreach (Invitado inv in invitados)
+            foreach (string inv in invitados)
             {
-                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
             }
             gridGroupingControl3.DataSource = ia;
 
@@ -1159,9 +1159,9 @@ namespace PresentacionEscritorio
             invitados = negocio.getInvitadoReunion(idReu);
             asistentes = negocio.getAsistenteReunion(idReu);
             ia = new List<InvitadoAsitente>();
-            foreach (Invitado inv in invitados)
+            foreach (string inv in invitados)
             {
-                ia.Add(new InvitadoAsitente(inv.IDEmpleado, asistioEmpleado(inv.IDEmpleado)));
+                ia.Add(new InvitadoAsitente(inv, asistioEmpleado(inv)));
             }
             gridGroupingControl3.DataSource = ia;
 

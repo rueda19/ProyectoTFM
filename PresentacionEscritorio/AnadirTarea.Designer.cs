@@ -134,7 +134,7 @@
             this.FechaFin.Name = "FechaFin";
             this.FechaFin.ShowCheckBox = false;
             this.FechaFin.Size = new System.Drawing.Size(328, 21);
-            this.FechaFin.TabIndex = 0;
+            this.FechaFin.TabIndex = 1;
             this.FechaFin.Value = new System.DateTime(2016, 4, 14, 11, 44, 43, 483);
             // 
             // FechaInicio
@@ -153,7 +153,7 @@
             this.FechaInicio.Name = "FechaInicio";
             this.FechaInicio.ShowCheckBox = false;
             this.FechaInicio.Size = new System.Drawing.Size(328, 21);
-            this.FechaInicio.TabIndex = 1;
+            this.FechaInicio.TabIndex = 0;
             this.FechaInicio.Value = new System.DateTime(2016, 4, 14, 11, 47, 21, 730);
             // 
             // label1
@@ -273,7 +273,7 @@
             this.tbDescripcion.Name = "tbDescripcion";
             this.tableLayoutPanel1.SetRowSpan(this.tbDescripcion, 4);
             this.tbDescripcion.Size = new System.Drawing.Size(328, 126);
-            this.tbDescripcion.TabIndex = 11;
+            this.tbDescripcion.TabIndex = 8;
             // 
             // tbReunionNombre
             // 
@@ -306,7 +306,7 @@
             this.cbEstado.Margin = new System.Windows.Forms.Padding(7);
             this.cbEstado.Name = "cbEstado";
             this.cbEstado.Size = new System.Drawing.Size(328, 21);
-            this.cbEstado.TabIndex = 16;
+            this.cbEstado.TabIndex = 6;
             this.cbEstado.Text = "Planificada";
             // 
             // label8
@@ -343,7 +343,7 @@
             metroColorTable1.ThumbPushedBorder = System.Drawing.Color.Empty;
             this.cbResponsable.ScrollMetroColorTable = metroColorTable1;
             this.cbResponsable.Size = new System.Drawing.Size(328, 21);
-            this.cbResponsable.TabIndex = 18;
+            this.cbResponsable.TabIndex = 7;
             this.cbResponsable.Text = "multiColumnComboBox1";
             // 
             // label9
@@ -389,7 +389,7 @@
             metroColorTable2.ThumbPushedBorder = System.Drawing.Color.Empty;
             this.ComboBoxPuntoRojoID.ScrollMetroColorTable = metroColorTable2;
             this.ComboBoxPuntoRojoID.Size = new System.Drawing.Size(83, 21);
-            this.ComboBoxPuntoRojoID.TabIndex = 22;
+            this.ComboBoxPuntoRojoID.TabIndex = 3;
             this.ComboBoxPuntoRojoID.Text = "multiColumnComboBox1";
             // 
             // tbReunionID
@@ -400,7 +400,7 @@
             this.tbReunionID.Margin = new System.Windows.Forms.Padding(7);
             this.tbReunionID.Name = "tbReunionID";
             this.tbReunionID.Size = new System.Drawing.Size(83, 20);
-            this.tbReunionID.TabIndex = 23;
+            this.tbReunionID.TabIndex = 2;
             // 
             // label10
             // 
@@ -435,7 +435,7 @@
             metroColorTable3.ThumbPushedBorder = System.Drawing.Color.Empty;
             this.ComboBoxTareaPadre.ScrollMetroColorTable = metroColorTable3;
             this.ComboBoxTareaPadre.Size = new System.Drawing.Size(83, 21);
-            this.ComboBoxTareaPadre.TabIndex = 25;
+            this.ComboBoxTareaPadre.TabIndex = 4;
             this.ComboBoxTareaPadre.Text = "multiColumnComboBox1";
             // 
             // textBoxTareaPadre
@@ -467,7 +467,7 @@
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.ParentForm = this.tableLayoutPanel1;
             this.comboBoxTipo.Size = new System.Drawing.Size(328, 21);
-            this.comboBoxTipo.TabIndex = 27;
+            this.comboBoxTipo.TabIndex = 5;
             this.comboBoxTipo.Text = "comboBoxAutoComplete1";
             // 
             // AnadirTarea

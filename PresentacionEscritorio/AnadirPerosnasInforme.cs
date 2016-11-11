@@ -24,10 +24,10 @@ namespace PresentacionEscritorio
         private List<Empleado> empleados = new List<Empleado>();
         private Negocio.Negocio negocio = new Negocio.Negocio();
         private List<EmplIndi> ias = new List<EmplIndi>();
-        private List<Invitado> invitados = new List<Invitado>();
+        private List<string> invitados = new List<string>();
         private Indicadores indicadores;
 
-        public AnadirPerosnasInforme(List<Invitado> invitados, Indicadores indicadores)
+        public AnadirPerosnasInforme(List<string> invitados, Indicadores indicadores)
         {
             InitializeComponent();
             this.indicadores = indicadores;
@@ -38,7 +38,7 @@ namespace PresentacionEscritorio
                 bool b = invitadoEmpleado(em.Usuario);
                 ias.Add(new EmplIndi(em.Usuario, em.NombreCompleto, b));
                 if(b)
-                    negocio.setEmpIndicadores(new EmpleadoIndicadores(indicadores.ID, em.Usuario));
+                    negocio.setEmpIndicadores(em.Usuario, indicadores.ID);
             }
             gridGroupingControl1.DataSource = ias;
             SampleCustomization(gridGroupingControl1);
@@ -58,7 +58,7 @@ namespace PresentacionEscritorio
             int i = 0;
             while (invitados.Count > i && !b)
             {
-                if (invitados[i].IDEmpleado.Equals(p))
+                if (invitados[i].Equals(p))
                 {
                     b = true;
                 }
@@ -126,7 +126,7 @@ namespace PresentacionEscritorio
                     Boolean b = (bool)style.CellValue;
                     if (!b)
                     {
-                        if (negocio.setEmpIndicadores(new EmpleadoIndicadores(indicadores.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.setEmpIndicadores(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), indicadores.ID) > 0)
                         {
                             //invitados = negocio.getInvitadoReunion(idReu);
                             //asistentes = negocio.getAsistenteActa(acta.ID);
@@ -139,7 +139,7 @@ namespace PresentacionEscritorio
                     }
                     else
                     {
-                        if (negocio.removeEmpIndicadores(new EmpleadoIndicadores(indicadores.ID, rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString())) > 0)
+                        if (negocio.removeEmpIndicadores(rec.GetValue(styleUser.TableCellIdentity.Column.Name).ToString(), indicadores.ID) > 0)
                         {
                             //asistentes = negocio.getAsistenteActa(acta.ID);
                             //ia = new List<InvitadoAsitente>();

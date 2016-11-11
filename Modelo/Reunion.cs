@@ -14,8 +14,10 @@ namespace Modelo
         public double DuracionReal { get; set; }
         public DateTime Fecha { get; set; }
         public string IDResponsable { get; set; }
+        List<Empleado> Asistentes { get; set; }
+        List<Empleado> Invitados { get; set; }
 
-        public Reunion(int id, string titulo, string ubicacion, double duracionEstimada, double duracionReal, DateTime fecha, string idResponsable)
+        public Reunion(int id, string titulo, string ubicacion, double duracionEstimada, double duracionReal, DateTime fecha, string idResponsable, List<Empleado> invitados, List<Empleado> asistentes)
         {
             ID = id;
             Titulo = titulo;
@@ -24,6 +26,8 @@ namespace Modelo
             DuracionReal = duracionReal;
             Fecha = fecha;
             IDResponsable = idResponsable;
+            Asistentes = asistentes;
+            Invitados = invitados;
         }
     }
 }
